@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\1.Domain\CQRS.Domain.Library\CQRS.Domain.Library.csproj" />
+    <ProjectReference Include="..\..\2.Application\CQRS.Application.Library\CQRS.Application.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\CommandsDataAccess\CQRS.Infrastructure.CommandsDb.Library\CQRS.Infrastructure.CommandsDb.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\QueriesDataAccess\CQRS.Infrastructure.QueriesDb.Library\CQRS.Infrastructure.QueriesDb.Library.csproj" />
+  </ItemGroup>
+
+</Project>
