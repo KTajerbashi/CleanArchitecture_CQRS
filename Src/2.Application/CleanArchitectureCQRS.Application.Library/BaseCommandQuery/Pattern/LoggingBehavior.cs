@@ -39,7 +39,6 @@ namespace CleanArchitectureCQRS.Application.Library.BaseCommandQuery.Pattern
             var response = await next();
 
             _logger.LogInformation($"Handled {typeof(TResponse).Name}");
-
             return response;
         }
     }
