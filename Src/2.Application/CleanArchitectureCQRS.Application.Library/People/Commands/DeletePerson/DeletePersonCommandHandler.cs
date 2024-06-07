@@ -6,8 +6,8 @@ namespace CleanArchitectureCQRS.Application.Library.People.Commands.DeletePerson
 {
     public class DeletePersonCommandHandler : IRequestHandler<DeletePersonCommandModel, Guid>
     {
-        private readonly IApplicationContext _context;
-        public DeletePersonCommandHandler(IApplicationContext context)
+        private readonly ICommandApplicationContext _context;
+        public DeletePersonCommandHandler(ICommandApplicationContext context)
         {
             _context = context;
         }

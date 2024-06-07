@@ -5,9 +5,9 @@ namespace CleanArchitectureCQRS.Application.Library.People.Commands.ChangePasswo
 {
     public class ChangePasswordPersonHandler : IRequestHandler<ChangePasswordCommandModel, bool>
     {
-        private readonly IApplicationContext _context;
+        private readonly ICommandApplicationContext _context;
 
-        public ChangePasswordPersonHandler(IApplicationContext context)
+        public ChangePasswordPersonHandler(ICommandApplicationContext context)
         {
             _context = context;
         }

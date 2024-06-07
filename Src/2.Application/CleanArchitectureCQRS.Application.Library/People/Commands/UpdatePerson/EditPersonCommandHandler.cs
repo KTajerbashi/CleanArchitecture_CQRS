@@ -4,8 +4,8 @@ using MediatR;
 namespace CleanArchitectureCQRS.Application.Library.People.Commands.UpdatePerson;
 public class EditPersonCommandHandler : IRequestHandler<EditPersonCommandModel, Guid>
 {
-    private readonly IApplicationContext _context;
-    public EditPersonCommandHandler(IApplicationContext context)
+    private readonly ICommandApplicationContext _context;
+    public EditPersonCommandHandler(ICommandApplicationContext context)
     {
         _context = context;
     }

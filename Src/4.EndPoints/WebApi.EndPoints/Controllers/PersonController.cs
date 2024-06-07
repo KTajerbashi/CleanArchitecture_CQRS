@@ -3,6 +3,8 @@ using CleanArchitectureCQRS.Application.Library.People.Commands.CreatePerson;
 using CleanArchitectureCQRS.Application.Library.People.Commands.DeletePerson;
 using CleanArchitectureCQRS.Application.Library.People.Commands.UpdatePerson;
 using CleanArchitectureCQRS.Application.Library.People.Queries;
+using CleanArchitectureCQRS.Application.Library.People.Queries.GetAllPerson;
+using CleanArchitectureCQRS.Application.Library.People.Queries.GetPersonById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 

@@ -1,14 +1,10 @@
-using CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
-using Microsoft.EntityFrameworkCore;
-using System.Reflection;
-using MediatR;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using CleanArchitectureCQRS.Application.Library.People.Commands;
-using CleanArchitectureCQRS.Application.Library.People.Handler;
 using CleanArchitectureCQRS.Application.Library.Databases;
-using CleanArchitectureCQRS.Application.Library.People.Queries;
 using CleanArchitectureCQRS.Application.Library.DIContainer;
+using CleanArchitectureCQRS.CommandsDb.Library.Database;
+using CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
+using CleanArchitectureCQRS.QueriesDb.Library.Database;
+using Microsoft.EntityFrameworkCore;
+using WebApi.EndPoints.DIContainers;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,18 +13,8 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
-#region ContextDb
-builder.Services.AddDbContext<ApplicationContext>(options =>
-{
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"),
-    b => b.MigrationsAssembly(typeof(ApplicationContext).Assembly.FullName));
-});
-#endregion
+builder.Services.AddApplicationDatabase(builder);
 #region MediateR
-// Adding MediatR
-
-builder.Services.AddScoped<IApplicationContext, ApplicationContext>();
 builder.Services.AddApplication();
 #endregion
 

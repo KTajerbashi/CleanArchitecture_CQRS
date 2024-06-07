@@ -6,8 +6,8 @@ namespace CleanArchitectureCQRS.Application.Library.People.Commands.CreatePerson
 {
     public class AddPersonCommandHandler : IRequestHandler<AddPersonCommandModel, Guid>
     {
-        private readonly IApplicationContext _context;
-        public AddPersonCommandHandler(IApplicationContext context)
+        private readonly ICommandApplicationContext _context;
+        public AddPersonCommandHandler(ICommandApplicationContext context)
         {
             _context = context;
         }
