@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.EndPoints", "Src\4.E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTest.Domain", "Test\XTest.Domain\XTest.Domain.csproj", "{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess.EF", "DataAccess.EF", "{E032C378-48BB-4E6C-8D41-DF69E0616AB6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureCQRS.ContextDatabase.Library", "Src\3.Infrastructure\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj", "{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,10 @@ Global
 		{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +86,8 @@ Global
 		{0AD6B196-27A0-4E75-B77D-84D90BE2B20B} = {32DEAF00-1F58-4FE6-ABD9-82BA6D16023E}
 		{9EFF1402-68D0-4BB8-87D0-386FF62664C8} = {64413C8A-4233-4995-83A5-D782B7A12D76}
 		{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6} = {AF1190F7-FEDE-4D63-91A2-4356170BCE9C}
+		{E032C378-48BB-4E6C-8D41-DF69E0616AB6} = {0A24628C-FA2D-4BE7-9F93-BB0F8D835BC6}
+		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04} = {E032C378-48BB-4E6C-8D41-DF69E0616AB6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCCEA207-C96C-455D-8AA1-3AF252ACB80D}
