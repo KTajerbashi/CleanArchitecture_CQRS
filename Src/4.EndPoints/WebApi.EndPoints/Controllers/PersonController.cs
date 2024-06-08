@@ -32,7 +32,9 @@ namespace WebApi.EndPoints.Controllers
         [HttpGet("GetById")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            return Ok(await mediator.Send(new GetPersonByIdQueryModel { Id = id }));
+            var result = await mediator.Send(new GetPersonByIdQueryModel { Id = id });
+
+            return Ok(result ?? null);
         }
         [HttpPut("ChangePassword")]
         public async Task<IActionResult> ChangePassword(ChangePasswordCommandModel command)
@@ -42,7 +44,7 @@ namespace WebApi.EndPoints.Controllers
         [HttpDelete]
         public async Task<IActionResult> Delete(Guid id)
         {
-            return Ok(await mediator.Send(new DeletePersonCommandModel { Id = id }));
+            return Ok(await mediator.Send(new DeletePersonCommandModel(id)));
         }
         [HttpPut]
         public async Task<IActionResult> Update(Guid id, EditPersonCommandModel command)

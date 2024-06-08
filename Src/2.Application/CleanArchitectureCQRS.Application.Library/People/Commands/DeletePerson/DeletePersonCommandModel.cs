@@ -2,8 +2,5 @@
 
 namespace CleanArchitectureCQRS.Application.Library.People.Commands.DeletePerson
 {
-    public class DeletePersonCommandModel : IRequest<Guid>
-    {
-        public Guid Id { get; set; }
-    }
+    public record DeletePersonCommandModel(Guid Id) : IRequest<Guid>;
 }

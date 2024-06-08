@@ -5,6 +5,7 @@ using CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
 using CleanArchitectureCQRS.QueriesDb.Library.Database;
 using Microsoft.EntityFrameworkCore;
 using WebApi.EndPoints.DIContainers;
+using WebApi.EndPoints.Middlewares;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -26,7 +27,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseExceptionsHandling();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();

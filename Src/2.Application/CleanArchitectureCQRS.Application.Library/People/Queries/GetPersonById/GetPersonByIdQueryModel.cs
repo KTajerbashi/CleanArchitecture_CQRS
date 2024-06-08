@@ -3,7 +3,7 @@ using MediatR;
 
 namespace CleanArchitectureCQRS.Application.Library.People.Queries.GetPersonById
 {
-    public class GetPersonByIdQueryModel : IRequest<Person>
+    public record GetPersonByIdQueryModel : IRequest<Person>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

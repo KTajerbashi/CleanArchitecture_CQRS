@@ -1,14 +1,9 @@
 ﻿using CleanArchitectureCQRS.Domain.Library.Person.Entities;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CleanArchitectureCQRS.Application.Library.People.Queries.GetAllPerson
 {
-    public class GetAllPersonQueryModel : IRequest<IEnumerable<Person>>
+    public record GetAllPersonQueryModel : IRequest<IEnumerable<Person>>
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
