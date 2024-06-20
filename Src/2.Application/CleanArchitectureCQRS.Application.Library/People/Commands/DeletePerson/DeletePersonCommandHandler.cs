@@ -17,7 +17,8 @@ namespace CleanArchitectureCQRS.Application.Library.People.Commands.DeletePerson
             if (person == null) return default;
             _context.People.Remove(person);
             await _context.SaveChangesAsync();
-            return person.Id;
+            //return person.BusinessId.Value;
+            return default;
         }
     }
 }

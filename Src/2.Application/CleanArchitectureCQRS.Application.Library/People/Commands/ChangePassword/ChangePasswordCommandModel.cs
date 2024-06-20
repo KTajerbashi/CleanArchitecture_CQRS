@@ -2,5 +2,5 @@
 
 namespace CleanArchitectureCQRS.Application.Library.People.Commands.ChangePassword
 {
-    public record ChangePasswordCommandModel(Guid Id, string Password) : IRequest<bool>;
+    public record ChangePasswordCommandModel(int Id, string Password) : IRequest<bool>;
 }

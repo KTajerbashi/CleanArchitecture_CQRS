@@ -15,25 +15,31 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Infrastructure", "3.Infra
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4.EndPoints", "4.EndPoints", "{64413C8A-4233-4995-83A5-D782B7A12D76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureCQRS.Domain.Library", "Src\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj", "{11F0B8E3-C52D-406A-AFDC-17A453F2374C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureCQRS.Domain.Library", "Src\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj", "{11F0B8E3-C52D-406A-AFDC-17A453F2374C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureCQRS.Application.Library", "Src\2.Application\CleanArchitectureCQRS.Application.Library\CleanArchitectureCQRS.Application.Library.csproj", "{E6E343EA-BF9C-4E50-8B2A-DC827CF80022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureCQRS.Application.Library", "Src\2.Application\CleanArchitectureCQRS.Application.Library\CleanArchitectureCQRS.Application.Library.csproj", "{E6E343EA-BF9C-4E50-8B2A-DC827CF80022}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommandsDataAccess", "CommandsDataAccess", "{18932B75-64BE-4378-9CB8-78E4A06137EF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "QueriesDataAccess", "QueriesDataAccess", "{32DEAF00-1F58-4FE6-ABD9-82BA6D16023E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureCQRS.CommandsDb.Library", "Src\3.Infrastructure\CommandsDataAccess\CleanArchitectureCQRS.CommandsDb.Library\CleanArchitectureCQRS.CommandsDb.Library.csproj", "{DADE7702-DFA1-474F-A982-292E597EC63A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureCQRS.CommandsDb.Library", "Src\3.Infrastructure\CommandsDataAccess\CleanArchitectureCQRS.CommandsDb.Library\CleanArchitectureCQRS.CommandsDb.Library.csproj", "{DADE7702-DFA1-474F-A982-292E597EC63A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureCQRS.QueriesDb.Library", "Src\3.Infrastructure\QueriesDataAccess\CleanArchitectureCQRS.QueriesDb.Library\CleanArchitectureCQRS.QueriesDb.Library.csproj", "{0AD6B196-27A0-4E75-B77D-84D90BE2B20B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureCQRS.QueriesDb.Library", "Src\3.Infrastructure\QueriesDataAccess\CleanArchitectureCQRS.QueriesDb.Library\CleanArchitectureCQRS.QueriesDb.Library.csproj", "{0AD6B196-27A0-4E75-B77D-84D90BE2B20B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi.EndPoints", "Src\4.EndPoints\WebApi.EndPoints\WebApi.EndPoints.csproj", "{9EFF1402-68D0-4BB8-87D0-386FF62664C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi.EndPoints", "Src\4.EndPoints\WebApi.EndPoints\WebApi.EndPoints.csproj", "{9EFF1402-68D0-4BB8-87D0-386FF62664C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XTest.Domain", "Test\XTest.Domain\XTest.Domain.csproj", "{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XTest.Domain", "Test\XTest.Domain\XTest.Domain.csproj", "{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess.EF", "DataAccess.EF", "{E032C378-48BB-4E6C-8D41-DF69E0616AB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CleanArchitectureCQRS.ContextDatabase.Library", "Src\3.Infrastructure\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj", "{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CleanArchitectureCQRS.ContextDatabase.Library", "Src\3.Infrastructure\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj", "{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedKernel", "SharedKernel", "{9277C7E3-A030-4661-A507-59B1DBCF05DB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AbstractionsExtensions", "AbstractionsExtensions", "{6F7649FD-E532-453E-A48E-E27192FB488D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbstractionsExtensions.Library", "SharedKernel\AbstractionsExtensions\AbstractionsExtensions.Library\AbstractionsExtensions.Library.csproj", "{5DBC9EDE-A9AA-4F29-9238-CFC848D48DDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +75,10 @@ Global
 		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DBC9EDE-A9AA-4F29-9238-CFC848D48DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DBC9EDE-A9AA-4F29-9238-CFC848D48DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DBC9EDE-A9AA-4F29-9238-CFC848D48DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DBC9EDE-A9AA-4F29-9238-CFC848D48DDD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -88,6 +98,8 @@ Global
 		{709A2DDA-89DF-48E6-A7D4-AAACEBDC36F6} = {AF1190F7-FEDE-4D63-91A2-4356170BCE9C}
 		{E032C378-48BB-4E6C-8D41-DF69E0616AB6} = {0A24628C-FA2D-4BE7-9F93-BB0F8D835BC6}
 		{E268142E-9BA0-4BE3-A73B-D5DF98B53A04} = {E032C378-48BB-4E6C-8D41-DF69E0616AB6}
+		{6F7649FD-E532-453E-A48E-E27192FB488D} = {9277C7E3-A030-4661-A507-59B1DBCF05DB}
+		{5DBC9EDE-A9AA-4F29-9238-CFC848D48DDD} = {6F7649FD-E532-453E-A48E-E27192FB488D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FCCEA207-C96C-455D-8AA1-3AF252ACB80D}

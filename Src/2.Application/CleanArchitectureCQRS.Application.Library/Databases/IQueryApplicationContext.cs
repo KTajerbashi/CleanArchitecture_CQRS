@@ -1,4 +1,4 @@
-﻿using CleanArchitectureCQRS.Domain.Library.Person.Entities;
+﻿using CleanArchitectureCQRS.Domain.Library.People.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitectureCQRS.Application.Library.Databases

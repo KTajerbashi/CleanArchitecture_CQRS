@@ -18,14 +18,15 @@ public class EditPersonCommandHandler : IRequestHandler<EditPersonCommandModel, 
         }
         else
         {
-            person.Name = request.Name;
-            person.Family = request.Family;
+            person.FirstName = request.Name;
+            person.LastName = request.Family;
             person.NationalCode = request.NationalCode;
             person.MobileNumber = request.MobileNumber;
             person.Email = request.Email;
             _context.People.Update(person);
             await _context.SaveChangesAsync();
-            return person.Id;
+            return default;
+            //return person.BusinessId.Value;
         }
     }
 }

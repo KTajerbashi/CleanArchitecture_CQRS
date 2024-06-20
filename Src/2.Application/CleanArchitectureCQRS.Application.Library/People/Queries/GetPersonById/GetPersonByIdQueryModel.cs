@@ -1,11 +1,11 @@
-﻿using CleanArchitectureCQRS.Domain.Library.Person.Entities;
+﻿using CleanArchitectureCQRS.Domain.Library.People.Entities;
 using MediatR;
 
 namespace CleanArchitectureCQRS.Application.Library.People.Queries.GetPersonById
 {
     public record GetPersonByIdQueryModel : IRequest<Person>
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Family { get; set; }
         public string NationalCode { get; set; }

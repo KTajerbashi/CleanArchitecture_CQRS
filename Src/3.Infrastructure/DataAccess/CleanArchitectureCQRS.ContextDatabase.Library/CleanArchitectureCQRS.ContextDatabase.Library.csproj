@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SharedKernel\AbstractionsExtensions\AbstractionsExtensions.Library\AbstractionsExtensions.Library.csproj" />
     <ProjectReference Include="..\..\..\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Application\CleanArchitectureCQRS.Application.Library\CleanArchitectureCQRS.Application.Library.csproj" />
   </ItemGroup>

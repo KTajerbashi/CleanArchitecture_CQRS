@@ -1,5 +1,5 @@
 ﻿using CleanArchitectureCQRS.Application.Library.Databases;
-using CleanArchitectureCQRS.Domain.Library.Person.Entities;
+using CleanArchitectureCQRS.Domain.Library.People.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 

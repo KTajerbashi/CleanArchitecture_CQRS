@@ -30,7 +30,7 @@ namespace WebApi.EndPoints.Controllers
             return Ok(await mediator.Send(new GetAllPersonQueryModel()));
         }
         [HttpGet("GetById")]
-        public async Task<IActionResult> GetById(Guid id)
+        public async Task<IActionResult> GetById(int id)
         {
             var result = await mediator.Send(new GetPersonByIdQueryModel { Id = id });
 
@@ -42,12 +42,12 @@ namespace WebApi.EndPoints.Controllers
             return Ok(await mediator.Send(command));
         }
         [HttpDelete]
-        public async Task<IActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(int id)
         {
             return Ok(await mediator.Send(new DeletePersonCommandModel(id)));
         }
         [HttpPut]
-        public async Task<IActionResult> Update(Guid id, EditPersonCommandModel command)
+        public async Task<IActionResult> Update(int id, EditPersonCommandModel command)
         {
             if (id != command.Id)
             {
