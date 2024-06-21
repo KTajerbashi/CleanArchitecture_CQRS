@@ -1,9 +1,5 @@
-﻿using CleanArchitectureCQRS.Application.Library.BaseCommandQuery.Pattern;
-using CleanArchitectureCQRS.Application.Library.Databases;
-using CleanArchitectureCQRS.CommandsDb.Library.Database;
+﻿using CleanArchitectureCQRS.Application.Library.Databases;
 using CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
-using CleanArchitectureCQRS.QueriesDb.Library.Database;
-using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebApi.EndPoints.DIContainers
@@ -21,22 +17,22 @@ namespace WebApi.EndPoints.DIContainers
             builder.Services.AddScoped<IApplicationContext, ApplicationContext>();
 
 
-            //// Command Database Config
-            services.AddDbContext<CommandApplicationContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionCommandDatabase"),
-                b => b.MigrationsAssembly(typeof(CommandApplicationContext).Assembly.FullName));
-            });
-            builder.Services.AddScoped<ICommandApplicationContext, CommandApplicationContext>();
+            ////// Command Database Config
+            //services.AddDbContext<CommandApplicationContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionCommandDatabase"),
+            //    b => b.MigrationsAssembly(typeof(CommandApplicationContext).Assembly.FullName));
+            //});
+            //builder.Services.AddScoped<ICommandApplicationContext, CommandApplicationContext>();
 
 
-            //// Query Database Config
-            services.AddDbContext<QueryApplicationContext>(options =>
-            {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionQueryDatabase"),
-                b => b.MigrationsAssembly(typeof(QueryApplicationContext).Assembly.FullName));
-            });
-            builder.Services.AddScoped<IQueryApplicationContext, QueryApplicationContext>();
+            ////// Query Database Config
+            //services.AddDbContext<QueryApplicationContext>(options =>
+            //{
+            //    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionQueryDatabase"),
+            //    b => b.MigrationsAssembly(typeof(QueryApplicationContext).Assembly.FullName));
+            //});
+            //builder.Services.AddScoped<IQueryApplicationContext, QueryApplicationContext>();
             return services;
 
         }

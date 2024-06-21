@@ -1,16 +1,16 @@
 ﻿using CleanArchitectureCQRS.Domain.Library.Base.Domain.Events;
 
+
 namespace CleanArchitectureCQRS.Domain.Library.Base.Domain.Entities;
 
-public interface IAggregateRoot
+/// <summary>
+/// Interface for AggregateRoot
+/// IAggregateRoot is the combination of IBaseEntity and IAggregateRoot
+/// </summary>
+/// <typeparam name="TKey"></typeparam>
+public interface IAggregateRoot<out TKey> : IBaseEntity<TKey>
 {
-    /// <summary>
-    /// رخداد های موجودیت را حذف میکند 
-    /// </summary>
+    long Version { get; }
+    IReadOnlyCollection<IDomainEvent<TKey>> Events { get; }
     void ClearEvents();
-    /// <summary>
-    /// تمام رویداد های که روی موجودیت اتفاق می افتد را نگه میدارد
-    /// </summary>
-    /// <returns></returns>
-    IEnumerable<IDomainEvent> GetEvents();
 }

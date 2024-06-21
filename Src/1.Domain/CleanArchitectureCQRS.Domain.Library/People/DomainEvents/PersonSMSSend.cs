@@ -2,5 +2,5 @@
 
 namespace CleanArchitectureCQRS.Domain.Library.People.DomainEvents
 {
-    public record PersonSMSSend(int Id, string link) : IDomainEvent;
+    //public record PersonSMSSend(int Id, string link) : IDomainEvent;
 }

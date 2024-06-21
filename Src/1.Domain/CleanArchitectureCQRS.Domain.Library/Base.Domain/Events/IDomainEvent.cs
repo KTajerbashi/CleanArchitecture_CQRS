@@ -1,13 +1,12 @@
 ﻿namespace CleanArchitectureCQRS.Domain.Library.Base.Domain.Events;
 
 /// <summary>
-/// در این مجموعه از 
-/// event
-/// ها برای تغییر وضعیت و نگهداری تغییرات استفاده می‌شود
-/// به منظور انجام اتوماتیک امور مختلف از این اینترفیس به عنوان 
-/// marker
-/// استفاده می شود
+/// 
 /// </summary>
-public interface IDomainEvent
+/// <typeparam name="TKey"></typeparam>
+public interface IDomainEvent<out TKey>
 {
+    public long AggregateVersion { get; }
+    TKey AggregateId { get; }
+    DateTime TimeStamp { get; }
 }

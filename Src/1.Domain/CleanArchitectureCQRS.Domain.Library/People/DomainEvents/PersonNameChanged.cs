@@ -2,5 +2,5 @@
 
 namespace CleanArchitectureCQRS.Domain.Library.People.DomainEvents
 {
-    public record PersonNameChanged(int Id, string FirstName) : IDomainEvent;
+    //public record PersonNameChanged(int Id, string FirstName) : IDomainEvent;
 }
