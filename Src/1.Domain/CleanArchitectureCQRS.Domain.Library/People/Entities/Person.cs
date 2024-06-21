@@ -52,6 +52,14 @@ namespace CleanArchitectureCQRS.Domain.Library.People.Entities
             FirstName = firstName;
             AddEvent(new PersonNameChanged(Id, firstName));
         }
+        public void PersonSMSSend(string link)
+        {
+            AddEvent(new PersonSMSSend(Id, link));
+        }
+        public void PersonEmailSend()
+        {
+            AddEvent(new PersonEmailSend(Id));
+        }
 
         #region Properties
         public FirstName FirstName { get; set; }

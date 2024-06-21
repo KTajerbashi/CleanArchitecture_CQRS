@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CleanArchitectureCQRS.ContextDatabase.Library.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240620213423_Initial_Database")]
+    [Migration("20240621070602_Initial_Database")]
     partial class Initial_Database
     {
         /// <inheritdoc />

@@ -12,5 +12,4 @@ namespace CleanArchitectureCQRS.Domain.Library.People.DomainEvents
         string NationalCode,
         string Password
         ) : IDomainEvent;
-    public record PersonNameChanged(int Id, string FirstName) : IDomainEvent;
 }

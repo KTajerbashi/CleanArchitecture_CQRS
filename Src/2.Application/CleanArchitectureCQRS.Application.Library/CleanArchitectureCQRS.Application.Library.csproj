@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Orders\**" />
+    <EmbeddedResource Remove="Orders\**" />
+    <None Remove="Orders\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
   </ItemGroup>
 
