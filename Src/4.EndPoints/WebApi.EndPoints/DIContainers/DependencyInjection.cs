@@ -1,4 +1,4 @@
-﻿using CleanArchitectureCQRS.Application.Library.Databases;
+﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.Databases;
 using CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
 using Microsoft.EntityFrameworkCore;
 

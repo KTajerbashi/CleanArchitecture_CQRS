@@ -1,4 +1,4 @@
-using CleanArchitectureCQRS.Application.Library.DIContainer;
+using CleanArchitectureCQRS.Application.Library.BaseApplication.DIContainer;
 using CleanArchitectureCQRS.ContextDatabase.Library.DIContainer;
 using WebApi.EndPoints.DIContainers;
 using WebApi.EndPoints.Middlewares;
