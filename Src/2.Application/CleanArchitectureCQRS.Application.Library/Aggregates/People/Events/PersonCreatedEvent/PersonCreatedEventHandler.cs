@@ -1,4 +1,4 @@
-﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands;
+﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Repositories;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.ApplicationServices.Events;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.DomainEvents;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.Entities;

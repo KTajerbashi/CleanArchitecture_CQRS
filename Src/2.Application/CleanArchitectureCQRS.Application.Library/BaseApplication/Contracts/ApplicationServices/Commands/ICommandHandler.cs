@@ -11,8 +11,8 @@ namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.Ap
 public interface ICommandHandler<TCommand, TData> : IRequestHandler<TCommand, TData>
     where TCommand : ICommand<TData>
 {
-    Task<CommandResult<TData>> Handle(TCommand request);
 }
+
 /// <summary>
 /// 
 /// </summary>

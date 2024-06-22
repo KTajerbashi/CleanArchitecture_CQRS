@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Application\CleanArchitectureCQRS.Application.Library\CleanArchitectureCQRS.Application.Library.csproj" />
+    <ProjectReference Include="..\..\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj" />
   </ItemGroup>
 
 </Project>

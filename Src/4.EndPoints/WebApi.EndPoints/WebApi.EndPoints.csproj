@@ -19,9 +19,9 @@
   <ItemGroup>
     <ProjectReference Include="..\..\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj" />
     <ProjectReference Include="..\..\2.Application\CleanArchitectureCQRS.Application.Library\CleanArchitectureCQRS.Application.Library.csproj" />
-    <ProjectReference Include="..\..\3.Infrastructure\CommandsDataAccess\CleanArchitectureCQRS.CommandsDb.Library\CleanArchitectureCQRS.CommandsDb.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\DataAccessCommands\CleanArchitectureCQRS.CommandsDb.Library\CleanArchitectureCQRS.CommandsDb.Library.csproj" />
+    <ProjectReference Include="..\..\3.Infrastructure\DataAccessQueries\CleanArchitectureCQRS.QueriesDb.Library\CleanArchitectureCQRS.QueriesDb.Library.csproj" />
     <ProjectReference Include="..\..\3.Infrastructure\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj" />
-    <ProjectReference Include="..\..\3.Infrastructure\QueriesDataAccess\CleanArchitectureCQRS.QueriesDb.Library\CleanArchitectureCQRS.QueriesDb.Library.csproj" />
   </ItemGroup>
 
 </Project>
