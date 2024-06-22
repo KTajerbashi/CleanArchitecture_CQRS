@@ -6,6 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Catalogs\**" />
+    <EmbeddedResource Remove="Catalogs\**" />
+    <None Remove="Catalogs\**" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="MediatR" Version="12.3.0" />
