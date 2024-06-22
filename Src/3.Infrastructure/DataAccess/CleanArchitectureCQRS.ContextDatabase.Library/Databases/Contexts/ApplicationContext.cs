@@ -1,8 +1,4 @@
-﻿using CleanArchitectureCQRS.Application.Library.Databases;
-using CleanArchitectureCQRS.ContextDatabase.Library.People;
-using CleanArchitectureCQRS.Domain.Library.Base.Domain.ValueObjects;
-using CleanArchitectureCQRS.Domain.Library.Catalogs.Entities;
-using CleanArchitectureCQRS.Domain.Library.People.ValueObjects;
+﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.Databases;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
@@ -14,13 +10,11 @@ public class ApplicationContext : DbContext, IApplicationContext
     protected IDbContextTransaction _transaction;
 
     //public DbSet<Person> People { get; set; }
-    public DbSet<CatalogItem> CatalogItems { get; set; }
     public ApplicationContext(DbContextOptions<ApplicationContext> options)
         : base(options) { }
     protected ApplicationContext()
     {
     }
-
 
     public void BeginTransaction()
     {
@@ -54,8 +48,6 @@ public class ApplicationContext : DbContext, IApplicationContext
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         base.ConfigureConventions(configurationBuilder);
-        configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
-        configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
     }
 
     public Task<int> SaveChangesAsync()
