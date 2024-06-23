@@ -1,12 +1,7 @@
-﻿//using CleanArchitectureCQRS.Domain.Library.People.Entities;
-//using Microsoft.EntityFrameworkCore;
+﻿namespace CleanArchitectureCQRS.Application.Library.Databases;
 
-//namespace CleanArchitectureCQRS.Application.Library.Databases
-//{
-//    public interface ICommandApplicationContext
-//    {
-//        DbSet<Person> People { get; set; }
+public interface ICommandApplicationContext
+{
 
-//        Task<int> SaveChangesAsync();
-//    }
-//}
+    Task<int> SaveChangesAsync();
+}

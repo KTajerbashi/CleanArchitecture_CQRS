@@ -1,6 +1,6 @@
 ﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Commands;
 
-namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.ApplicationServices.Commands;
+namespace CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Commands;
 /// <summary>
 /// تعریف ساختار برای مدیریت دستورات. پیاده سازی الگوی Mediator
 /// از این الگو جهت کاهش پیچیدگی صدا زدن دستورات استفاده می‌شود

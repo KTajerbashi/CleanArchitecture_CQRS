@@ -1,11 +1,8 @@
-﻿//using CleanArchitectureCQRS.Domain.Library.People.Entities;
-//using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-//namespace CleanArchitectureCQRS.Application.Library.Databases
-//{
-//    public interface IQueryApplicationContext
-//    {
-//        DbSet<Person> People { get; set; }
+namespace CleanArchitectureCQRS.Application.Library.Databases;
 
-//    }
-//}
+public interface IQueryApplicationContext
+{
+
+}

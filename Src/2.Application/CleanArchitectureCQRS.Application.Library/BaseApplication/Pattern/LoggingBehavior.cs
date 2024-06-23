@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CleanArchitectureCQRS.Application.Library.BaseApplication.BaseCommandQuery.Pattern
+namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Pattern
 {
     //public interface ISender
     //{

@@ -1,6 +1,6 @@
 ﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Queries;
 
-namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.ApplicationServices.Queries;
+namespace CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Queries;
 
 /// <summary>
 /// تعریف ساختار الگوی Mediator جهت اتصال ساده کوئری‌ها به هندلر‌ها

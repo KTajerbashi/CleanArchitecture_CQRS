@@ -1,6 +1,6 @@
 ﻿using CleanArchitectureCQRS.Domain.Library.BaseDomain.Events;
 
-namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.ApplicationServices.Events;
+namespace CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Events;
 
 
 /// <summary>
