@@ -13,10 +13,11 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
     .AddEnvironmentVariables();
 
 //Register Application layer and Event Store layer from Infrastructure here
-builder.Services.AddApplication();
-builder.Services.AddEventStore(builder.Configuration);
-builder.Services.AddApplicationDatabase(builder);
 
+builder.Services.AddDependencies();
+builder.Services.AddApplicationDatabase(builder);
+builder.Services.AddApplicationDependencies();
+builder.Services.AddContextDatabaseDependencies(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
