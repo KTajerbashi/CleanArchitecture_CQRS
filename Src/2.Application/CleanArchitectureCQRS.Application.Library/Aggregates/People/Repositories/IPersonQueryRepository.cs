@@ -1,7 +1,7 @@
 ﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.Data.Queries;
 
-namespace MiniBlog.Core.Contracts.People.Queries
+namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Repositories
 {
     public interface IPersonQueryRepository : IQueryRepository
     {

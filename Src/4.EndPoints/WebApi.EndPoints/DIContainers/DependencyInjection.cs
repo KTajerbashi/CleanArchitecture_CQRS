@@ -6,7 +6,6 @@ using CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.Data.Q
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.Data.Transactions;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Databases;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities;
-using CleanArchitectureCQRS.Application.Library.Databases;
 using CleanArchitectureCQRS.CommandsDb.Library.Database;
 using CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
 using CleanArchitectureCQRS.QueriesDb.Library.Database;

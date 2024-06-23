@@ -1,4 +1,4 @@
-﻿namespace CleanArchitectureCQRS.Application.Library.Databases;
+﻿namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Databases;
 
 public interface ICommandApplicationContext
 {

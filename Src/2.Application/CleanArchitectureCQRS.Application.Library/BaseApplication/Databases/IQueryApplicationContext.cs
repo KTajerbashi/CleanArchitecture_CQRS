@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace CleanArchitectureCQRS.Application.Library.Databases;
+namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Databases;
 
 public interface IQueryApplicationContext
 {
