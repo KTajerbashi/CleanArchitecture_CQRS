@@ -2,7 +2,7 @@
 
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
 
-public class GetPersonByIdValidator : AbstractValidator<GetPersonByIdModel>
+public class GetPersonByIdValidator : AbstractValidator<GetPersonById>
 {
     public GetPersonByIdValidator()
     {

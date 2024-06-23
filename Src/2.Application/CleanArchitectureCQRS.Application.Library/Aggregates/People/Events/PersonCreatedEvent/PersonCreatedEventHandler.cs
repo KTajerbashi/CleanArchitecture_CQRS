@@ -1,5 +1,5 @@
 ﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Repositories;
-using CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.ApplicationServices.Events;
+using CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Events;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.DomainEvents;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.Entities;
 using Microsoft.Extensions.Logging;

@@ -5,7 +5,7 @@ namespace MiniBlog.Core.Contracts.People.Queries
 {
     public interface IPersonQueryRepository : IQueryRepository
     {
-        public Task<PersonQuery?> ExecuteAsync(GetPersonByIdModel query);
+        public Task<PersonQuery?> ExecuteAsync(GetPersonById query);
 
     }
 }

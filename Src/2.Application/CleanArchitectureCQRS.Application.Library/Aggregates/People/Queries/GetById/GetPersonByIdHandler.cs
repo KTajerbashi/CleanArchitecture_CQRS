@@ -1,12 +1,17 @@
-﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.Contracts.ApplicationServices.Queries;
+﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Queries;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Queries;
+using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities;
 
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
 
-public class GetPersonByIdHandler : IQueryHandler<GetPersonByIdModel, PersonQuery>
+public class GetPersonByIdHandler : QueryHandler<GetPersonById, PersonQuery>
 {
-    public Task<QueryResult<PersonQuery>> Handle(GetPersonByIdModel request)
+    public GetPersonByIdHandler(UtilitiesServices utilitiesServices) : base(utilitiesServices)
     {
-        throw new NotImplementedException();
+    }
+
+    public override Task<QueryResult<PersonQuery>> Handle(GetPersonById request, CancellationToken cancellationToken)
+    {
+        return ResultAsync(new PersonQuery());
     }
 }

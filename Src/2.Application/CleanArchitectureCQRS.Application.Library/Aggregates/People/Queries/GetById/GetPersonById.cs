@@ -3,7 +3,7 @@ using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.
 
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
 
-public class GetPersonByIdModel : IQuery<PersonQuery>, IWebRequest
+public class GetPersonById : IQuery<PersonQuery>, IWebRequest
 {
     public int PersonId { get; set; }
     public string Path => "/api/Person/GetPersonById";
