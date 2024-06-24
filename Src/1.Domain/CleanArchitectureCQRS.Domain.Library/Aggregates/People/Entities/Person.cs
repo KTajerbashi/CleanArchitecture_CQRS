@@ -19,16 +19,11 @@ public class Person : AggregateRoot<int>
     {
 
     }
-    public Person(int id, string firstName, string lastName)
+    public Person(string firstName, string lastName)
     {
-        if (id < 1)
-        {
-            throw new InvalidEntityStateException(MessagePatterns.IdInvalidationMessage);
-        }
-        //Id = id;
         FirstName = firstName;
         LastName = lastName;
-        AddEvent(new PersonCreated(id, BusinessId.Value, firstName, lastName));
+        AddEvent(new PersonCreated(BusinessId.Value, firstName, lastName));
     }
     public void ChangeFirstName(string firstName)
     {
