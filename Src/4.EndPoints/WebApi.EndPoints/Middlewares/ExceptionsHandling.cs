@@ -1,43 +1,38 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
-using System.Threading.Tasks;
+﻿namespace WebApi.EndPoints.Middlewares;
 
-namespace WebApi.EndPoints.Middlewares
+// You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
+public class ExceptionsHandling
 {
-    // You may need to install the Microsoft.AspNetCore.Http.Abstractions package into your project
-    public class ExceptionsHandling
+    private readonly RequestDelegate _next;
+
+    public ExceptionsHandling(RequestDelegate next)
     {
-        private readonly RequestDelegate _next;
-
-        public ExceptionsHandling(RequestDelegate next)
-        {
-            Console.WriteLine("INFO UP : ExceptionsHandling");
-            _next = next;
-        }
-
-        public Task Invoke(HttpContext httpContext)
-        {
-            Console.WriteLine("INFO UP : Invoke");
-            try
-            {
-                return _next(httpContext);
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"INFO Down {ex.Message}");
-                throw;
-            }
-        }
+        Console.WriteLine("INFO UP : ExceptionsHandling");
+        _next = next;
     }
 
-    // Extension method used to add the middleware to the HTTP request pipeline.
-    public static class ExceptionsHandlingExtensions
+    public Task Invoke(HttpContext httpContext)
     {
-        public static IApplicationBuilder UseExceptionsHandling(this IApplicationBuilder builder)
+        Console.WriteLine("INFO UP : Invoke");
+        try
         {
-            Console.WriteLine("INFO UP : UseExceptionsHandling");
-            return builder.UseMiddleware<ExceptionsHandling>();
-            Console.WriteLine("INFO Down : UseExceptionsHandling");
+            return _next(httpContext);
         }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"INFO Down {ex.Message}");
+            throw;
+        }
+    }
+}
+
+// Extension method used to add the middleware to the HTTP request pipeline.
+public static class ExceptionsHandlingExtensions
+{
+    public static IApplicationBuilder UseExceptionsHandling(this IApplicationBuilder builder)
+    {
+        Console.WriteLine("INFO UP : UseExceptionsHandling");
+        return builder.UseMiddleware<ExceptionsHandling>();
+        Console.WriteLine("INFO Down : UseExceptionsHandling");
     }
 }
