@@ -1,8 +1,6 @@
 ﻿using CleanArchitectureCQRS.Domain.Library.Aggregates.People.DomainEvents;
-using CleanArchitectureCQRS.Domain.Library.Aggregates.People.Resources;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.ValueObjects;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.Entities;
-using CleanArchitectureCQRS.Domain.Library.BaseDomain.Exceptions;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 

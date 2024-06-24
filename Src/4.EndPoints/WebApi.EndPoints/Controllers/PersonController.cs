@@ -10,9 +10,6 @@ using WebApi.EndPoints.WebApiBase.Controllers;
 
 namespace WebApi.EndPoints.Controllers;
 
-
-
-
 public class PersonController : BaseController
 {
     public PersonController(IMediator mediator) : base(mediator)

@@ -1,4 +1,4 @@
-﻿using CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.ValueConversions;
+﻿using CleanArchitectureCQRS.ContextDatabase.Library.ValueConversions;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.ValueObjects;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
@@ -73,6 +73,7 @@ public abstract class BaseQueryDbContext : DbContext
         configurationBuilder.Properties<BusinessId>().HaveConversion<BusinessIdConversion>();
         configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
         configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
+        configurationBuilder.Properties<UserName>().HaveConversion<UserNameConversion>();
 
     }
 

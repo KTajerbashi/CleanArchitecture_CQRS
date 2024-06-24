@@ -1,5 +1,5 @@
 ﻿using CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.Extensions;
-using CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.ValueConversions;
+using CleanArchitectureCQRS.ContextDatabase.Library.ValueConversions;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.ValueObjects;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;

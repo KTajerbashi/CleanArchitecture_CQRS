@@ -1,7 +1,7 @@
 ﻿using CleanArchitectureCQRS.Domain.Library.Aggregates.People.ValueObjects;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.ValueConversions
+namespace CleanArchitectureCQRS.ContextDatabase.Library.ValueConversions
 {
     public class LastNameConversion : ValueConverter<LastName, string>
     {
