@@ -1,5 +1,6 @@
 ﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Commands;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Commands;
+using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Common;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities;
 
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.ChangePassword;
@@ -12,6 +13,6 @@ public class ChangePasswordHandler : CommandHandler<ChangePassword, int>
 
     public override Task<CommandResult<int>> Handle(ChangePassword request, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        return ResultAsync(10,ApplicationServiceStatus.ValidationError);
     }
 }

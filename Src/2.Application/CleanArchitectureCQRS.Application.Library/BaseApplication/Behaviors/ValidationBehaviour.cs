@@ -1,47 +1,42 @@
-﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Commands;
+﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Common;
 using FluentValidation;
 using MediatR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitectureCQRS.Application.Library.BaseApplication.Behaviors
 {
     public sealed class ValidationBehaviour<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-        where TRequest : class
+        where TRequest : IRequest<TResponse>
+        where TResponse : ApplicationServiceResult, new()
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
+        private readonly IServiceProvider _serviceProvider;
 
-        public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators)
+        public ValidationBehaviour(IEnumerable<IValidator<TRequest>> validators, IServiceProvider serviceProvider)
         {
             _validators = validators;
+            _serviceProvider = serviceProvider;
         }
 
-        public async Task<TResponse> Handle(
-            TRequest request,
-            RequestHandlerDelegate<TResponse> next,
-            CancellationToken cancellationToken)
+        public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
         {
-            if (!_validators.Any())
+            var validator = _serviceProvider.GetService<IValidator<TRequest>>();
+            TResponse res = null;
+            if (validator != null)
             {
-                return await next();
-            }
-            var context = new ValidationContext<TRequest>(request);
-            var errorsDictionary = _validators
-            .Select(x => x.Validate(context))
-            .SelectMany(x => x.Errors)
-            .Where(x => x != null)
-            .GroupBy(
-                x => x.PropertyName,
-                x => x.ErrorMessage,
-                (propertyName, errorMessages) => new
+                var validationResult = validator.Validate(request);
+                if (!validationResult.IsValid)
                 {
-                    Key = propertyName,
-                    Values = errorMessages.Distinct().ToArray()
-                })
-            .ToDictionary(x => x.Key, x => x.Values);
-            if (errorsDictionary.Any())
-            {
-                throw new ValidationException("");
+                    res = new()
+                    {
+                        Status = ApplicationServiceStatus.ValidationError
+                    };
+                    foreach (var item in validationResult.Errors)
+                    {
+                        res.AddMessage(item.ErrorMessage);
+                    }
+                }
             }
-
             return await next();
         }
     }

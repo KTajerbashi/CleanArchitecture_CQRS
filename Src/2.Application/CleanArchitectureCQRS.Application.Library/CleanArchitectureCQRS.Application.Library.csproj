@@ -29,7 +29,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\SharedKernel\Utilities\Utilities.Extensions\Utilities.Extensions.csproj" />
     <ProjectReference Include="..\..\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="BaseApplication\Databases\" />
   </ItemGroup>
 
 </Project>

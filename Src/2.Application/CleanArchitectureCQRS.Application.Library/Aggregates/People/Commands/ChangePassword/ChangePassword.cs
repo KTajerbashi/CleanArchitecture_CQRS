@@ -8,4 +8,6 @@ using System.Threading.Tasks;
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.ChangePassword;
 public class ChangePassword : ICommand<int>
 {
+    public int Id { get; set; }
+    public string Password { get; set; }
 }

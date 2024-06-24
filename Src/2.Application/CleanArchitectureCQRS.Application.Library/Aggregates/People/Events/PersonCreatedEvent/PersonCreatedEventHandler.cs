@@ -21,7 +21,7 @@ public class PersonCreatedHandler : IDomainEventHandler<PersonCreated>
     {
         try
         {
-            Person person = new Person(10,DateTime.Now.ToString(),DateTime.Now.ToString());
+            Person person = new Person(DateTime.Now.ToString(),DateTime.Now.ToString());
 
             await personCommandRepository.InsertAsync(person);
             await personCommandRepository.CommitAsync();
