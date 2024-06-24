@@ -1,11 +1,10 @@
-﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.Databases;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 namespace CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
 
-public class ApplicationContext : DbContext, IApplicationContext
+public class ApplicationContext : DbContext
 {
     protected IDbContextTransaction _transaction;
 

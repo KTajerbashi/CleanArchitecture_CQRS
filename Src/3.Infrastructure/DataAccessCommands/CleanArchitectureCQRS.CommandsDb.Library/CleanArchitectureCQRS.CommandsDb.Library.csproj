@@ -7,10 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.6" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\SharedKernel\AbstractionsExtensions\AbstractionsExtensions.Library\AbstractionsExtensions.Library.csproj" />
     <ProjectReference Include="..\..\..\1.Domain\CleanArchitectureCQRS.Domain.Library\CleanArchitectureCQRS.Domain.Library.csproj" />
     <ProjectReference Include="..\..\..\2.Application\CleanArchitectureCQRS.Application.Library\CleanArchitectureCQRS.Application.Library.csproj" />
     <ProjectReference Include="..\..\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj" />
