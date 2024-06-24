@@ -12,14 +12,24 @@ public class PersonQueryRepository : BaseQueryRepository<DbContextApplicationQue
     {
     }
 
-    public async Task<PersonQuery?> ExecuteAsync(GetPersonById query)
+    public List<PersonQuery> GetAllPerson()
     {
-        var result =  await _dbContext.People.Select(item => new PersonQuery()
+        var result =  _dbContext.People.Select(item => new PersonQuery()
         {
             Id = item.Id,
             FirstName = item.FirstName.Value,
             LastName = item.LastName.Value
-        }).FirstOrDefaultAsync(code => code.Id.Equals(query.PersonId));
+        }).ToList();
+        return result;
+    }
+    public PersonQuery GetPersonById(GetPersonById query)
+    {
+        var result =  _dbContext.People.Select(item => new PersonQuery()
+        {
+            Id = item.Id,
+            FirstName = item.FirstName.Value,
+            LastName = item.LastName.Value
+        }).FirstOrDefault(code => code.Id.Equals(query.PersonId));
         return result;
     }
 }

@@ -9,6 +9,7 @@ namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.C
 public class CreatePersonHandler : CommandHandler<CreatePerson, Guid>
 {
     private readonly IPersonCommandRepository personCommandRepository;
+
     public CreatePersonHandler(UtilitiesServices utilitiesServices, IPersonCommandRepository personCommandRepository) : base(utilitiesServices)
     {
         this.personCommandRepository = personCommandRepository;
@@ -16,8 +17,10 @@ public class CreatePersonHandler : CommandHandler<CreatePerson, Guid>
 
     public override Task<CommandResult<Guid>> Handle(CreatePerson request, CancellationToken cancellationToken)
     {
-        var entity = new Person(request.FirstName, request.LastName);
+        var entity = new Person(request.FirstName, request.LastName,$"{request.FirstName}_{request.LastName}@mail.com","09021301500");
+        entity.ChangeFirstName(entity.FirstName.Value);
         personCommandRepository.Insert(entity);
+        personCommandRepository.Commit();
         return OkAsync(entity.BusinessId.Value);
     }
 }

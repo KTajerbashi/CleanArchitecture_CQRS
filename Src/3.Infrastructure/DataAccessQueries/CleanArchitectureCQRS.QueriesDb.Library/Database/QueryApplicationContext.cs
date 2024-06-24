@@ -9,6 +9,7 @@ public class DbContextApplicationQueries : BaseQueryDbContext
     public DbContextApplicationQueries(DbContextOptions<DbContextApplicationQueries> options)
         : base(options) { }
 
+    
 
     public virtual DbSet<Person> People { get; set; } = null!;
 

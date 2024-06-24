@@ -32,8 +32,7 @@ public static class QueryRepositoryExtensions
             entities = entities.OrderByField(query.SortBy, query.SortAscending);
         entities = entities.Skip(query.SkipCount).Take(query.PageSize);
 
-        result.QueryResult = await entities.Select(
-               c => selectFunc(c)).ToListAsync();
+        result.QueryResult = await entities.Select(c => selectFunc(c)).ToListAsync();
         return result;
     }
 }

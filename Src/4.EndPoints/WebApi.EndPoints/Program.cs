@@ -3,6 +3,8 @@ using CleanArchitectureCQRS.ContextDatabase.Library.DIContainer;
 using System.Reflection;
 using WebApi.EndPoints.DIContainers;
 using WebApi.EndPoints.Middlewares;
+using AbstractionsExtensions.Library.UsersManagement.Services.Extensions.DependencyInjection;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,6 +19,7 @@ builder.Configuration.SetBasePath(Directory.GetCurrentDirectory())
 
 builder.Services.AddDependencies("CleanArchitectureCQRS");
 builder.Services.AddWebApiCore("CleanArchitectureCQRS");
+builder.Services.AddWebUserInfoService(builder.Configuration,"CleanArchitectureCQRS",true);
 builder.Services.AddApplicationDependencies();
 builder.Services.AddContextDatabaseDependencies(builder.Configuration);
 builder.Services.ConfigureServices(builder.Configuration);

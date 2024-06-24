@@ -38,6 +38,9 @@ public class WebUserInfoService : IUserInfoService
 
     public bool IsCurrentUser(string userId)
     {
+
+
+        
         return string.Equals(UserId().ToString(), userId, StringComparison.OrdinalIgnoreCase);
     }
 

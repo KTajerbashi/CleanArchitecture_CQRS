@@ -2,6 +2,7 @@
 using CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Events;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.DomainEvents;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.Entities;
+using MediatR;
 using Microsoft.Extensions.Logging;
 
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Events.PersonCreatedEvent;
@@ -21,8 +22,7 @@ public class PersonCreatedHandler : IDomainEventHandler<PersonCreated>
     {
         try
         {
-            Person person = new Person(DateTime.Now.ToString(),DateTime.Now.ToString());
-
+            Person person = new Person(Event.FirstName,Event.LastName,$"{Event.FirstName}_{Event.LastName}@mail.com","09021301500");
             await personCommandRepository.InsertAsync(person);
             await personCommandRepository.CommitAsync();
 

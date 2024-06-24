@@ -6,19 +6,21 @@ using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetAll
 using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.EndPoints.WebApiBase.Controllers;
 
 namespace WebApi.EndPoints.Controllers;
-[ApiController]
-[Route("[controller]")]
-public class PersonController : ControllerBase
+
+
+
+
+public class PersonController : BaseController
 {
-    private readonly IMediator mediator;
-    public PersonController(IMediator mediator)
+    public PersonController(IMediator mediator) : base(mediator)
     {
-        this.mediator = mediator;
     }
+
     [HttpPost]
-    public async Task<IActionResult> Create(CreatePerson command) => Ok(await mediator.Send(command));
+    public async Task<IActionResult> Create(CreatePerson command) => await Create<CreatePerson,Guid>(command);
 
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
@@ -36,23 +38,22 @@ public class PersonController : ControllerBase
     }
 
 
-    [HttpGet]
+    [HttpGet("GetAll")]
     public async Task<IActionResult> GetAll()
     {
-        return Ok(await mediator.Send(new GetAllPerson()));
+        return await Get<GetAllPerson, List<PersonQuery>>(new GetAllPerson());
     }
+    
+    
     [HttpGet("GetById")]
-    public async Task<IActionResult> GetById(int id)
-    {
-        var result = await mediator.Send(new GetPersonById { PersonId = id });
-
-        return Ok(result ?? null);
-    }
+    public async Task<IActionResult> GetById(GetPersonById getPerson) => await Get<GetPersonById, PersonQuery>(getPerson);
+    
+    
     [HttpPut("ChangePassword")]
     public async Task<IActionResult> ChangePassword(ChangePassword command)
     {
         return Ok(await mediator.Send(command));
     }
-  
+
 
 }

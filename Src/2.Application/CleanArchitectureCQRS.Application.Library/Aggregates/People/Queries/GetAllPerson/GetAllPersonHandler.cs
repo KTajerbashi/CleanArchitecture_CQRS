@@ -6,7 +6,7 @@ using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities;
 
 namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetAllPerson;
 
-public class GetAllPersonHandler : QueryHandler<GetAllPerson, int>
+public class GetAllPersonHandler : QueryHandler<GetAllPerson, List<PersonQuery>>
 {
     private readonly IPersonQueryRepository personQueryRepository;
     public GetAllPersonHandler(UtilitiesServices utilitiesServices, IPersonQueryRepository personQueryRepository) : base(utilitiesServices)
@@ -14,8 +14,8 @@ public class GetAllPersonHandler : QueryHandler<GetAllPerson, int>
         this.personQueryRepository = personQueryRepository;
     }
 
-    public override Task<QueryResult<int>> Handle(GetAllPerson request, CancellationToken cancellationToken)
+    public override async Task<QueryResult<List<PersonQuery>>> Handle(GetAllPerson request, CancellationToken cancellationToken)
     {
-        return ResultAsync(10);
+        return await ResultAsync(personQueryRepository.GetAllPerson());
     }
 }

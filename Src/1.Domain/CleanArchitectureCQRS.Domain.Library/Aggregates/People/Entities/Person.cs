@@ -14,15 +14,19 @@ public class Person : AggregateRoot<int>
     #region Properties
     public FirstName FirstName { get; set; }
     public LastName LastName { get; set; }
+    public string Email { get; set; }
+    public string Phone { get; set; }
     #endregion
     private Person()
     {
 
     }
-    public Person(string firstName, string lastName)
+    public Person(string firstName, string lastName, string email, string phone)
     {
         FirstName = firstName;
         LastName = lastName;
+        Email = email;
+        Phone = phone;
         AddEvent(new PersonCreated(BusinessId.Value, firstName, lastName));
     }
     public void ChangeFirstName(string firstName)

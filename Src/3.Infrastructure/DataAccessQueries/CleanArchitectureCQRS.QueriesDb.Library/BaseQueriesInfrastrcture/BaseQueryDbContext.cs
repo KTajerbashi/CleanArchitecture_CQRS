@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.ValueConversions;
+using CleanArchitectureCQRS.Domain.Library.Aggregates.People.ValueObjects;
+using CleanArchitectureCQRS.Domain.Library.BaseDomain.ValueObjects;
+using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitectureCQRS.QueriesDb.Library.BaseQueriesInfrastrcture;
 
@@ -61,6 +64,15 @@ public abstract class BaseQueryDbContext : DbContext
     public override Task<int> SaveChangesAsync(bool acceptAllChangesOnSuccess, CancellationToken cancellationToken = default)
     {
         throw new NotSupportedException();
+
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+        configurationBuilder.Properties<BusinessId>().HaveConversion<BusinessIdConversion>();
+        configurationBuilder.Properties<FirstName>().HaveConversion<FirstNameConversion>();
+        configurationBuilder.Properties<LastName>().HaveConversion<LastNameConversion>();
 
     }
 

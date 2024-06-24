@@ -3,7 +3,7 @@
 /// ساختار پایه جهت بازگشت داده‌ها هنگام کوئری گرفتن وقتی که Paging دارد
 /// </summary>
 /// <typeparam name="T">نوع داده‌ای که از کوئری دریافت می‌شود را تعیین می‌کند!</typeparam>
-public class PagedData<T>
+public class PagedData<T>:IQuery<T>
 {
     public List<T> QueryResult { get; set; }
     public int PageNumber { get; set; } = 1;

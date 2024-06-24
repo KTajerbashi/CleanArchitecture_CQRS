@@ -5,7 +5,8 @@ namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Repositori
 {
     public interface IPersonQueryRepository : IQueryRepository
     {
-        public Task<PersonQuery?> ExecuteAsync(GetPersonById query);
+        public PersonQuery GetPersonById(GetPersonById query);
+        public List<PersonQuery> GetAllPerson();
 
     }
 }
