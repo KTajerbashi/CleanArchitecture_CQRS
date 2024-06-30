@@ -1,4 +1,5 @@
-﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.ChangePassword;
+﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.ChangeName;
+using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.ChangePassword;
 using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.CreatePerson;
 using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.DeletePerson;
 using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.UpdatePerson;
@@ -31,6 +32,11 @@ public class PersonController : BaseController
         {
             return BadRequest();
         }
+        return Ok(await mediator.Send(command));
+    }
+    [HttpPut("ChangeName")]
+    public async Task<IActionResult> ChangeName(ChangeName command)
+    {
         return Ok(await mediator.Send(command));
     }
 

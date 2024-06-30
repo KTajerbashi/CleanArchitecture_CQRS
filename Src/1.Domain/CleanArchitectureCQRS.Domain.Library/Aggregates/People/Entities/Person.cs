@@ -30,6 +30,6 @@ public class Person : AggregateRoot<int>
     public void ChangeFirstName(string firstName)
     {
         FirstName = firstName;
-        AddEvent(new PersonNameChanged(Id, firstName));
+      //  AddEvent(new PersonNameChanged(Id, firstName));
     }
 }

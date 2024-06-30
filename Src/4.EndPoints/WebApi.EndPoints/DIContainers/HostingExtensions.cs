@@ -12,9 +12,9 @@ namespace WebApi.EndPoints.DIContainers
             //CommandDbContext
             services.AddDbContext<DbContextApplicationCommand>(
                 c =>
-                    c.UseSqlServer(configuration.GetConnectionString("DefaultConnectionCommandDatabase"))
-                     .AddInterceptors(new SetPersianYeKeInterceptor(),
-                                 new AddAuditDataInterceptor()));
+                    c.UseSqlServer(configuration.GetConnectionString("DefaultConnectionCommandDatabase")));
+                     //.AddInterceptors(new SetPersianYeKeInterceptor(),
+                     //            new AddAuditDataInterceptor()));
 
             //QueryDbContext
             services.AddDbContext<DbContextApplicationQueries>(
