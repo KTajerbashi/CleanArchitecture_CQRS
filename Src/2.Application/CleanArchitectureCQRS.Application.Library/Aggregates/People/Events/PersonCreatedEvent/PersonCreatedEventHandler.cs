@@ -18,15 +18,16 @@ public class PersonCreatedHandler : IDomainEventHandler<PersonCreated>
         this.personCommandRepository = personCommandRepository;
     }
 
-    public async Task Handle(PersonCreated Event)
+
+    public async Task Handle(PersonCreated notification, CancellationToken cancellationToken)
     {
         try
         {
-            Person person = new Person(Event.FirstName,Event.LastName,$"{Event.FirstName}_{Event.LastName}@mail.com","09021301500");
+            Person person = new Person(notification.FirstName,notification.LastName,$"{notification.FirstName}_{notification.LastName}@mail.com","09021301500");
             await personCommandRepository.InsertAsync(person);
             await personCommandRepository.CommitAsync();
 
-            _logger.LogInformation("Handled {Event} in BlogCreatedHandler", Event.GetType().Name);
+            _logger.LogInformation("Handled {Event} in BlogCreatedHandler", notification.GetType().Name);
 
             await Task.CompletedTask;
         }

@@ -1,4 +1,6 @@
-﻿namespace CleanArchitectureCQRS.Domain.Library.BaseDomain.Events;
+﻿using MediatR;
+
+namespace CleanArchitectureCQRS.Domain.Library.BaseDomain.Events;
 
 /// <summary>
 /// در این مجموعه از 
@@ -8,6 +10,6 @@
 /// marker
 /// استفاده می شود
 /// </summary>
-public interface IDomainEvent
+public interface IDomainEvent : INotification
 {
 }

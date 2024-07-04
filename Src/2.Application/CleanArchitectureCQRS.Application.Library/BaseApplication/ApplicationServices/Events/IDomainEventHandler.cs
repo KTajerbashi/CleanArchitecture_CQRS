@@ -1,4 +1,5 @@
 ﻿using CleanArchitectureCQRS.Domain.Library.BaseDomain.Events;
+using MediatR;
 
 namespace CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Events;
 
@@ -7,7 +8,7 @@ namespace CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationS
 /// 
 /// </summary>
 /// <typeparam name="TDomainEvent"></typeparam>
-public interface IDomainEventHandler<TDomainEvent> where TDomainEvent : IDomainEvent
+public interface IDomainEventHandler<TDomainEvent>: INotificationHandler<TDomainEvent>
+    where TDomainEvent : IDomainEvent
 {
-    Task Handle(TDomainEvent Event);
 }

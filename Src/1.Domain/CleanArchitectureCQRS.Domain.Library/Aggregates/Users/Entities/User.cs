@@ -40,9 +40,9 @@ public class User : AggregateRoot<int>
         FirstName = firstName;
         AddEvent(new FirstNameChanged(Id, firstName));
     }
-    public void ChangeUserName(string firstName)
+    public void ChangeUserName(string username)
     {
-        FirstName = firstName;
-        AddEvent(new UserNameChanged(Id, firstName));
+        UserName = username;
+        AddEvent(new UserNameChanged(Id, username));
     }
 }

@@ -1,6 +1,7 @@
 ﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Commands;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.RequestResponse.Common;
 using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities;
+using MediatR;
 
 namespace CleanArchitectureCQRS.Application.Library.BaseApplication.ApplicationServices.Commands;
 
@@ -16,6 +17,7 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
     /// این سرویس خدمات است موارد مورد نیاز است
     /// </summary>
     protected readonly UtilitiesServices UtilitiesServices;
+    private readonly IPublisher _publisher;
 
     /// <summary>
     /// چون کاماند هندلر خروجی ازین جنس است پس ما یک نمونه میسازیم
@@ -24,9 +26,10 @@ public abstract class CommandHandler<TCommand, TData> : ICommandHandler<TCommand
     protected readonly CommandResult<TData> result = new();
 
 
-    public CommandHandler(UtilitiesServices utilitiesServices)
+    public CommandHandler(UtilitiesServices utilitiesServices, IPublisher publisher = null)
     {
         UtilitiesServices = utilitiesServices;
+        _publisher = publisher;
     }
 
     /// <summary>
@@ -118,10 +121,12 @@ public abstract class CommandHandler<TCommand> : ICommandHandler<TCommand>
 {
     protected readonly UtilitiesServices UtilitiesServices;
     protected readonly CommandResult result = new();
+    private readonly IPublisher _publisher;
 
-    public CommandHandler(UtilitiesServices utilitiesServices)
+    public CommandHandler(UtilitiesServices utilitiesServices, IPublisher publisher = null)
     {
         UtilitiesServices = utilitiesServices;
+        _publisher = publisher;
     }
 
     /// <summary>

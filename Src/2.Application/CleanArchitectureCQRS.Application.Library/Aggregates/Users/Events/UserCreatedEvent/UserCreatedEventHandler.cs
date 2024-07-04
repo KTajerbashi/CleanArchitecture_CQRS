@@ -13,35 +13,37 @@ namespace CleanArchitectureCQRS.Application.Library.Aggregates.Users.Events.User
 public class UserCreatedEventHandler : IDomainEventHandler<UserCreated>
 {
     private readonly ILogger<UserCreatedEventHandler> _logger;
-    private readonly IUserCommandRepository userCommandRepository;
+    private readonly IPersonCommandRepository personCommandRepository;
 
-    public UserCreatedEventHandler(ILogger<UserCreatedEventHandler> logger, IUserCommandRepository userCommandRepository)
+    public UserCreatedEventHandler(ILogger<UserCreatedEventHandler> logger, IPersonCommandRepository personCommandRepository)
     {
         _logger = logger;
-        this.userCommandRepository = userCommandRepository;
+        this.personCommandRepository = personCommandRepository;
     }
 
-    public async Task Handle(UserCreated Event)
+
+    public async Task Handle(UserCreated notification, CancellationToken cancellationToken)
     {
+        personCommandRepository.BeginTransaction();
         try
         {
-            User user = new User(
-                Event.FirstName,
-                Event.LastName,
-                Event.Email,
-                Event.UserName,
-                Event.Phone
+            Person user = new Person(
+                notification.FirstName,
+                notification.LastName,
+                notification.Email,
+                notification.Phone
                 );
-            await userCommandRepository.InsertAsync(user);
-            await userCommandRepository.CommitAsync();
+            await personCommandRepository.InsertAsync(user);
+            await personCommandRepository.CommitAsync();
 
-            _logger.LogInformation("Handled {Event} in UserCreatedEventHandler", Event.GetType().Name);
-
+            _logger.LogInformation("Handled {Event} in UserCreatedEventHandler", notification.GetType().Name);
             await Task.CompletedTask;
+            personCommandRepository.CommitTransaction();
         }
         catch (Exception)
         {
 
+            personCommandRepository.RollbackTransaction();
             throw;
         }
     }
