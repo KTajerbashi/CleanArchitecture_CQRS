@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using System.Reflection;
 
 namespace CleanArchitectureCQRS.ContextDatabase.Library.Databases.Contexts;
 
-public class ApplicationContext : DbContext
+public class ApplicationContext : IdentityDbContext
 {
     protected IDbContextTransaction _transaction;
 
