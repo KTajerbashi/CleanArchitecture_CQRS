@@ -1,13 +1,12 @@
-using WebApi.EndPoints.HostExtensions.ServiceExtensions;
-using WebApi.EndPoints.HostExtensions.StartUp;
+using WebApi.EndPoints.HostExtensions.ProgramStartup;
 
 
 StartupApplication.StartApplication(() =>
 {
     WebApplication
             .CreateBuilder(args)
-            .ApplicationServices()
-            .ApplicationPipeline()
-            .RunAsync();
+            .AddServicesApplication()
+            .UsePipelineApplication()
+            .Run();
 });
 

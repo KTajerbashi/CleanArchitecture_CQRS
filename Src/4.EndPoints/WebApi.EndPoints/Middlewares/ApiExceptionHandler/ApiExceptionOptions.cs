@@ -1,7 +1,10 @@
-﻿namespace WebApi.EndPoints.Middlewares.ApiExceptionHandler;
+﻿using Microsoft.AspNetCore.Http;
 
-public class ApiExceptionOptions
+namespace WebApi.EndPoints.Middlewares.ApiExceptionHandler
 {
-    public Action<HttpContext, Exception, ApiError> AddResponseDetails { get; set; }
-    public Func<Exception, LogLevel> DetermineLogLevel { get; set; }
+    public class ApiExceptionOptions
+    {
+        public Action<HttpContext, Exception, ApiError> AddResponseDetails { get; set; }
+        public Func<Exception, LogLevel> DetermineLogLevel { get; set; }
+    }
 }

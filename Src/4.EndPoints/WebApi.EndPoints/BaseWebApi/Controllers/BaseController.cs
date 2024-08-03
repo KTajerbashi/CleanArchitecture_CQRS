@@ -5,7 +5,7 @@ using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
-using WebApi.EndPoints.DIContainers;
+using WebApi.EndPoints.HostExtensions.Providers.HttpAccessor;
 
 namespace WebApi.EndPoints.BaseWebApi.Controllers;
 
@@ -128,4 +128,8 @@ public abstract class BaseController : Controller
         return BadRequest(result.Messages);
     }
 
+    protected async Task<IActionResult> ReturnResponse<TModel>(TModel model)
+    {
+        return await Task.FromResult(Ok(model));
+    }
 }

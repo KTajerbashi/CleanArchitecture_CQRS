@@ -1,63 +1,92 @@
-﻿using CleanArchitectureCQRS.Application.Library.BaseApplication.Utilities.Translator;
+﻿using Azure;
+using FluentValidation;
+using System.Diagnostics;
 using System.Net;
 
-namespace WebApi.EndPoints.Middlewares.ApiExceptionHandler;
-
-public class ApiExceptionMiddleware
+namespace WebApi.EndPoints.Middlewares.ApiExceptionHandler
 {
-    private readonly RequestDelegate _next;
-    private readonly ILogger<ApiExceptionMiddleware> _logger;
-    private readonly ApiExceptionOptions _options;
-    private readonly ITranslator _translator;
-
-    public ApiExceptionMiddleware(ApiExceptionOptions options, RequestDelegate next,
-        ILogger<ApiExceptionMiddleware> logger,  ITranslator translator
-        )
+    public class ApiExceptionMiddleware
     {
-        _next = next;
-        _logger = logger;
-        _options = options;
-        _translator = translator;
-    }
+        private readonly RequestDelegate _next;
+        private readonly ILogger<ApiExceptionMiddleware> _logger;
+        private readonly ApiExceptionOptions _options;
 
-    public async Task Invoke(HttpContext context)
-    {
-        try
+        public ApiExceptionMiddleware(
+            ApiExceptionOptions options, 
+            RequestDelegate next,
+            ILogger<ApiExceptionMiddleware> logger
+            )
         {
-            await _next(context);
+            _next = next;
+            _logger = logger;
+            _options = options;
         }
-        catch (Exception ex)
+
+        public async Task Invoke(HttpContext context)
         {
-            await HandleExceptionAsync(context, ex);
+            try
+            {
+                context.TraceIdentifier = Activity.Current?.Id ?? context?.TraceIdentifier;
+                await _next(context);
+            }
+            catch (Exception ex)
+            {
+                await HandleExceptionAsync(context, ex);
+            }
         }
-    }
 
-    private Task HandleExceptionAsync(HttpContext context, Exception exception)
-    {
-        var error = new ApiError
+        private Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            Id = Guid.NewGuid().ToString(),
-            Status = (short)HttpStatusCode.InternalServerError,
-            Title = _translator["SOME_KIND_OF_ERROR_OCCURRED_IN_THE_API"]
-        };
+            var error = new ApiError
+            {
+                Id = Guid.NewGuid().ToString(),
+                Status = (short)HttpStatusCode.InternalServerError,
+                Title = $"{exception.InnerException}",
+                TraceId = context.TraceIdentifier,
+            };
 
-        _options.AddResponseDetails?.Invoke(context, exception, error);
+            _options.AddResponseDetails?.Invoke(context, exception, error);
 
-        var innerExMessage = GetInnermostExceptionMessage(exception);
+            var innerExMessage = GetInnermostExceptionMessage(exception);
 
-        var level = _options.DetermineLogLevel?.Invoke(exception) ?? LogLevel.Error;
-        _logger.Log(level, exception, "BADNESS!!! " + innerExMessage + " -- {ErrorId}.", error.Id);
+            var level = _options.DetermineLogLevel?.Invoke(exception) ?? LogLevel.Error;
+            _logger.Log(level, exception, "BADNESS!!! " + innerExMessage + " -- {ErrorId}.", error.Id);
 
-        var result = error.ToString();
-        context.Response.ContentType = "application/json";
-        context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
-        return context.Response.WriteAsync(result);
-    }
-    private string GetInnermostExceptionMessage(Exception exception)
-    {
-        if (exception.InnerException != null)
-            return GetInnermostExceptionMessage(exception.InnerException);
+            context.Response.ContentType = "application/json";
+            context.Response.StatusCode = exception switch
+            {
+                ValidationException => (int)HttpStatusCode.BadRequest,
+                UnauthorizedAccessException => (int)HttpStatusCode.Unauthorized,
+                KeyNotFoundException => (int)HttpStatusCode.NotFound,
+                _ => (int)HttpStatusCode.InternalServerError
+            };
 
-        return exception.Message;
+            var message = exception switch
+            {
+                ValidationException => exception.Message,
+                UnauthorizedAccessException => exception.Message,
+                KeyNotFoundException => exception.Message,
+                _ => "Internal Server Error from the custom middleware."
+            };
+            var errorJson = System.Text.Json.JsonSerializer.Serialize(new
+            {
+                Error = error,
+                Message = message,
+                StatusCode = context.Response.StatusCode,
+
+            });
+            return context.Response.WriteAsync(new ErrorDetails()
+            {
+                Errors = errorJson,
+            }.ToString());
+
+        }
+        private string GetInnermostExceptionMessage(Exception exception)
+        {
+            if (exception.InnerException != null)
+                return GetInnermostExceptionMessage(exception.InnerException);
+
+            return exception.Message;
+        }
     }
 }

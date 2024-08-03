@@ -1,32 +1,19 @@
 ﻿using FluentValidation.AspNetCore;
 using WebApi.EndPoints.Middlewares.ApiExceptionHandler;
 
-namespace WebApi.EndPoints.DIContainers;
-
-/// <summary>
-/// 
-/// </summary>
+namespace WebApi.EndPoints.HostExtensions.Configurations;
 public static class AddApiConfigurationExtensions
 {
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="services"></param>
-    /// <param name="assemblyNamesForLoad"></param>
-    /// <returns></returns>
     public static IServiceCollection AddWebApiCore(this IServiceCollection services, params string[] assemblyNamesForLoad)
     {
-        services.AddControllers().AddFluentValidation();
+        services
+            .AddControllers()
+            .AddFluentValidation();
+
         services.AddDependencies(assemblyNamesForLoad);
 
         return services;
     }
-
-    /// <summary>
-    /// 
-    /// </summary>
-    /// <param name="app"></param>
-
     public static void UseApiExceptionHandler(this IApplicationBuilder app)
     {
         app.UseApiExceptionHandler(options =>
@@ -49,7 +36,5 @@ public static class AddApiConfigurationExtensions
             };
         });
     }
-
-
 
 }
