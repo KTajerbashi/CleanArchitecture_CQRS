@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CleanArchitectureCQRS.Domain.Library.Aggregates.People.Entities;
 
-[Table("People", Schema = "Test"), Description("Users System")]
+[Table("People", Schema = "BUS"), Description("Users System")]
 public class Person : AggregateRoot<int>
 {
     #region Properties
@@ -30,6 +30,6 @@ public class Person : AggregateRoot<int>
     public void ChangeFirstName(string firstName)
     {
         FirstName = firstName;
-      //  AddEvent(new PersonNameChanged(Id, firstName));
+        //  AddEvent(new PersonNameChanged(Id, firstName));
     }
 }

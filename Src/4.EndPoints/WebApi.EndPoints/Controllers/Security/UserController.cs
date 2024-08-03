@@ -1,16 +1,12 @@
-﻿using CleanArchitectureCQRS.Application.Library.Aggregates.People.Commands.CreatePerson;
-using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetAllPerson;
-using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
-using CleanArchitectureCQRS.Application.Library.Aggregates.Users.Commands.CreateUser;
+﻿using CleanArchitectureCQRS.Application.Library.Aggregates.Users.Commands.CreateUser;
 using CleanArchitectureCQRS.Application.Library.Aggregates.Users.Queires.GetAllUser;
 using CleanArchitectureCQRS.Application.Library.Aggregates.Users.Queires.GetUserById;
-using CleanArchitectureCQRS.Domain.Library.Aggregates.Users.DomainEvents;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using WebApi.EndPoints.WebApiBase.Controllers;
+using WebApi.EndPoints.BaseWebApi.Controllers;
 
-namespace WebApi.EndPoints.Controllers;
+namespace WebApi.EndPoints.Controllers.Security;
 
 public class UserController : BaseController
 {

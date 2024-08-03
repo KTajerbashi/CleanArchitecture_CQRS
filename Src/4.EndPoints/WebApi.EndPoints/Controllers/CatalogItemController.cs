@@ -1,17 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using WebApi.EndPoints.BaseWebApi.Controllers;
 
 namespace WebApi.EndPoints.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class CatalogItemController : ControllerBase
+public class CatalogItemController : BaseController
 {
-    private readonly IMediator _mediator;
-
-    public CatalogItemController(IMediator mediator)
+    public CatalogItemController(IMediator mediator) : base(mediator)
     {
-        _mediator = mediator;
     }
- 
 }

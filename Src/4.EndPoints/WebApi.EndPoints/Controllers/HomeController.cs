@@ -1,27 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
+using MediatR;
+using WebApi.EndPoints.BaseWebApi.Controllers;
 
-namespace WebApi.EndPoints.Controllers
+namespace WebApi.EndPoints.Controllers;
+
+public class HomeController : BaseController
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class HomeController : ControllerBase
+    public HomeController(IMediator mediator) : base(mediator)
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
-
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
-
-        [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<string> Get()
-        {
-            return Enumerable.Range(1, 5).Select(index => $"{index}").ToArray();
-        }
     }
 }

@@ -7,7 +7,7 @@ using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetAll
 using CleanArchitectureCQRS.Application.Library.Aggregates.People.Queries.GetById;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using WebApi.EndPoints.WebApiBase.Controllers;
+using WebApi.EndPoints.BaseWebApi.Controllers;
 
 namespace WebApi.EndPoints.Controllers;
 
@@ -18,7 +18,7 @@ public class PersonController : BaseController
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(CreatePerson command) => await Create<CreatePerson,Guid>(command);
+    public async Task<IActionResult> Create(CreatePerson command) => await Create<CreatePerson, Guid>(command);
 
     [HttpDelete]
     public async Task<IActionResult> Delete(int id)
@@ -46,12 +46,12 @@ public class PersonController : BaseController
     {
         return await Get<GetAllPerson, List<PersonQuery>>(new GetAllPerson());
     }
-    
-    
+
+
     [HttpGet("GetById")]
     public async Task<IActionResult> GetById(GetPersonById getPerson) => await Get<GetPersonById, PersonQuery>(getPerson);
-    
-    
+
+
     [HttpPut("ChangePassword")]
     public async Task<IActionResult> ChangePassword(ChangePassword command)
     {

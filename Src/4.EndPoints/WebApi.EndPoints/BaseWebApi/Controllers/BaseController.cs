@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using WebApi.EndPoints.DIContainers;
 
-namespace WebApi.EndPoints.WebApiBase.Controllers;
+namespace WebApi.EndPoints.BaseWebApi.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]

@@ -1,6 +1,7 @@
 ﻿using CleanArchitectureCQRS.ContextDatabase.Library.ValueConversions;
 using CleanArchitectureCQRS.Domain.Library.Aggregates.People.ValueObjects;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.ValueObjects;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CleanArchitectureCQRS.QueriesDb.Library.BaseQueriesInfrastrcture;
@@ -8,7 +9,7 @@ namespace CleanArchitectureCQRS.QueriesDb.Library.BaseQueriesInfrastrcture;
 /// <summary>
 /// 
 /// </summary>
-public abstract class BaseQueryDbContext : DbContext
+public abstract class BaseQueryDbContext : IdentityDbContext
 {
     public BaseQueryDbContext(DbContextOptions options) : base(options) { }
 

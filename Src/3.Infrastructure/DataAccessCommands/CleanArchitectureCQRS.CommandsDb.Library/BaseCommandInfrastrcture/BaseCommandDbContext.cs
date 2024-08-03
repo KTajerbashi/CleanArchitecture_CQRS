@@ -1,6 +1,7 @@
 ﻿using CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.Extensions;
 using CleanArchitectureCQRS.ContextDatabase.Library.ValueConversions;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.ValueObjects;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage;
@@ -12,7 +13,7 @@ namespace CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture;
 /// <summary>
 /// 
 /// </summary>
-public abstract class BaseCommandDbContext : DbContext
+public abstract class BaseCommandDbContext : IdentityDbContext
 {
     protected IDbContextTransaction _transaction;
 
