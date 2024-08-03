@@ -1,5 +1,5 @@
 ﻿
-using CleanArchitectureCQRS.Domain.Library.Aggregates.Users.Resources;
+using CleanArchitectureCQRS.Domain.Library.Aggregates.People.Resources;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.Exceptions;
 using CleanArchitectureCQRS.Domain.Library.BaseDomain.ValueObjects;
 

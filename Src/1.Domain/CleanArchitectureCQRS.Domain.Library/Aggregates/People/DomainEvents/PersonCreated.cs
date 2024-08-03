@@ -5,4 +5,8 @@ namespace CleanArchitectureCQRS.Domain.Library.Aggregates.People.DomainEvents;
 public record PersonCreated(
         Guid BusinessId,
         string FirstName,
-        string LastName) : IDomainEvent;
+        string LastName,
+        string Email,
+        string UserName,
+        string Phone
+        ) : IDomainEvent;

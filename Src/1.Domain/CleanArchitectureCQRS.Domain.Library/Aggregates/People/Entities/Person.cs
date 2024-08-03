@@ -9,27 +9,45 @@ namespace CleanArchitectureCQRS.Domain.Library.Aggregates.People.Entities;
 [Table("People", Schema = "BUS"), Description("Users System")]
 public class Person : AggregateRoot<int>
 {
-    #region Properties
     public FirstName FirstName { get; set; }
     public LastName LastName { get; set; }
+    public UserName UserName { get; set; }
     public string Email { get; set; }
     public string Phone { get; set; }
-    #endregion
+
     private Person()
     {
 
     }
-    public Person(string firstName, string lastName, string email, string phone)
+    public Person(
+        string firstName, 
+        string lastName, 
+        string email, 
+        string username, 
+        string phone)
     {
         FirstName = firstName;
         LastName = lastName;
         Email = email;
         Phone = phone;
-        AddEvent(new PersonCreated(BusinessId.Value, firstName, lastName));
+        UserName = username;
+        AddEvent(new PersonCreated(
+            BusinessId.Value,
+            firstName,
+            lastName,
+            email,
+            username,
+            phone
+            ));
     }
     public void ChangeFirstName(string firstName)
     {
         FirstName = firstName;
-        //  AddEvent(new PersonNameChanged(Id, firstName));
+        AddEvent(new FirstNameChanged(Id, firstName));
+    }
+    public void ChangeUserName(string username)
+    {
+        UserName = username;
+        AddEvent(new UserNameChanged(Id, username));
     }
 }
