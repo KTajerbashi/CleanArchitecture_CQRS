@@ -4,11 +4,11 @@ using CleanArchitectureCQRS.QueriesDb.Library.BaseQueriesInfrastrcture;
 using CleanArchitectureCQRS.QueriesDb.Library.Database;
 using Microsoft.EntityFrameworkCore;
 
-namespace MiniBlog.Infrastructure.Data.Sql.Queries.People;
+namespace CleanArchitectureCQRS.QueriesDb.Library.Aggregates.People;
 
-public class PersonQueryRepository : BaseQueryRepository<DbContextApplicationQueries>, IPersonQueryRepository
+public class PersonQueryRepository : BaseQueryRepository<DbContextApplicationQuery>, IPersonQueryRepository
 {
-    public PersonQueryRepository(DbContextApplicationQueries dbContext) : base(dbContext)
+    public PersonQueryRepository(DbContextApplicationQuery dbContext) : base(dbContext)
     {
     }
 

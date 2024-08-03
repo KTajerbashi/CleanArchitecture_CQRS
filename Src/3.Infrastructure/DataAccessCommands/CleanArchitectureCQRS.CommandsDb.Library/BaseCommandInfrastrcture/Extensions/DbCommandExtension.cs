@@ -4,7 +4,6 @@ using System.Data.Common;
 using Utilities.Extensions.Extensions;
 
 namespace CleanArchitectureCQRS.CommandsDb.Library.BaseCommandInfrastrcture.Extensions;
-
 /// <summary>
 /// قابلیت های که میخواهیم روی دستورات اعمال شود
 /// </summary>
