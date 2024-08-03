@@ -23,7 +23,12 @@ public class PersonCreatedHandler : IDomainEventHandler<PersonCreated>
     {
         try
         {
-            Person person = new Person(notification.FirstName,notification.LastName,$"{notification.FirstName}_{notification.LastName}@mail.com","09021301500");
+            Person person = new Person(
+                notification.FirstName,
+                notification.LastName,
+                $"{notification.FirstName}_{notification.LastName}@mail.com",
+                notification.UserName,
+                "09021301500");
             await personCommandRepository.InsertAsync(person);
             await personCommandRepository.CommitAsync();
 

@@ -17,7 +17,12 @@ public class CreatePersonHandler : CommandHandler<CreatePerson, Guid>
 
     public override Task<CommandResult<Guid>> Handle(CreatePerson request, CancellationToken cancellationToken)
     {
-        var entity = new Person(request.FirstName, request.LastName,$"{request.FirstName}_{request.LastName}@mail.com","09021301500");
+        var entity = new Person(
+            request.FirstName, 
+            request.LastName,
+            $"{request.FirstName}_{request.LastName}@mail.com",
+            $"{request.FirstName}_{request.LastName}",
+            "09021301500");
         entity.ChangeFirstName(entity.FirstName.Value);
         personCommandRepository.Insert(entity);
         personCommandRepository.Commit();
