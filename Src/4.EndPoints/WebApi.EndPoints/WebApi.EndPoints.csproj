@@ -38,9 +38,4 @@
     <ProjectReference Include="..\..\3.Infrastructure\DataAccess\CleanArchitectureCQRS.ContextDatabase.Library\CleanArchitectureCQRS.ContextDatabase.Library.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Models\Identity\Account\" />
-    <Folder Include="Models\Identity\Authorization\" />
-  </ItemGroup>
-
 </Project>

@@ -13,11 +13,11 @@ namespace WebApi.EndPoints.BaseWebApi.Controllers;
 [Route("api/[controller]")]
 public abstract class BaseController : Controller
 {
-    protected readonly IMediator mediator;
+    protected readonly IMediator Mediator;
 
     protected BaseController(IMediator mediator)
     {
-        this.mediator = mediator;
+        this.Mediator = mediator;
     }
 
     protected UtilitiesServices ApplicationContext => HttpContext.ApplicationContext();
@@ -32,7 +32,7 @@ public abstract class BaseController : Controller
     protected virtual async Task<IActionResult> Create<TCommand, TData>(TCommand command)
         where TCommand : ICommand<TData>
     {
-        var result = await mediator.Send(command);
+        var result = await Mediator.Send(command);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
@@ -53,7 +53,7 @@ public abstract class BaseController : Controller
     /// <returns></returns>
     protected async Task<IActionResult> Edit<TCommand, TData>(TCommand command) where TCommand : class, ICommand<TData>
     {
-        var result = await mediator.Send(command);
+        var result = await Mediator.Send(command);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
@@ -74,7 +74,7 @@ public abstract class BaseController : Controller
     /// <returns></returns>
     protected async Task<IActionResult> Delete<TCommand, TData>(TCommand command) where TCommand : ICommand<TData>
     {
-        var result = await mediator.Send(command);
+        var result = await Mediator.Send(command);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
@@ -95,7 +95,7 @@ public abstract class BaseController : Controller
     /// <returns></returns>
     protected async Task<IActionResult> GetById<TQuery, TData>(TQuery query) where TQuery : IQuery<TData>
     {
-        var result = await mediator.Send(query);
+        var result = await Mediator.Send(query);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
@@ -116,7 +116,7 @@ public abstract class BaseController : Controller
     /// <returns></returns>
     protected async Task<IActionResult> Get<TQuery, TData>(TQuery query) where TQuery : IQuery<TData>
     {
-        var result = await mediator.Send(query);
+        var result = await Mediator.Send(query);
         if (result.Status == ApplicationServiceStatus.Ok)
         {
             return StatusCode((int)HttpStatusCode.OK, result.Data);
