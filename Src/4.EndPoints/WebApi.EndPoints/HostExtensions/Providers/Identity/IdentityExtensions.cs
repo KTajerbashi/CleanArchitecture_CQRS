@@ -13,7 +13,7 @@ public static class IdentityExtensions
     public static IServiceCollection AddIdentityServices(this IServiceCollection services, IConfiguration configuration)
         => services
         .AddIdentity()
-        .AddIdentityJWT(configuration)
+        //.AddIdentityJWT(configuration)
         .AddIdentityConfigs()
         .AddIdentityCookies()
         .AddIdentityPolicies();
@@ -27,6 +27,7 @@ public static class IdentityExtensions
             //.AddUserManager()
             //.AddRoleManager<IdentityRole>()
             ;
+        services.AddScoped<IJWTServiceToken, JWTServiceToken>();
 
         return services;
 
@@ -91,13 +92,12 @@ public static class IdentityExtensions
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = configuration["Jwt:Issuer"],
-                ValidAudience = configuration["Jwt:Issuer"],
+                ValidIssuer = configuration["Jwt:ValidIssuer"],
+                ValidAudience = configuration["Jwt:ValidAudience"],
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["Jwt:Key"]))
             };
         });
         services.AddAuthorization();
-        services.AddScoped<IJWTServiceToken, JWTServiceToken>();
         return services;
     }
     public static void UseIdentity(this WebApplication app)

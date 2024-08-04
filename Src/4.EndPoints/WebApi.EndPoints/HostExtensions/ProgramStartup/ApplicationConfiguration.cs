@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Serilog;
 using WebApi.EndPoints.HostExtensions.Configurations;
+using WebApi.EndPoints.HostExtensions.Providers.BackgrounTask.Hangfire.Extensions;
 using WebApi.EndPoints.HostExtensions.Providers.Identity;
 using WebApi.EndPoints.HostExtensions.Providers.Swagger;
 
@@ -31,6 +32,7 @@ public static class ApplicationConfiguration
         builder.Services.AddMvc();
 
         builder.Services.AddControllers();
+        builder.Services.AddHangfireServices(configuration);
 
         return builder.Build();
     }
@@ -69,10 +71,11 @@ public static class ApplicationConfiguration
             builder.AllowAnyMethod();
         });
 
+        app.UseHangfireProvider();
+        
         app.MapControllers();
 
         app.UseHttpsRedirection();
-
 
         return app;
     }
