@@ -1,10 +1,10 @@
-﻿using CleanArchitectureCQRS.CommandsDb.Library.DIContainer;
+﻿using AbstractionsExtensions.Library.BackgroundTask.HangfireProvider.Extensions;
+using CleanArchitectureCQRS.CommandsDb.Library.DIContainer;
 using CleanArchitectureCQRS.QueriesDb.Library.DIContainer;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Serilog;
 using WebApi.EndPoints.HostExtensions.Configurations;
-using WebApi.EndPoints.HostExtensions.Providers.BackgrounTask.Hangfire.Extensions;
 using WebApi.EndPoints.HostExtensions.Providers.Identity;
 using WebApi.EndPoints.HostExtensions.Providers.Swagger;
 
@@ -72,7 +72,7 @@ public static class ApplicationConfiguration
         });
 
         app.UseHangfireProvider();
-        
+
         app.MapControllers();
 
         app.UseHttpsRedirection();
