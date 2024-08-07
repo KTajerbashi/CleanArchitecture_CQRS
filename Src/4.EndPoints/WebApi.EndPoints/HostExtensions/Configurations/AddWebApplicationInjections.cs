@@ -55,6 +55,31 @@ public static class AddWebApplicationInjections
         return assemblies;
     }
 
+    public static IServiceCollection AddWithTransientLifetime(
+        this IServiceCollection services,
+        IEnumerable<Assembly> assembliesForSearch,
+        params Type[] assignableTo)
+    {
+        services
+            .Scan(s => s.FromAssemblies(assembliesForSearch)
+            .AddClasses(c => c.AssignableToAny(assignableTo))
+            .AsImplementedInterfaces()
+            .WithTransientLifetime());
+        return services;
+    }
+
+
+    public static IServiceCollection AddWithScopedLifetime(this IServiceCollection services,
+   IEnumerable<Assembly> assembliesForSearch,
+   params Type[] assignableTo)
+    {
+        services.Scan(s => s.FromAssemblies(assembliesForSearch)
+            .AddClasses(c => c.AssignableToAny(assignableTo))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
+        return services;
+    }
+
     /// <summary>
     /// 
     /// </summary>
@@ -62,11 +87,12 @@ public static class AddWebApplicationInjections
     /// <param name="assmblyName"></param>
     /// <returns></returns>
 
-    private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string[] assmblyName)
+    private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string[] assemblyName)
     {
-        return assmblyName.Any(d => compilationLibrary.Name.Contains(d))
-            || compilationLibrary.Dependencies.Any(d => assmblyName.Any(c => d.Name.Contains(c)));
+        return assemblyName.Any(d => compilationLibrary.Name.Contains(d))
+            || compilationLibrary.Dependencies.Any(d => assemblyName.Any(c => d.Name.Contains(c)));
     }
     private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string assmblyName)
       => (compilationLibrary.Name.Contains(assmblyName) || compilationLibrary.Dependencies.Any(d => assmblyName.Equals(d)));
+
 }

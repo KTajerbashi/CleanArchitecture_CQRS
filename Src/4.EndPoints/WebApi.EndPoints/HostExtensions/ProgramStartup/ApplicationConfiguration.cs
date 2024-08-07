@@ -7,6 +7,9 @@ using Serilog;
 using WebApi.EndPoints.HostExtensions.Configurations;
 using WebApi.EndPoints.HostExtensions.Providers.Identity;
 using WebApi.EndPoints.HostExtensions.Providers.Swagger;
+using SOAPContainerServices.Extensions.DependencyInjection;
+using CleanArchitectureCQRS.Application.Library.Aggregates.People.Repositories;
+using CleanArchitectureCQRS.CommandsDb.Library.Aggregates.People;
 
 namespace WebApi.EndPoints.HostExtensions.ProgramStartup;
 
@@ -30,6 +33,7 @@ public static class ApplicationConfiguration
         builder.Services.AddContextDatabaseQueryDependencies(configuration);
 
         builder.Services.AddMvc();
+        builder.Services.AddNotificationService();
 
         builder.Services.AddControllers();
         builder.Services.AddHangfireServices(configuration);

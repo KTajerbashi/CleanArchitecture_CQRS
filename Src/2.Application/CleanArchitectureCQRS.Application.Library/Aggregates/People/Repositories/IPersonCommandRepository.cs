@@ -5,4 +5,5 @@ namespace CleanArchitectureCQRS.Application.Library.Aggregates.People.Repositori
 
 public interface IPersonCommandRepository : ICommandRepository<Person, int>
 {
+    Task SendEmail();
 }

@@ -7,14 +7,12 @@ using WebApi.EndPoints.HostExtensions.Providers.Identity.Repositories;
 using WebApi.EndPoints.Models.Identity.Authorization;
 
 namespace WebApi.EndPoints.Controllers.Identity;
-
 public class AuthorizationController : BaseController
 {
     private readonly UserManager<IdentityUser> UserManager;
     private readonly RoleManager<IdentityRole> RoleManager;
     private readonly SignInManager<IdentityUser> SignInManager;
     private readonly IJWTServiceToken jWTServiceToken;
-
     public AuthorizationController(IMediator mediator, UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager, SignInManager<IdentityUser> signInManager, IJWTServiceToken jWTServiceToken) : base(mediator)
     {
         UserManager = userManager;
