@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Domain.Library.BaseDomain.ValueObjects;
+﻿using BaseSource.Core.Domain.Library.ValueObjects;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaseSource.Infra.Data.Sql.Library.ValueConversions

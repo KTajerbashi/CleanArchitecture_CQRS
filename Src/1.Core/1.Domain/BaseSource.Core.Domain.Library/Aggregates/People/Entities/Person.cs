@@ -1,6 +1,6 @@
 ﻿using BaseSource.Core.Domain.Library.Aggregates.People.DomainEvents;
 using BaseSource.Core.Domain.Library.Aggregates.People.ValueObjects;
-using BaseSource.Core.Domain.Library.BaseDomain.Entities;
+using BaseSource.Core.Domain.Library.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 

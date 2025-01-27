@@ -1,3 +1,3 @@
 ﻿global using MediatR;
-global using BaseSource.Core.Domain.Library.BaseDomain.Exceptions;
-global using BaseSource.Core.Domain.Library.BaseDomain.ValueObjects;
+global using BaseSource.Core.Domain.Library.Exceptions;
+global using BaseSource.Core.Domain.Library.ValueObjects;

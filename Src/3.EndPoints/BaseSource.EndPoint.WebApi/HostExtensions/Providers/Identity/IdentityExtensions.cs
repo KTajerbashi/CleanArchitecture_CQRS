@@ -1,6 +1,7 @@
 ﻿using BaseSource.EndPoint.WebApi.HostExtensions.Providers.Identity.Repositories;
 using BaseSource.EndPoint.WebApi.HostExtensions.Providers.Identity.Services;
 using BaseSource.Infra.Data.Sql.Command.Library.Database;
+using BaseSource.Infra.Data.Sql.Query.Library.Database;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -21,7 +22,7 @@ public static class IdentityExtensions
     {
         services.AddIdentity<IdentityUser, IdentityRole>()
             .AddRoles<IdentityRole>()
-            .AddEntityFrameworkStores<DbContextApplicationCommand>()
+            .AddEntityFrameworkStores<DatabaseContextCommand>()
             .AddDefaultTokenProviders()
             //.AddSignInManager()
             //.AddUserManager()

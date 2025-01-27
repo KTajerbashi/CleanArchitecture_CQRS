@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Domain.Library.BaseDomain.Entities;
-using BaseSource.Core.Domain.Library.BaseDomain.ValueObjects;
+﻿using BaseSource.Core.Domain.Library.Entities;
+using BaseSource.Core.Domain.Library.ValueObjects;
 using System.Linq.Expressions;
 
 namespace BaseSource.Core.Application.Library.BaseApplication.Contracts.Data.Commands;

@@ -1,4 +1,5 @@
 ﻿using BaseSource.Core.Domain.Library.Aggregates.People.Resources;
+using BaseSource.Core.Domain.Library.ValueObjects;
 
 namespace BaseSource.Core.Domain.Library.Aggregates.People.ValueObjects
 {

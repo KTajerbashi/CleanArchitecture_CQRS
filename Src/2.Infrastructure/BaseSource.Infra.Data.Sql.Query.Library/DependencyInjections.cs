@@ -9,7 +9,7 @@ public static class DependencyInjections
 {
     public static IServiceCollection AddQueryInfrastructureLibrary(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<DbContextApplicationQuery>(options =>
+        services.AddDbContext<DatabaseContextQuery>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
         return services;

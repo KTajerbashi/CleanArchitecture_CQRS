@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Domain.Library.BaseDomain.Events;
+﻿using BaseSource.Core.Domain.Library.Events;
 
 namespace BaseSource.Core.Domain.Library.Aggregates.People.DomainEvents;
 

@@ -1,15 +1,15 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Repositories;
 using BaseSource.Core.Domain.Library.Aggregates.People.Entities;
-using BaseSource.Infra.Data.Sql.Command.Library.BaseCommandInfrastrcture;
 using BaseSource.Infra.Data.Sql.Command.Library.Database;
+using BaseSource.Infra.Data.Sql.Command.Library.Patterns;
 
 namespace BaseSource.Infra.Data.Sql.Command.Library.Aggregates.People;
 
 public class PersonCommandRepository :
-        BaseCommandRepository<Person, DbContextApplicationCommand, int>,
+        BaseCommandRepository<Person, DatabaseContextCommand, int>,
         IPersonCommandRepository
 {
-    public PersonCommandRepository(DbContextApplicationCommand dbContext) : base(dbContext)
+    public PersonCommandRepository(DatabaseContextCommand dbContext) : base(dbContext)
     {
     }
 

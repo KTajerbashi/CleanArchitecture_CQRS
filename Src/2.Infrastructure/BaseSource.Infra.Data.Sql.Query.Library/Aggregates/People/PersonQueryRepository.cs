@@ -1,13 +1,13 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Queries.GetById;
 using BaseSource.Core.Application.Library.Aggregates.People.Repositories;
-using BaseSource.Infra.Data.Sql.Query.Library.BaseQueriesInfrastrcture;
 using BaseSource.Infra.Data.Sql.Query.Library.Database;
+using BaseSource.Infra.Data.Sql.Query.Library.Patterns;
 
 namespace BaseSource.Infra.Data.Sql.Query.Library.Aggregates.People;
 
-public class PersonQueryRepository : BaseQueryRepository<DbContextApplicationQuery>, IPersonQueryRepository
+public class PersonQueryRepository : BaseQueryRepository<DatabaseContextQuery>, IPersonQueryRepository
 {
-    public PersonQueryRepository(DbContextApplicationQuery dbContext) : base(dbContext)
+    public PersonQueryRepository(DatabaseContextQuery dbContext) : base(dbContext)
     {
     }
 

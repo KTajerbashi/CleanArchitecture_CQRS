@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Domain.Library.BaseDomain.Events;
+﻿using BaseSource.Core.Domain.Library.Events;
 using MediatR;
 
 namespace BaseSource.Core.Application.Library.BaseApplication.ApplicationServices.Events;

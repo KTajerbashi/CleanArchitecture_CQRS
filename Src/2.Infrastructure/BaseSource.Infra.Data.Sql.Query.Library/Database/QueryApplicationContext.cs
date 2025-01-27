@@ -1,12 +1,12 @@
 ﻿using BaseSource.Core.Domain.Library.Aggregates.People.Entities;
-using BaseSource.Infra.Data.Sql.Query.Library.BaseQueriesInfrastrcture;
+using BaseSource.Infra.Data.Sql.Library.Databases;
 using Microsoft.EntityFrameworkCore;
 
 namespace BaseSource.Infra.Data.Sql.Query.Library.Database;
 
-public class DbContextApplicationQuery : BaseQueryDbContext
+public class DatabaseContextQuery : BaseQueryDbContext
 {
-    public DbContextApplicationQuery(DbContextOptions<DbContextApplicationQuery> options)
+    public DatabaseContextQuery(DbContextOptions<DatabaseContextQuery> options)
         : base(options) { }
 
 
