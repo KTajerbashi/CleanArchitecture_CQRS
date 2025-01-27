@@ -9,7 +9,7 @@ public class StartupApplication
         try
         {
             Log.Logger = new LoggerConfiguration().WriteTo.Console().CreateBootstrapLogger();
-            Log.Information("startUpMessage");
+            Log.Information("Start Up Message");
             action();
         }
         catch (Exception ex)

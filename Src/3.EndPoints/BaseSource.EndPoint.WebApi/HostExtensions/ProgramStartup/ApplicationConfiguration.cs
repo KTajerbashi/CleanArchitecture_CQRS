@@ -46,7 +46,7 @@ public static class ApplicationConfiguration
 
         app.UseSerilogRequestLogging();
 
-        app.UseStaticFiles();
+        //app.UseStaticFiles();
 
         app.UseRouting();
 
