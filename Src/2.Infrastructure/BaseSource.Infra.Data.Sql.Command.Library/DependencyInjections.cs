@@ -1,4 +1,5 @@
 ﻿using BaseSource.Infra.Data.Sql.Command.Library.Database;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
