@@ -1,6 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace BaseSource.Infra.Data.Sql.Library.Configuration.Security;
+﻿namespace BaseSource.Infra.Data.Sql.Library.Configuration.Security;
 
 //public class UserConfiguration:IEntityTypeConfiguration<UserEntity>
 //{

@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Application.Library.Providers.Extensions;
+﻿using BaseSource.Core.Application.Library.Extensions;
 using BaseSource.Infra.Data.Sql.Library.Extensions;
 using System.Data;
 using System.Data.Common;

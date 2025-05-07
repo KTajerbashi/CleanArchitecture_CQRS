@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Domain.Library.Aggregates.People.ValueObjects;
+﻿using BaseSource.Core.Domain.Library.Entities.People.ValueObjects;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BaseSource.Infra.Data.Sql.Library.ValueConversions

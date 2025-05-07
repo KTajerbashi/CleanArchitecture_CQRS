@@ -1,12 +1,4 @@
-﻿using BaseSource.Core.Domain.Library.ValueObjects;
-using BaseSource.Infra.Data.Sql.Library.Extensions;
-using BaseSource.Infra.Data.Sql.Library.ValueConversions;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage;
-using System.Globalization;
-
-namespace BaseSource.Infra.Data.Sql.Library.Databases;
+﻿namespace BaseSource.Infra.Data.Sql.Library.Databases;
 
 public abstract class BaseCommandDbContext : BaseDatabaseContext
 {

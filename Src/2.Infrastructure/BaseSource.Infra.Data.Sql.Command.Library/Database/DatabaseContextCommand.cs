@@ -1,6 +1,6 @@
-﻿using BaseSource.Core.Domain.Library.Aggregates.People.Entities;
-using BaseSource.Core.Domain.Library.Aggregates.People.ValueObjects;
-using BaseSource.Core.Domain.Library.Aggregates.Products.Entities;
+﻿using BaseSource.Core.Domain.Library.Entities.People.Entities;
+using BaseSource.Core.Domain.Library.Entities.People.ValueObjects;
+using BaseSource.Core.Domain.Library.Entities.Products.Entities;
 using BaseSource.Infra.Data.Sql.Library.Databases;
 using BaseSource.Infra.Data.Sql.Library.Extensions;
 using BaseSource.Infra.Data.Sql.Library.ValueConversions;

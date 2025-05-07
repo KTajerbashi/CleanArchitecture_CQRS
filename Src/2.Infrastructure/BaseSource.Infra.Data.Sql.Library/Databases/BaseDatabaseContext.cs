@@ -1,7 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace BaseSource.Infra.Data.Sql.Library.Databases;
+﻿namespace BaseSource.Infra.Data.Sql.Library.Databases;
 
 public class BaseDatabaseContext : IdentityDbContext
 {

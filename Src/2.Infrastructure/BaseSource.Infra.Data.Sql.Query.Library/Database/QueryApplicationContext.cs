@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Domain.Library.Aggregates.People.Entities;
+﻿using BaseSource.Core.Domain.Library.Entities.People.Entities;
 using BaseSource.Infra.Data.Sql.Library.Databases;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +11,7 @@ public class DatabaseContextQuery : BaseQueryDbContext
 
 
 
-    public virtual DbSet<Person> People { get; set; } = null!;
+    public virtual DbSet<Person> People => Set<Person>();
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
