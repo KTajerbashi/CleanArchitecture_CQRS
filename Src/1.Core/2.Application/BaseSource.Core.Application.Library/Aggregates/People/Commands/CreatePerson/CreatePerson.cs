@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Commands;
+﻿using BaseSource.Core.Application.Library.Common.RequestResponse.Commands;
 
 namespace BaseSource.Core.Application.Library.Aggregates.People.Commands.CreatePerson;
 

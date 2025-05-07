@@ -1,5 +1,5 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Queries.GetById;
-using BaseSource.Core.Application.Library.BaseApplication.Contracts.Data.Queries;
+using BaseSource.Core.Application.Library.Common.Contracts.Data.Queries;
 
 namespace BaseSource.Core.Application.Library.Aggregates.People.Repositories
 {

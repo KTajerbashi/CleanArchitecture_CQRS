@@ -2,4 +2,8 @@
 
 public class ProviderUtilities
 {
+    public ProviderUtilities()
+    {
+        
+    }
 }

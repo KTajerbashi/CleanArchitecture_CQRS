@@ -1,7 +1,7 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Repositories;
-using BaseSource.Core.Application.Library.BaseApplication.ApplicationServices.Events;
-using BaseSource.Core.Domain.Library.Aggregates.People.DomainEvents;
-using BaseSource.Core.Domain.Library.Aggregates.People.Entities;
+using BaseSource.Core.Application.Library.Common.ApplicationServices.Events;
+using BaseSource.Core.Domain.Library.Entities.People.DomainEvents;
+using BaseSource.Core.Domain.Library.Entities.People.Entities;
 using Microsoft.Extensions.Logging;
 
 namespace BaseSource.Core.Application.Library.Aggregates.People.Events.PersonCreatedEvent;
