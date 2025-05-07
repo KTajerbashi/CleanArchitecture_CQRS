@@ -1,6 +1,6 @@
-﻿using BaseSource.Core.Domain.Library.Events;
+﻿using BaseSource.Core.Domain.Library.Common.Events;
 
-namespace BaseSource.Core.Domain.Library.Entities;
+namespace BaseSource.Core.Domain.Library.Common.Entities;
 
 public interface IAggregateRoot
 {

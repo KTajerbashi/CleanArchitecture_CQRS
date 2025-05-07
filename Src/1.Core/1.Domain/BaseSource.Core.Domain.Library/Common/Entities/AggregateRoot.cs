@@ -1,7 +1,7 @@
-﻿using BaseSource.Core.Domain.Library.Events;
+﻿using BaseSource.Core.Domain.Library.Common.Events;
 using System.Reflection;
 
-namespace BaseSource.Core.Domain.Library.Entities;
+namespace BaseSource.Core.Domain.Library.Common.Entities;
 
 /// <summary>
 /// پیاده سازی الگوی AggregateRoot

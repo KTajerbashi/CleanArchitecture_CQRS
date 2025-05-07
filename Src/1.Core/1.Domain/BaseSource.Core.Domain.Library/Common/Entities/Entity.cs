@@ -1,6 +1,6 @@
 ﻿using BaseSource.Core.Domain.Library.ValueObjects;
 
-namespace BaseSource.Core.Domain.Library.Entities;
+namespace BaseSource.Core.Domain.Library.Common.Entities;
 
 /// <summary>
 /// کلاس پایه برای تمامی Entityها موجود در سامانه

@@ -1,10 +1,10 @@
-﻿using BaseSource.Core.Domain.Library.Aggregates.People.DomainEvents;
-using BaseSource.Core.Domain.Library.Aggregates.People.ValueObjects;
-using BaseSource.Core.Domain.Library.Entities;
+﻿using BaseSource.Core.Domain.Library.Common.Entities;
+using BaseSource.Core.Domain.Library.Entities.People.DomainEvents;
+using BaseSource.Core.Domain.Library.Entities.People.ValueObjects;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace BaseSource.Core.Domain.Library.Aggregates.People.Entities;
+namespace BaseSource.Core.Domain.Library.Entities.People.Entities;
 
 [Table("People", Schema = "BUS"), Description("Users System")]
 public class Person : AggregateRoot<int>

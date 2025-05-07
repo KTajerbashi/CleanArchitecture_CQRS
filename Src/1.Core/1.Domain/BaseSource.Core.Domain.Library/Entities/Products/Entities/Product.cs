@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BaseSource.Core.Domain.Library.Aggregates.Products.Entities;
+namespace BaseSource.Core.Domain.Library.Entities.Products.Entities;
 
 public class Product
 {

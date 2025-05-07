@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.Library.Exceptions;
+﻿namespace BaseSource.Core.Domain.Library.Common.Exceptions;
 /// <summary>
 /// خطاهای لایه Domain مربوط به Entityها و ValueObjectها به کمک Extention برای لایه‌های بالاتر ارسال می‌شود
 /// با توجه به اینکه هم Entity و هم ValueObject به یک شکل خطا را ارسال می‌کنند یک کلاس Exception طراحی و پیاده سازی شده است.

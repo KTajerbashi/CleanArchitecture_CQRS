@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.Library.Aggregates.People.Resources
+﻿namespace BaseSource.Core.Domain.Library.Entities.People.Resources
 {
     public class MessagePatterns
     {

@@ -1,7 +1,7 @@
-﻿using BaseSource.Core.Domain.Library.Aggregates.People.Resources;
-using BaseSource.Core.Domain.Library.ValueObjects;
+﻿using BaseSource.Core.Domain.Library.Common.ValueObjects;
+using BaseSource.Core.Domain.Library.Entities.People.Resources;
 
-namespace BaseSource.Core.Domain.Library.Aggregates.People.ValueObjects
+namespace BaseSource.Core.Domain.Library.Entities.People.ValueObjects
 {
     public class LastName : BaseValueObject<LastName>
     {

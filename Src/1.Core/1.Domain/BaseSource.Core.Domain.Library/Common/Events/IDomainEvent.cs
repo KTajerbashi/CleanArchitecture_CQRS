@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.Library.Events;
+﻿namespace BaseSource.Core.Domain.Library.Common.Events;
 
 /// <summary>
 /// در این مجموعه از 

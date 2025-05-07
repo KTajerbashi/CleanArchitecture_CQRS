@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.Library.Exceptions;
+﻿namespace BaseSource.Core.Domain.Library.Common.Exceptions;
 
 public class InvalidApplicationServiceStateException : DomainStateException
 {

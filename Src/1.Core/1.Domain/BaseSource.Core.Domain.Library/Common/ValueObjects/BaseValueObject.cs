@@ -1,4 +1,4 @@
-﻿namespace BaseSource.Core.Domain.Library.ValueObjects;
+﻿namespace BaseSource.Core.Domain.Library.Common.ValueObjects;
 
 public abstract class BaseValueObject<TValueObject> : IEquatable<TValueObject>
     where TValueObject : BaseValueObject<TValueObject>

@@ -1,6 +1,6 @@
-﻿using BaseSource.Core.Domain.Library.Events;
+﻿using BaseSource.Core.Domain.Library.Common.Events;
 
-namespace BaseSource.Core.Domain.Library.Aggregates.People.DomainEvents;
+namespace BaseSource.Core.Domain.Library.Entities.People.DomainEvents;
 
 public record PersonCreated(
         Guid BusinessId,
