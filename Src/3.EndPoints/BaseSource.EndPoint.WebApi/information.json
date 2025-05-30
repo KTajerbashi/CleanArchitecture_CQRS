@@ -1,6 +1,0 @@
-{
-  "Add": "Add-Migration ***** -Context DatabaseContextCommand",
-  "Update": "Update-Database -Context DatabaseContextCommand",
-  "Remove": "Remove-Migration -Context DatabaseContextCommand -Force",
-  "Generate": ""
-}
