@@ -1,4 +1,5 @@
-﻿namespace BaseSource.Core.Application.UseCases.PrintWorld.PrintCommand;
+﻿
+namespace BaseSource.Core.Application.UseCases.PrintWorld.PrintCommand;
 
 public class PrintResponse
 {
@@ -19,6 +20,17 @@ public class PrintCommand : Command<PrintResponse>
     }
 
 }
+public class PrintCommandValidator : AbstractValidator<PrintCommand>
+{
+    public PrintCommandValidator()
+    {
+        RuleFor(x => x.Message)
+            .NotEmpty().WithMessage("Message cannot be empty.")
+            .MaximumLength(20).WithMessage("Message Maximum Length Must Be 20.")
+            .Length(5,10).WithMessage("Message Length Must Between 5 and 10 Charecter.")
+            ;
+    }
+}   
 
 
 public class PrintCommandHandler : CommandHandler<PrintCommand, PrintResponse>

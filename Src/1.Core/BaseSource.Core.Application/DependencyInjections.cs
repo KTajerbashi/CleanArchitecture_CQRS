@@ -1,5 +1,5 @@
 ﻿using BaseSource.Core.Application.Providers;
-
+using FluentValidation;
 namespace BaseSource.Core.Application;
 
 public static class DependencyInjections
@@ -10,7 +10,13 @@ public static class DependencyInjections
         {
             option.RegisterServicesFromAssemblies(assemblies);
         });
+
+
+        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+        services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()));
+        
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(LoggingBehavior<,>));
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
         services.AddScoped<ProviderFactory>();
         return services;
