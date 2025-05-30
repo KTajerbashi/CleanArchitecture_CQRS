@@ -15,7 +15,16 @@ public class TestController : AuthorizeController
     [HttpGet("Query")]
     public async Task<IActionResult> QueryTest()
     {
-        var response = await Factory.Mediator.Send(new PrintQuery("Hello World !"));
-        return ReturnResponse(response);
+        try
+        {
+            throw new ApplicationException("Application Query Not Fix !");
+            var response = await Factory.Mediator.Send(new PrintQuery("Hello World !"));
+            return ReturnResponse(response);
+        }
+        catch (Exception ex)
+        {
+            throw ex;
+        }
+
     }
 }

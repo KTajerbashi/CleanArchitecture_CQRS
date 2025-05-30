@@ -2,6 +2,7 @@
 using BaseSource.WebAPI.EndPoint.Providers.Swagger;
 using BaseSource.Core.Application;
 using BaseSource.WebAPI.EndPoint.Middleware.ValidationHandler;
+using BaseSource.WebAPI.EndPoint.Middleware.ExceptionHandler;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -39,7 +40,7 @@ public static class DependencyInjections
         }
 
         app.UseValidationExceptionHandler();
-
+        app.UseApiExceptionHandler();
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
