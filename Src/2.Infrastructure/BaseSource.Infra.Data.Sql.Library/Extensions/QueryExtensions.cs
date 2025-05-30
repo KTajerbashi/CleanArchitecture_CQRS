@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Queries;
-using BaseSource.Core.Application.Library.Providers.Extensions;
+﻿using BaseSource.Core.Application.Library.Common.RequestResponse.Queries;
+using BaseSource.Core.Application.Library.Extensions;
 using Microsoft.EntityFrameworkCore;
 namespace BaseSource.Infra.Data.Sql.Library.Extensions;
 

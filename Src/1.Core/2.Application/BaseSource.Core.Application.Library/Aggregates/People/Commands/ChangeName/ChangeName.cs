@@ -1,8 +1,5 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Repositories;
-using BaseSource.Core.Application.Library.BaseApplication.ApplicationServices.Commands;
-using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Commands;
-using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Common;
-using BaseSource.Core.Application.Library.BaseApplication.Utilities;
+
 
 namespace BaseSource.Core.Application.Library.Aggregates.People.Commands.ChangeName;
 
@@ -14,9 +11,9 @@ public class ChangeName : ICommand<int>
 public class ChangeNameHandler : CommandHandler<ChangeName, int>
 {
     private readonly IPersonCommandRepository personCommandRepository;
-    public ChangeNameHandler(UtilitiesServices utilitiesServices, IPersonCommandRepository personCommandRepository) : base(utilitiesServices)
+
+    public ChangeNameHandler(ProviderUtilities providerUtilities) : base(providerUtilities)
     {
-        this.personCommandRepository = personCommandRepository;
     }
 
     public override Task<CommandResult<int>> Handle(ChangeName request, CancellationToken cancellationToken)

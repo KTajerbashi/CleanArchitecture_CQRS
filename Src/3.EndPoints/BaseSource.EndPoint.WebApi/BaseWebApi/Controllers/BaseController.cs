@@ -1,6 +1,6 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Commands;
-using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Common;
-using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Queries;
+﻿using BaseSource.Core.Application.Library.Common.RequestResponse.Commands;
+using BaseSource.Core.Application.Library.Common.RequestResponse.Common;
+using BaseSource.Core.Application.Library.Common.RequestResponse.Queries;
 using BaseSource.Core.Application.Library.Providers;
 using BaseSource.EndPoint.WebApi.HostExtensions.Providers.HttpAccessor;
 using MediatR;

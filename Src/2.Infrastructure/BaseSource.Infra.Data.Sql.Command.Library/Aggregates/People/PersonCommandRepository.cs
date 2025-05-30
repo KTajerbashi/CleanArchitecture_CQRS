@@ -1,5 +1,5 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Repositories;
-using BaseSource.Core.Domain.Library.Aggregates.People.Entities;
+using BaseSource.Core.Domain.Library.Entities.People.Entities;
 using BaseSource.Infra.Data.Sql.Command.Library.Database;
 using BaseSource.Infra.Data.Sql.Command.Library.Patterns;
 

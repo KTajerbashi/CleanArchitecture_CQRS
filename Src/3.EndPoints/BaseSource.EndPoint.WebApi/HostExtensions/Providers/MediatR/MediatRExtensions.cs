@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.Behaviors;
+﻿using BaseSource.Core.Application.Library.Common.Behaviors;
 using BaseSource.Core.Application.Library.Providers;
 using MediatR;
 using System.Reflection;

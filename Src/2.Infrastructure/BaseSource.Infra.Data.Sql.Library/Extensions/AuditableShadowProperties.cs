@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Application.Library.UseCases.Interfaces;
-using BaseSource.Core.Domain.Library.Entities;
+﻿using BaseSource.Core.Application.Library.Common.Interfaces;
+using BaseSource.Core.Domain.Library.Common.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 

@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.EndPoints;
-using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Queries;
+﻿using BaseSource.Core.Application.Library.Common.RequestResponse.EndPoints;
+using BaseSource.Core.Application.Library.Common.RequestResponse.Queries;
 
 namespace BaseSource.Core.Application.Library.Aggregates.People.Queries.GetById;
 

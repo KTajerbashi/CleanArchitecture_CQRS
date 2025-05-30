@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Application.Library.UseCases.Interfaces;
+﻿using BaseSource.Core.Application.Library.Common.Interfaces;
 using BaseSource.Infra.Data.Sql.Library.Extensions;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using Microsoft.EntityFrameworkCore.Infrastructure;

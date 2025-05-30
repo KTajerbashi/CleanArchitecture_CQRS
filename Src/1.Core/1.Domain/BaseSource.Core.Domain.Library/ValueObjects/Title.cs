@@ -1,4 +1,7 @@
-﻿namespace BaseSource.Core.Domain.Library.ValueObjects;
+﻿using BaseSource.Core.Domain.Library.Common.Exceptions;
+using BaseSource.Core.Domain.Library.Common.ValueObjects;
+
+namespace BaseSource.Core.Domain.Library.ValueObjects;
 public class Title : BaseValueObject<Title>
 {
     #region Properties

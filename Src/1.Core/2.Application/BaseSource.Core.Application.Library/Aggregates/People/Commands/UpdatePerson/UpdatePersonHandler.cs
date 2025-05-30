@@ -1,16 +1,14 @@
 ﻿using BaseSource.Core.Application.Library.Aggregates.People.Repositories;
-using BaseSource.Core.Application.Library.BaseApplication.ApplicationServices.Commands;
-using BaseSource.Core.Application.Library.BaseApplication.RequestResponse.Commands;
-using BaseSource.Core.Application.Library.BaseApplication.Utilities;
 
 namespace BaseSource.Core.Application.Library.Aggregates.People.Commands.UpdatePerson;
 
 public class UpdatePersonHandler : CommandHandler<UpdatePerson, int>
 {
-    private readonly IPersonCommandRepository personCommandRepository;
-    public UpdatePersonHandler(UtilitiesServices utilitiesServices, IPersonCommandRepository personCommandRepository) : base(utilitiesServices)
+    private readonly IPersonCommandRepository _repository;
+
+    public UpdatePersonHandler(ProviderUtilities providerUtilities, IPersonCommandRepository repository) : base(providerUtilities)
     {
-        this.personCommandRepository = personCommandRepository;
+        _repository = repository;
     }
 
     public override Task<CommandResult<int>> Handle(UpdatePerson request, CancellationToken cancellationToken)

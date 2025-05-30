@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.Contracts.Data.Commands;
-using BaseSource.Core.Domain.Library.Entities;
+﻿using BaseSource.Core.Application.Library.Common.Contracts.Data.Commands;
+using BaseSource.Core.Domain.Library.Common.Entities;
 using BaseSource.Core.Domain.Library.ValueObjects;
 using BaseSource.Infra.Data.Sql.Library.Databases;
 using Microsoft.EntityFrameworkCore;

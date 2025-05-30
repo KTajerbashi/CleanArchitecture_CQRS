@@ -1,4 +1,4 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.Contracts.Data.Queries;
+﻿using BaseSource.Core.Application.Library.Common.Contracts.Data.Queries;
 using BaseSource.Infra.Data.Sql.Library.Databases;
 
 namespace BaseSource.Infra.Data.Sql.Query.Library.Patterns;

@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Application.Library.BaseApplication.Contracts.Data.Commands;
-using BaseSource.Core.Application.Library.BaseApplication.Contracts.Data.Queries;
+﻿using BaseSource.Core.Application.Library.Common.Contracts.Data.Commands;
+using BaseSource.Core.Application.Library.Common.Contracts.Data.Queries;
 using BaseSource.EndPoint.WebApi.HostExtensions.Providers.FluentValidation;
 using BaseSource.EndPoint.WebApi.HostExtensions.Providers.MediatR;
 using System.Reflection;
