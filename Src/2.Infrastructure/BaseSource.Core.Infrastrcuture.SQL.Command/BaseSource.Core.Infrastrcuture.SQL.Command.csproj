@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
+    <ProjectReference Include="..\..\1.Core\BaseSource.Core.Application\BaseSource.Core.Application.csproj" />
+    <ProjectReference Include="..\BaseSource.Core.Infrastrcuture.SQL\BaseSource.Core.Infrastrcuture.SQL.csproj" />
   </ItemGroup>
 
 </Project>

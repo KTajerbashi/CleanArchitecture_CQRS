@@ -7,7 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Common\" />
+    <ProjectReference Include="..\..\0.SharedKernel\BaseSource.Utilities\BaseSource.Utilities.csproj" />
+    <ProjectReference Include="..\BaseSource.Core.Domain\BaseSource.Core.Domain.csproj" />
   </ItemGroup>
 
 </Project>
