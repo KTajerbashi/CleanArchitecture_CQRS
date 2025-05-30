@@ -8,7 +8,7 @@ public class TestController : AuthorizeController
     [HttpGet("Command")]
     public async Task<IActionResult> CommandTest()
     {
-        var response = await Factory.Mediator.Send(new PrintCommand("Hi"));
+        var response = await Factory.Mediator.Send(new PrintCommand("Hello Fri"));
         return ReturnResponse(response);
     }
 
