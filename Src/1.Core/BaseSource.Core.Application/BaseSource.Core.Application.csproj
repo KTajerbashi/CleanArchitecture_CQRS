@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.5.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyModel" Version="9.0.5" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\0.SharedKernel\BaseSource.Utilities\BaseSource.Utilities.csproj" />
     <ProjectReference Include="..\BaseSource.Core.Domain\BaseSource.Core.Domain.csproj" />
   </ItemGroup>

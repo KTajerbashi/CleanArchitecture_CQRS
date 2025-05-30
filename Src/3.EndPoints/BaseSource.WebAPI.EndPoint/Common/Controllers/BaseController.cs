@@ -1,6 +1,6 @@
+using BaseSource.Core.Application.Providers;
 using BaseSource.WebAPI.EndPoint.Common.Models.ApiResponses;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
+using BaseSource.WebAPI.EndPoint.Extensions;
 
 namespace BaseSource.WebAPI.EndPoint.Common.Controllers;
 
@@ -8,7 +8,7 @@ namespace BaseSource.WebAPI.EndPoint.Common.Controllers;
 [Route("api/[controller]")]
 public abstract class BaseController : Controller
 {
-
+    protected ProviderFactory Factory => HttpContext.ApplicationContext();
 
     protected ObjectResult ReturnResponse(object? data)
     {

@@ -1,4 +1,6 @@
-﻿using BaseSource.WebAPI.EndPoint.Providers.Swagger;
+﻿using BaseSource.Core.Application.Utilities;
+using BaseSource.WebAPI.EndPoint.Providers.Swagger;
+using BaseSource.Core.Application;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -6,6 +8,7 @@ public static class DependencyInjections
 {
     public static WebApplicationBuilder AddWebAPIService(this WebApplicationBuilder builder)
     {
+        var assemblies = ("BaseSource").GetAssemblies().ToArray();
         // Add services to the container.
         builder.Services.AddControllers();
         
@@ -14,6 +17,8 @@ public static class DependencyInjections
 
         //  Swagger
         builder.Services.AddSwaggerProvider();
+
+        builder.Services.AddApplicationService(assemblies);
 
         return builder;
     }

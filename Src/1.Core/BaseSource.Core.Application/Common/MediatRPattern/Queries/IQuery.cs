@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace BaseSource.Core.Application.Common.MediatRPattern.Queries;
 
-namespace BaseSource.Core.Application.Common.MediatRPattern.Queries
+public interface IQuery<TResponse> : IRequest<TResponse>
+{ }
+
+public abstract class Query<TResponse> : IQuery<TResponse>
 {
-    internal class IQuery
-    {
-    }
+
 }
+
+
+

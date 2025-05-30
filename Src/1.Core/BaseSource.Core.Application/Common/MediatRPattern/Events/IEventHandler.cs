@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BaseSource.Core.Domain.Common.Event;
 
-namespace BaseSource.Core.Application.Common.MediatRPattern.Events
+namespace BaseSource.Core.Application.Common.MediatRPattern.Events;
+
+public interface IEventHandler<TEvent> : INotificationHandler<TEvent>
+    where TEvent : IDomainEvent
 {
-    internal class IEventHandler
-    {
-    }
+}
+
+public abstract class EventHandler<TEvent> : IEventHandler<TEvent>
+    where TEvent : IDomainEvent
+{
+    public abstract Task Handle(TEvent notification, CancellationToken cancellationToken);
 }

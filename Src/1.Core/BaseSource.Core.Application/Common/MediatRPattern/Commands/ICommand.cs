@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+namespace BaseSource.Core.Application.Common.MediatRPattern.Commands;
 
-namespace BaseSource.Core.Application.Common.MediatRPattern.Commands
-{
-    internal class ICommand
-    {
-    }
-}
+public interface ICommand : IRequest { }
+public interface ICommand<TResponse> : IRequest<TResponse> { }
+
+public abstract class Command : ICommand { }
+public abstract class Command<TResponse> : ICommand<TResponse> { }

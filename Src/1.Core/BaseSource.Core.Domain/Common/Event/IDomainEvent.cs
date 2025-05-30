@@ -1,6 +1,8 @@
-﻿namespace BaseSource.Core.Domain.Common.Event;
+﻿
 
-public interface IDomainEvent
+namespace BaseSource.Core.Domain.Common.Event;
+
+public interface IDomainEvent : INotification
 {
     DateTime OccurredOn { get; }
 }

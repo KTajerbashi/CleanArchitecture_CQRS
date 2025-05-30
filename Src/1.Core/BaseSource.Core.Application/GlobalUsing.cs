@@ -1,1 +1,8 @@
-﻿
+﻿global using BaseSource.Core.Application.Common.MediatRPattern.Behavior;
+global using BaseSource.Core.Application.Common.MediatRPattern.Commands;
+global using BaseSource.Core.Application.Common.MediatRPattern.Queries;
+global using BaseSource.Core.Application.Providers;
+global using MediatR;
+global using Microsoft.Extensions.DependencyInjection;
+global using Microsoft.Extensions.DependencyModel;
+global using System.Reflection;
