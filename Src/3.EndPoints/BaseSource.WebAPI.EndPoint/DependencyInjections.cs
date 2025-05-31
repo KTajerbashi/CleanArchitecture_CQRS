@@ -3,6 +3,7 @@ using BaseSource.WebAPI.EndPoint.Providers.Swagger;
 using BaseSource.Core.Application;
 using BaseSource.WebAPI.EndPoint.Middleware.ValidationHandler;
 using BaseSource.WebAPI.EndPoint.Middleware.ExceptionHandler;
+using BaseSource.Utilities;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -24,7 +25,12 @@ public static class DependencyInjections
         //  Swagger
         builder.Services.AddSwaggerProvider();
 
+        //  BaseSource Utilities
+        builder.Services.AddBaseSourceUtilities();
+
+
         builder.Services.AddApplicationService(assemblies);
+
 
         return builder;
     }
