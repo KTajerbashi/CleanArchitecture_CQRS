@@ -1,6 +1,4 @@
-﻿using BaseSource.Utilities.Models;
-
-namespace BaseSource.Utilities.DapperProvider;
+﻿namespace BaseSource.Utilities.DapperProvider;
 
 public interface IQueryExecute
 {
