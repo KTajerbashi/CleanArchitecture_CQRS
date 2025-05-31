@@ -2,6 +2,8 @@
 global using BaseSource.Core.Application.Common.MediatRPattern.Commands;
 global using BaseSource.Core.Application.Common.MediatRPattern.Queries;
 global using BaseSource.Core.Application.Providers;
+global using BaseSource.Core.Domain.Common.Aggregate;
+global using BaseSource.Core.Domain.ValueObjects;
 global using FluentValidation;
 global using MediatR;
 global using Microsoft.Extensions.DependencyInjection;
