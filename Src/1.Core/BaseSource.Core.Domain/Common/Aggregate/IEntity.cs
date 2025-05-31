@@ -49,7 +49,10 @@ public abstract class Entity<TId> : AuditableEntity<TId>
     }
 }
 
+public abstract class Entity : Entity<long>
+{
 
+}
 public abstract class AggregateRoot<TId> : Entity<TId>
     where TId : struct, IComparable, IComparable<TId>, IConvertible, IEquatable<TId>, IFormattable
 {
