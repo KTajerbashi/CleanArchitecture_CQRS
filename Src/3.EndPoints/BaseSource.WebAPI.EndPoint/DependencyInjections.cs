@@ -11,6 +11,7 @@ public static class DependencyInjections
 {
     public static WebApplicationBuilder AddWebAPIService(this WebApplicationBuilder builder)
     {
+        IConfiguration configuration = builder.Configuration;
         var assemblies = ("BaseSource").GetAssemblies().ToArray();
 
         // Add Http Context Accessor.
@@ -26,7 +27,7 @@ public static class DependencyInjections
         builder.Services.AddSwaggerProvider();
 
         //  BaseSource Utilities
-        builder.Services.AddBaseSourceUtilities();
+        builder.Services.AddBaseSourceUtilities(configuration);
 
 
         builder.Services.AddApplicationService(assemblies);
