@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Utilities.CacheProvider;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace BaseSource.Utilities.CacheProvider;
 
 public interface ICacheAdapter
 {

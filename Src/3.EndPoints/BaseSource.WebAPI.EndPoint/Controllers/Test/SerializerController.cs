@@ -1,7 +1,6 @@
 ﻿using BaseSource.Utilities.SerializerProvider;
 
 namespace BaseSource.WebAPI.EndPoint.Controllers.Test;
-
 public class SerializerController : AuthorizeController
 {
     private readonly IJsonSerializer _jsonSerializer;

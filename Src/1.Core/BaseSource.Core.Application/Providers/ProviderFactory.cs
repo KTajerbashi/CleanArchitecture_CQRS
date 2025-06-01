@@ -11,18 +11,23 @@ public class ProviderFactory
     public readonly IMediator Mediator;
     public readonly IPublisher Publisher;
     public readonly INotificationPublisher NotificationPublisher;
+    public readonly ILoggerFactory LoggerFactory;
     public readonly IQueryExecute Query;
     public readonly ICacheAdapter Cache;
     public readonly IJsonSerializer Json;
     public readonly IMapperAdapter Mapper;
-    public readonly ILoggerFactory LoggerFactory;
 
-    public ProviderFactory(IMediator mediator, IPublisher publisher, INotificationPublisher notificationPublisher, IQueryExecute query)
+    public ProviderFactory(
+        IMediator mediator,
+        IPublisher publisher,
+        INotificationPublisher notificationPublisher,
+        ILoggerFactory loggerFactory
+        )
     {
         Mediator = mediator;
         Publisher = publisher;
         NotificationPublisher = notificationPublisher;
-        Query = query;
+        LoggerFactory = loggerFactory;
     }
 
     //public ProviderFactory(

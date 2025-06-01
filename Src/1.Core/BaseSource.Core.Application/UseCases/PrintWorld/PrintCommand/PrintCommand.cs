@@ -47,6 +47,6 @@ public class PrintCommandHandler : CommandHandler<PrintCommand, PrintResponse>
         Console.WriteLine($"B : {DateTime.Now.ToString("G")} => {command.Message}");
         Console.WriteLine("===================PrintCommandHandler===================");
 
-        return new PrintResponse("Success Command");
+        return new PrintResponse($"Success Command With Message : {command.Message}");
     }
 }

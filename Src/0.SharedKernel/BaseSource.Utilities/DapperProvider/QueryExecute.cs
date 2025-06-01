@@ -1,10 +1,6 @@
 ﻿using BaseSource.Utilities.Extensions;
 using BaseSource.Utilities.Helpers;
-using BaseSource.Utilities.Models;
-using BaseSource.Utilities.SerializerProvider;
 using Dapper;
-using Microsoft.Extensions.Configuration;
-using System.Data;
 
 namespace BaseSource.Utilities.DapperProvider;
 
@@ -23,7 +19,8 @@ public class QueryExecute : IQueryExecute, IDisposable
     }
     private void InitializeConnection()
     {
-        _connection.ConnectionString = _configuration.GetConnectionString("QueryDb_ConnectionString");
+        return;
+        _connection.ConnectionString = _configuration.GetConnectionString("QueryConnection");
         if (_connection.State == ConnectionState.Closed)
             _connection.Open();
     }
