@@ -16,6 +16,15 @@ public class ProviderFactory
     public readonly IJsonSerializer Json;
     public readonly IMapperAdapter Mapper;
     public readonly ILoggerFactory LoggerFactory;
+
+    public ProviderFactory(IMediator mediator, IPublisher publisher, INotificationPublisher notificationPublisher, IQueryExecute query)
+    {
+        Mediator = mediator;
+        Publisher = publisher;
+        NotificationPublisher = notificationPublisher;
+        Query = query;
+    }
+
     //public ProviderFactory(
     //    IMediator mediator,
     //    IPublisher publisher,
