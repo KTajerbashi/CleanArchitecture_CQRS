@@ -9,3 +9,4 @@ global using MediatR;
 global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.DependencyModel;
 global using System.Reflection;
+global using BaseSource.Utilities.Scrutor;

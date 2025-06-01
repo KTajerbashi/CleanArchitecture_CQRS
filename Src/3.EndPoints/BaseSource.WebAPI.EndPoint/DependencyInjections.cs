@@ -4,6 +4,9 @@ using BaseSource.Core.Application;
 using BaseSource.WebAPI.EndPoint.Middleware.ValidationHandler;
 using BaseSource.WebAPI.EndPoint.Middleware.ExceptionHandler;
 using BaseSource.Utilities;
+using Autofac.Extensions.DependencyInjection;
+using Autofac;
+using BaseSource.Utilities.Autofac;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -13,6 +16,13 @@ public static class DependencyInjections
     {
         IConfiguration configuration = builder.Configuration;
         var assemblies = ("BaseSource").GetAssemblies().ToArray();
+
+        // Configure Autofac
+        builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
+            .ConfigureContainer<ContainerBuilder>(containerBuilder =>
+            {
+                containerBuilder.AddAutofacLifetimeServices();
+            });
 
         // Add Http Context Accessor.
         builder.Services.AddHttpContextAccessor();

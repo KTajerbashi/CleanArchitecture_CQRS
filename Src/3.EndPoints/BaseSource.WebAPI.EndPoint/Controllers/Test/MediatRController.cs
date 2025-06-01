@@ -1,9 +1,8 @@
 ﻿using BaseSource.Core.Application.UseCases.PrintWorld.PrintCommand;
 using BaseSource.Core.Application.UseCases.PrintWorld.PrintQuery;
 
-namespace BaseSource.WebAPI.EndPoint.Controllers;
-
-public class TestController : AuthorizeController
+namespace BaseSource.WebAPI.EndPoint.Controllers.Test;
+public class MediatRController : AuthorizeController
 {
     [HttpGet("Command")]
     public async Task<IActionResult> CommandTest()
