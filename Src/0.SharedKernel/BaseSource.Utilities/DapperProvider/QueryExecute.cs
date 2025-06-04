@@ -1,8 +1,4 @@
-﻿using BaseSource.Utilities.Extensions;
-using BaseSource.Utilities.Helpers;
-using Dapper;
-
-namespace BaseSource.Utilities.DapperProvider;
+﻿namespace BaseSource.Utilities.DapperProvider;
 
 public class QueryExecute : IQueryExecute, IDisposable
 {
@@ -19,7 +15,6 @@ public class QueryExecute : IQueryExecute, IDisposable
     }
     private void InitializeConnection()
     {
-        return;
         _connection.ConnectionString = _configuration.GetConnectionString("QueryConnection");
         if (_connection.State == ConnectionState.Closed)
             _connection.Open();

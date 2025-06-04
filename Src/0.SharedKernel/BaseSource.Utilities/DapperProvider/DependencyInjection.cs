@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Utilities.DapperProvider;
+﻿
+
+namespace BaseSource.Utilities.DapperProvider;
 
 public static class DependencyInjection
 {
@@ -11,7 +13,7 @@ public static class DependencyInjection
             return connection;
         });
 
-        services.AddScoped<IQueryExecute, QueryExecute>();
+        //services.AddScoped<IQueryExecute, QueryExecute>();
 
         return services;
     }

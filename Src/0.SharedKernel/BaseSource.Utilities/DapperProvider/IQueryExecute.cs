@@ -1,6 +1,6 @@
 ﻿namespace BaseSource.Utilities.DapperProvider;
 
-public interface IQueryExecute
+public interface IQueryExecute : IScopedLifetime
 {
     #region PagedData
     Task<PagedData<TModel>> ReadPagingAsync<TEntity, TModel>(FilterObject @filterObject)

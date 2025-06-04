@@ -9,6 +9,8 @@ using Autofac;
 using BaseSource.Utilities.Autofac;
 using BaseSource.Core.Infrastrcuture.SQL.Query;
 using BaseSource.Core.Infrastrcuture.SQL.Command;
+using BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;
+using BaseSource.WebAPI.EndPoint.Providers.Identity;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -41,6 +43,7 @@ public static class DependencyInjections
         //  BaseSource Utilities
         builder.Services.AddBaseSourceUtilities(configuration);
 
+        builder.Services.AddIdentityProviders();
 
         builder.Services.AddApplicationService(assemblies);
 
@@ -48,6 +51,13 @@ public static class DependencyInjections
         builder.Services.AddInfrastructureQueryServices(configuration);
 
         return builder;
+    }
+
+    public static async Task InitialiseDatabaseAsync(this WebApplication app)
+    {
+        using var scope = app.Services.CreateScope();
+        var initialiser = scope.ServiceProvider.GetRequiredService<InitialCommandDataContext>();
+        await initialiser.RunAsync();
     }
 
     public static WebApplication UseWebAPIService(this WebApplication app)

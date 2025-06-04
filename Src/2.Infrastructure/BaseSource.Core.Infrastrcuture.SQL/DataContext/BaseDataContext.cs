@@ -1,40 +1,4 @@
-﻿using BaseSource.Core.Domain.Aggregates.Identity.RoleAggregate;
-using BaseSource.Core.Domain.Aggregates.Identity.UserAggregate;
-using BaseSource.Core.Infrastrcuture.SQL.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System.Globalization;
-
-namespace BaseSource.Core.Infrastrcuture.SQL.DataContext;
-
-public static class BaseDataContextExtensions
-{
-    //public static async Task InitialiseDatabaseAsync(this WebApplication app)
-    //{
-    //    using var scope = app.Services.CreateScope();
-    //    var initialiser = scope.ServiceProvider.GetRequiredService<InitializerSeedData>();
-    //    await initialiser.RunAsync();
-    //}
-
-    public static ModelBuilder ApplyIdentityConfiguration(this ModelBuilder builder)
-    {
-        builder.Entity<UserIdentity>().ToTable("Users", "Identity");
-
-        builder.Entity<UserClaimIdentity>().ToTable("UserClaims", "Identity");
-
-        builder.Entity<UserLoginIdentity>().ToTable("UserLogins", "Identity");
-
-        builder.Entity<UserRoleIdentity>().ToTable("UserRoles", "Identity");
-
-        builder.Entity<UserTokenIdentity>().ToTable("UserTokens", "Identity");
-
-        builder.Entity<RoleIdentity>().ToTable("Roles", "Identity");
-
-        builder.Entity<RoleClaimIdentity>().ToTable("RoleClaims", "Identity");
-        return builder;
-    }
-}
+﻿namespace BaseSource.Core.Infrastrcuture.SQL.DataContext;
 
 public abstract class BaseDataContext : IdentityDbContext<UserIdentity, RoleIdentity, long, UserClaimIdentity, UserRoleIdentity, UserLoginIdentity, RoleClaimIdentity, UserTokenIdentity>
 {
@@ -60,7 +24,7 @@ public abstract class BaseDataContext : IdentityDbContext<UserIdentity, RoleIden
         return value != null ? condition : default!;
     }
     public object GetShadowPropertyValue(object entity, string propertyName) => Entry(entity).Property(propertyName).CurrentValue!;
-    
+
     public IEnumerable<string> GetIncludePaths(Type clrEntityType)
     {
         var entityType = Model.FindEntityType(clrEntityType);

@@ -1,6 +1,4 @@
-﻿
-
-namespace BaseSource.Core.Infrastrcuture.SQL.Command;
+﻿namespace BaseSource.Core.Infrastrcuture.SQL.Command;
 
 public static class DependencyInjections
 {
@@ -15,6 +13,11 @@ public static class DependencyInjections
                     sqlOptions.EnableRetryOnFailure();
                 });
         });
+
+        services.AddScoped<InitialCommandDataContext>();
+
         return services;
     }
+
+  
 }

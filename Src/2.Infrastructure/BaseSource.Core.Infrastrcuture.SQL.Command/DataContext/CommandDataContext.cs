@@ -1,5 +1,4 @@
-﻿
-namespace BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;
+﻿namespace BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;
 
 public class CommandDataContext : BaseCommandDataContext
 {

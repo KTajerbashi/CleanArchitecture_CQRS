@@ -22,12 +22,14 @@ public class ProviderFactory
         IPublisher publisher,
         INotificationPublisher notificationPublisher,
         ILoggerFactory loggerFactory
-        )
+,
+        IQueryExecute query)
     {
         Mediator = mediator;
         Publisher = publisher;
         NotificationPublisher = notificationPublisher;
         LoggerFactory = loggerFactory;
+        Query = query;
     }
 
     //public ProviderFactory(
