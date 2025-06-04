@@ -7,6 +7,8 @@ using BaseSource.Utilities;
 using Autofac.Extensions.DependencyInjection;
 using Autofac;
 using BaseSource.Utilities.Autofac;
+using BaseSource.Core.Infrastrcuture.SQL.Query;
+using BaseSource.Core.Infrastrcuture.SQL.Command;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -42,6 +44,8 @@ public static class DependencyInjections
 
         builder.Services.AddApplicationService(assemblies);
 
+        builder.Services.AddInfrastructureCommandServices(configuration);
+        builder.Services.AddInfrastructureQueryServices(configuration);
 
         return builder;
     }
