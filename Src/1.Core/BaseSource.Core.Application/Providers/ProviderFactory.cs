@@ -24,7 +24,9 @@ public class ProviderFactory
         ILoggerFactory loggerFactory
 ,
         IQueryExecute query,
-        ICacheAdapter cache)
+        ICacheAdapter cache,
+        IJsonSerializer json,
+        IMapperAdapter mapper)
     {
         Mediator = mediator;
         Publisher = publisher;
@@ -32,6 +34,8 @@ public class ProviderFactory
         LoggerFactory = loggerFactory;
         Query = query;
         Cache = cache;
+        Json = json;
+        Mapper = mapper;
     }
 
     //public ProviderFactory(

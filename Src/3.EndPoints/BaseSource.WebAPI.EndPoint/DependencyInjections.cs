@@ -33,7 +33,7 @@ public static class DependencyInjections
 
         // Add services to the container.
         builder.Services.AddControllers();
-        
+
         // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         builder.Services.AddOpenApi();
 
@@ -41,7 +41,7 @@ public static class DependencyInjections
         builder.Services.AddSwaggerProvider();
 
         //  BaseSource Utilities
-        builder.Services.AddBaseSourceUtilities(configuration);
+        builder.Services.AddBaseSourceUtilities(configuration, assemblies);
 
         builder.Services.AddIdentityProviders();
 

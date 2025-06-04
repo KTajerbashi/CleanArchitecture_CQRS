@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Utilities.MapperProvider;
+﻿using AutoMapper.Internal.Mappers;
+
+namespace BaseSource.Utilities.MapperProvider;
 
 public interface IMapperAdapter
 {
