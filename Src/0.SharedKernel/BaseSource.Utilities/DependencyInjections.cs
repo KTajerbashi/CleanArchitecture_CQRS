@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Utilities;
+﻿using BaseSource.Utilities.CacheProvider;
+
+namespace BaseSource.Utilities;
 
 public static class DependencyInjections
 {
@@ -9,6 +11,9 @@ public static class DependencyInjections
         services.AddQueryExecute(configuration);
         
         services.AddScrutorProvider();
+
+        services.AddSqlDistributedCache(configuration, "SqlCache");
+
         return services;
     }
 }

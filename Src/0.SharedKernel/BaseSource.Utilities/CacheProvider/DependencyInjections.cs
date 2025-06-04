@@ -1,50 +1,80 @@
-﻿using BaseSource.Utilities.CacheProvider.InMemory;
-using BaseSource.Utilities.CacheProvider.Redis;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using BaseSource.Utilities.CacheProvider.SQL;
 
 namespace BaseSource.Utilities.CacheProvider;
 
 public static class DependencyInjections
 {
-    //public static IServiceCollection AddRedisDistributedCache(
-    //    this IServiceCollection services,IConfiguration configuration,string sectionName)
-    //    => services.AddRedisDistributedCache(configuration.GetSection(sectionName));
+    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services,
+                                                                      IConfiguration configuration,
+                                                                      string sectionName)
+            => services.AddSqlDistributedCache(configuration.GetSection(sectionName));
 
-    //public static IServiceCollection AddRedisDistributedCache(this IServiceCollection services, IConfiguration configuration)
-    //{
-    //    services.AddTransient<ICacheAdapter, RedisCacheAdapter>();
-    //    services.Configure<RedisCacheOptions>(configuration);
+    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services, IConfiguration configuration)
+    {
+        services.AddTransient<ICacheAdapter, SqlCacheAdapter>();
+        services.Configure<SqlCacheOptions>(configuration);
 
-    //    var option = configuration.Get<RedisCacheOptions>();
+        var option = configuration.Get<SqlCacheOptions>();
 
-    //    services.AddStackExchangeRedisCache(options =>
-    //    {
-    //        options.Configuration = option.Configuration;
-    //        options.InstanceName = option.InstanceName;
-    //    });
+        if (option.AutoCreateTable)
+            CreateTable(option);
 
-    //    return services;
-    //}
+        services.AddDistributedSqlServerCache(options =>
+        {
+            options.ConnectionString = option.ConnectionString;
+            options.SchemaName = option.SchemaName;
+            options.TableName = option.TableName;
+        });
 
-    //public static IServiceCollection AddRedisDistributedCache(this IServiceCollection services,
-    //                                                          Action<RedisCacheOptions> setupAction)
-    //{
-    //    services.AddTransient<ICacheAdapter, RedisCacheAdapter>();
-    //    services.Configure(setupAction);
+        return services;
+    }
 
-    //    var option = new RedisCacheOptions();
-    //    setupAction.Invoke(option);
+    public static IServiceCollection AddSqlDistributedCache(this IServiceCollection services,
+                                                            Action<SqlCacheOptions> setupAction)
+    {
+        services.AddTransient<ICacheAdapter, SqlCacheAdapter>();
+        services.Configure(setupAction);
 
-    //    services.AddStackExchangeRedisCache(options =>
-    //    {
-    //        options.Configuration = option.Configuration;
-    //        options.InstanceName = option.InstanceName;
-    //    });
+        var option = new SqlCacheOptions();
+        setupAction.Invoke(option);
 
-    //    return services;
-    //}
+        if (option.AutoCreateTable)
+            CreateTable(option);
 
-    public static IServiceCollection AddInMemoryCaching(this IServiceCollection services)
-        => services.AddMemoryCache().AddTransient<ICacheAdapter, InMemoryCacheAdapter>();
+        services.AddDistributedSqlServerCache(options =>
+        {
+            options.ConnectionString = option.ConnectionString;
+            options.SchemaName = option.SchemaName;
+            options.TableName = option.TableName;
+        });
+
+        return services;
+    }
+
+    private static void CreateTable(SqlCacheOptions options)
+    {
+        string table = options.TableName;
+        string schema = options.SchemaName;
+
+        string createTable = $@"
+IF NOT EXISTS (SELECT * FROM sys.schemas WHERE name = '{schema}')
+BEGIN
+    EXEC('CREATE SCHEMA {schema}');
+END
+
+IF (NOT EXISTS (SELECT *  FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '{schema}' AND  TABLE_NAME = '{table}' ))
+	Begin
+		CREATE TABLE [{schema}].[{table}](
+		[Id][nvarchar](449) COLLATE SQL_Latin1_General_CP1_CS_AS NOT NULL,
+		[Value] [varbinary](max)NOT NULL,
+		[ExpiresAtTime] [datetimeoffset](7) NOT NULL,
+		[SlidingExpirationInSeconds] [bigint] NULL,
+		[AbsoluteExpiration] [datetimeoffset](7) NULL,
+		PRIMARY KEY(Id),
+		INDEX Index_ExpiresAtTime NONCLUSTERED (ExpiresAtTime))
+	End
+";
+        var dbConnection = new SqlConnection(options.ConnectionString);
+        dbConnection.Execute(createTable);
+    }
 }

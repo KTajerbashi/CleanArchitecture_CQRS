@@ -23,13 +23,15 @@ public class ProviderFactory
         INotificationPublisher notificationPublisher,
         ILoggerFactory loggerFactory
 ,
-        IQueryExecute query)
+        IQueryExecute query,
+        ICacheAdapter cache)
     {
         Mediator = mediator;
         Publisher = publisher;
         NotificationPublisher = notificationPublisher;
         LoggerFactory = loggerFactory;
         Query = query;
+        Cache = cache;
     }
 
     //public ProviderFactory(
