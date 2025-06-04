@@ -2,7 +2,6 @@
 using BaseSource.Core.Application.UseCases.PrintWorld.PrintedEvent;
 
 namespace BaseSource.WebAPI.EndPoint.Controllers.Test;
-
 public class ProviderController : AuthorizeController
 {
 

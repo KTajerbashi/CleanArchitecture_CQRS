@@ -11,6 +11,7 @@ using BaseSource.Core.Infrastrcuture.SQL.Query;
 using BaseSource.Core.Infrastrcuture.SQL.Command;
 using BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;
 using BaseSource.WebAPI.EndPoint.Providers.Identity;
+using BaseSource.WebAPI.EndPoint.Providers.Serilog;
 
 namespace BaseSource.WebAPI.EndPoint;
 
@@ -69,6 +70,7 @@ public static class DependencyInjections
             //  Swagger
             app.UseSwaggerProvider();
         }
+        app.UseMiddleware<RequestLoggingMiddleware>();
 
         app.UseValidationExceptionHandler();
         app.UseApiExceptionHandler();

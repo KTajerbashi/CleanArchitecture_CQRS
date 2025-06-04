@@ -1,10 +1,4 @@
-﻿using BaseSource.Utilities.CacheProvider;
-using BaseSource.Utilities.DapperProvider;
-using BaseSource.Utilities.MapperProvider;
-using BaseSource.Utilities.SerializerProvider;
-using Microsoft.Extensions.Logging;
-
-namespace BaseSource.Core.Application.Providers;
+﻿namespace BaseSource.Core.Application.Providers;
 
 public class ProviderFactory
 {
@@ -21,8 +15,7 @@ public class ProviderFactory
         IMediator mediator,
         IPublisher publisher,
         INotificationPublisher notificationPublisher,
-        ILoggerFactory loggerFactory
-,
+        ILoggerFactory loggerFactory,
         IQueryExecute query,
         ICacheAdapter cache,
         IJsonSerializer json,
@@ -37,24 +30,4 @@ public class ProviderFactory
         Json = json;
         Mapper = mapper;
     }
-
-    //public ProviderFactory(
-    //    IMediator mediator,
-    //    IPublisher publisher,
-    //    INotificationPublisher notificationPublisher,
-    //    IQueryExecute queryExecute,
-    //    ICacheAdapter cacheAdapter,
-    //    IJsonSerializer jsonSerializer,
-    //    IMapperAdapter mapper,
-    //    ILoggerFactory loggerFactory)
-    //{
-    //    Mediator = mediator;
-    //    Publisher = publisher;
-    //    NotificationPublisher = notificationPublisher;
-    //    Query = queryExecute;
-    //    Cache = cacheAdapter;
-    //    Json = jsonSerializer;
-    //    Mapper = mapper;
-    //    LoggerFactory = loggerFactory;
-    //}
 }
