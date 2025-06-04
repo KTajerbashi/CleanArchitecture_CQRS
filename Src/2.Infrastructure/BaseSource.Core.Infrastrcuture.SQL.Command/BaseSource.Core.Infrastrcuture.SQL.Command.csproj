@@ -1,14 +1,21 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\1.Core\BaseSource.Core.Application\BaseSource.Core.Application.csproj" />
-    <ProjectReference Include="..\BaseSource.Core.Infrastrcuture.SQL\BaseSource.Core.Infrastrcuture.SQL.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.5">
+	    <PrivateAssets>all</PrivateAssets>
+	    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\1.Core\BaseSource.Core.Application\BaseSource.Core.Application.csproj" />
+		<ProjectReference Include="..\BaseSource.Core.Infrastrcuture.SQL\BaseSource.Core.Infrastrcuture.SQL.csproj" />
+	</ItemGroup>
 
 </Project>

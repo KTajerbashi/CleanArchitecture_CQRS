@@ -4,3 +4,6 @@ global using BaseSource.Core.Domain.ValueObjects;
 global using BaseSource.Core.Infrastrcuture.SQL.Command.Common.DataContext;
 global using Microsoft.EntityFrameworkCore; 
 global using BaseSource.Core.Application.Common.ServicePattern;
+global using Microsoft.Extensions.Configuration;
+global using Microsoft.Extensions.DependencyInjection;
+global using BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;

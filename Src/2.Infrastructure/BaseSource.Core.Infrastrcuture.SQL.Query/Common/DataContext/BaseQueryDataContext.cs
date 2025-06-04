@@ -4,4 +4,11 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Query.Common.DataContext;
 
 public abstract class BaseQueryDataContext : BaseDataContext
 {
+    protected BaseQueryDataContext()
+    {
+    }
+
+    protected BaseQueryDataContext(DbContextOptions options) : base(options)
+    {
+    }
 }
