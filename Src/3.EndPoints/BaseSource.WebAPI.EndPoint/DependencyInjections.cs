@@ -48,8 +48,8 @@ public static class DependencyInjections
 
         builder.Services.AddApplicationService(assemblies);
 
-        builder.Services.AddInfrastructureCommandServices(configuration);
-        builder.Services.AddInfrastructureQueryServices(configuration);
+        builder.Services.AddInfrastructureCommandServices(configuration,assemblies);
+        builder.Services.AddInfrastructureQueryServices(configuration, assemblies);
 
         return builder;
     }

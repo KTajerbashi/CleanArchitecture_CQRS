@@ -11,58 +11,58 @@ public abstract class BaseController : Controller
 {
     protected ProviderFactory Factory => HttpContext.ApplicationContext();
 
-    protected virtual async Task<IActionResult> CreateAsync<TCommand>(TCommand command)
+    protected virtual async Task<ObjectResult> CreateAsync<TCommand>(TCommand command)
         where TCommand : ICommand
     {
         await Factory.Mediator.Send(command);
         return ReturnResponse();
     }
-    protected virtual async Task<IActionResult> CreateAsync<TCommand, TResponse>(TCommand command)
+    protected virtual async Task<ObjectResult> CreateAsync<TCommand, TResponse>(TCommand command)
        where TCommand : ICommand<TResponse>
         => ReturnResponse((await Factory.Mediator.Send(command)));
 
 
-    protected virtual async Task<IActionResult> UpdateAsync<TCommand>(TCommand command)
+    protected virtual async Task<ObjectResult> UpdateAsync<TCommand>(TCommand command)
     where TCommand : ICommand
     {
         await Factory.Mediator.Send(command);
         return ReturnResponse();
     }
-    protected virtual async Task<IActionResult> UpdateAsync<TCommand, TResponse>(TCommand command)
+    protected virtual async Task<ObjectResult> UpdateAsync<TCommand, TResponse>(TCommand command)
        where TCommand : ICommand<TResponse>
         => ReturnResponse((await Factory.Mediator.Send(command)));
 
 
-    protected virtual async Task<IActionResult> DeleteAsync<TCommand>(TCommand command)
+    protected virtual async Task<ObjectResult> DeleteAsync<TCommand>(TCommand command)
         where TCommand : ICommand
     {
         await Factory.Mediator.Send(command);
         return ReturnResponse();
     }
-    protected virtual async Task<IActionResult> DeleteAsync<TCommand, TResponse>(TCommand command)
+    protected virtual async Task<ObjectResult> DeleteAsync<TCommand, TResponse>(TCommand command)
        where TCommand : ICommand<TResponse>
         => ReturnResponse((await Factory.Mediator.Send(command)));
 
 
-    protected virtual async Task<IActionResult> GetAsync<TQuery, TResponse>(TQuery query)
+    protected virtual async Task<ObjectResult> GetAsync<TQuery, TResponse>(TQuery query)
         where TQuery : IQuery<TResponse>
         => ReturnResponse(await Factory.Mediator.Send(query));
-    protected virtual async Task<IActionResult> GetAllAsync<TQuery, TResponse>(TQuery query)
+    protected virtual async Task<ObjectResult> GetAllAsync<TQuery, TResponse>(TQuery query)
        where TQuery : IQuery<List<TResponse>>
         => ReturnResponse((await Factory.Mediator.Send(query)));
 
 
-    protected virtual async Task<IActionResult> CommandAsync<TCommand>(TCommand command)
+    protected virtual async Task<ObjectResult> CommandAsync<TCommand>(TCommand command)
     where TCommand : ICommand
     {
         await Factory.Mediator.Send(command);
         return ReturnResponse();
     }
-    protected virtual async Task<IActionResult> CommandAsync<TCommand, TResponse>(TCommand command)
+    protected virtual async Task<ObjectResult> CommandAsync<TCommand, TResponse>(TCommand command)
     where TCommand : ICommand<TResponse>
         => ReturnResponse((await Factory.Mediator.Send(command)));
 
-    protected virtual async Task<IActionResult> QueryAsync<TQuery, TResponse>(TQuery query)
+    protected virtual async Task<ObjectResult> QueryAsync<TQuery, TResponse>(TQuery query)
        where TQuery : IQuery<List<TResponse>>
         => ReturnResponse((await Factory.Mediator.Send(query)));
 
