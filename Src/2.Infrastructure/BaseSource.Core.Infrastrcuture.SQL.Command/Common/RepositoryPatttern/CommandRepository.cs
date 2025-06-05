@@ -1,6 +1,9 @@
-﻿namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.RepositoryPatttern;
+﻿using BaseSource.Core.Domain.ValueObjects;
+using BaseSource.Core.Infrastrcuture.SQL.Command.Common.UnitOfWorkPatter;
 
-public abstract class CommandRepository<TEntity, TId, TContext> : ICommandRepository<TEntity, TId>
+namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.RepositoryPatttern;
+
+public abstract class CommandRepository<TEntity, TId, TContext> : UnitOfWork<TContext>, ICommandRepository<TEntity, TId>
     where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
@@ -14,54 +17,50 @@ public abstract class CommandRepository<TEntity, TId, TContext> : ICommandReposi
     protected TContext Context;
     protected DbSet<TEntity> Entity;
 
-    protected CommandRepository(TContext context)
+    protected CommandRepository(TContext context) : base(context)
     {
         Context = context;
         Entity = Context.Set<TEntity>();
     }
 
-    public Task DeleteAsync(TId id)
+    public async Task DeleteAsync(TId id)
     {
-        throw new NotImplementedException();
+        TEntity entity = await Context.Set<TEntity>().SingleAsync(item => item.Id.Equals(id));
+        entity.Delete();
     }
 
-    public Task DeleteAsync(EntityId entityId)
+    public async Task DeleteAsync(EntityId entityId)
     {
-        throw new NotImplementedException();
+        TEntity entity = await Context.Set<TEntity>().SingleAsync(item => item.EntityId.Equals(entityId));
+        entity.Delete();
     }
 
-    public Task DeleteAsync(TEntity entity)
+    public async Task DeleteAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        await Task.CompletedTask;
+        entity.Delete();
     }
 
-    public Task<TEntity> GetAsync(TId id)
+    public async Task<TEntity> GetAsync(TId id)
+        => await Context.Set<TEntity>().SingleAsync(item => item.Id.Equals(id));
+
+    public async Task<TEntity> GetAsync(EntityId entityId)
+        => await Context.Set<TEntity>().SingleAsync(item => item.EntityId.Equals(entityId));
+
+    public async Task<TEntity> GetAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        //return Entity.Entry(entity).Entity;
+        return await Context.Set<TEntity>().SingleAsync(item => item.EntityId.Equals(entity.EntityId)) ?? throw new InvalidOperationException();
     }
 
-    public Task<TEntity> GetAsync(EntityId entityId)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<IEnumerable<TEntity>> GetAsync()
+        => await Context.Set<TEntity>().Where(item => item.IsActive && !item.IsDeleted).ToListAsync();
 
-    public Task<TEntity> GetAsync(TEntity entity)
-    {
-        throw new NotImplementedException();
-    }
+    public async Task<TId> InsertAsync(TEntity entity)
+       => (await Context.Set<TEntity>().AddAsync(entity)).Entity.Id;
 
-    public Task<IEnumerable<TEntity>> GetAsync()
+    public IQueryable<TEntity> Queryable()
     {
-        throw new NotImplementedException();
-    }
-
-    public Task<TId> InsertAsync(TEntity entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<IQueryable<TEntity>> QueryableAsync()
-    {
-        throw new NotImplementedException();
+        return Context.Set<TEntity>().Where(item => item.IsActive && !item.IsDeleted).AsQueryable();
     }
 }

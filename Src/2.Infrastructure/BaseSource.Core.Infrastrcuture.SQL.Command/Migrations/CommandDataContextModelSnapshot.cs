@@ -36,6 +36,9 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<long>("RoleId")
                         .HasColumnType("bigint");
 
@@ -61,6 +64,9 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .HasMaxLength(256)
@@ -98,6 +104,9 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<long>("UserId")
                         .HasColumnType("bigint");
 
@@ -129,6 +138,9 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("FirstName")
                         .IsRequired()
@@ -196,6 +208,12 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
                     b.Property<string>("ProviderKey")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
@@ -215,6 +233,12 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
                         .HasColumnType("bigint");
 
                     b.Property<long>("RoleId")
+                        .HasColumnType("bigint");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("Id")
                         .HasColumnType("bigint");
 
                     b.Property<bool>("IsDefault")
@@ -237,6 +261,12 @@ namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("EntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<long>("Id")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
