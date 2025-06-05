@@ -1,12 +1,15 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BaseSource.Core.Domain.Common.Aggregate;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Identity;
 
 [Table("UserRoles", Schema = "Identity")]
-public class UserRoleIdentity : IdentityUserRole<long>
+public class UserRoleIdentity : IdentityUserRole<long>, IEntity<long>
 {
+    public long Id { get; private set; }
+    public EntityId EntityId { get; private set; } = Guid.NewGuid();
     public bool IsDefault { get; private set; }
+
+
     public UserRoleIdentity()
     {
         

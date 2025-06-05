@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BaseSource.Core.Domain.Common.Aggregate;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Identity;
 
 [Table("UserClaims", Schema = "Identity")]
-public class UserClaimIdentity : IdentityUserClaim<long>
+public class UserClaimIdentity : IdentityUserClaim<long>, IEntity<int>
 {
+    public EntityId EntityId { get; private set; } = Guid.NewGuid();
 }

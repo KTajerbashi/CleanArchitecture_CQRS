@@ -1,15 +1,17 @@
-﻿using BaseSource.Core.Infrastrcuture.SQL.Identity.Parameters;
-using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BaseSource.Core.Domain.Common.Aggregate;
+using BaseSource.Core.Infrastrcuture.SQL.Identity.Parameters;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Identity;
 
 [Table("Users", Schema = "Identity")]
-public class UserIdentity : IdentityUser<long>
+public class UserIdentity : IdentityUser<long>, IEntity<long>
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }
     public string NationalCode { get; private set; }
+
+    public EntityId EntityId { get; private set; } = Guid.NewGuid();
+
     public UserIdentity()
     {
 

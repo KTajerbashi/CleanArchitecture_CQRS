@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Core.Infrastrcuture.SQL.DataContext;
+﻿using BaseSource.Core.Infrastrcuture.SQL.Common.Conversions;
+
+namespace BaseSource.Core.Infrastrcuture.SQL.DataContext;
 
 public abstract class BaseDataContext : IdentityDbContext<UserIdentity, RoleIdentity, long, UserClaimIdentity, UserRoleIdentity, UserLoginIdentity, RoleClaimIdentity, UserTokenIdentity>
 {
@@ -9,6 +11,12 @@ public abstract class BaseDataContext : IdentityDbContext<UserIdentity, RoleIden
 
     protected BaseDataContext(DbContextOptions options) : base(options)
     {
+    }
+
+    protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
+    {
+        base.ConfigureConventions(configurationBuilder);
+        configurationBuilder.Properties<EntityId>().HaveConversion<EntityIdConversion>();
     }
 
     protected override void OnModelCreating(ModelBuilder builder)

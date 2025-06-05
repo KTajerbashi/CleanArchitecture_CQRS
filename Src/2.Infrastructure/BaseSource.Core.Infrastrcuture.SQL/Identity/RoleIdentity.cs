@@ -1,12 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using BaseSource.Core.Domain.Common.Aggregate;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Identity;
 
 [Table("Roles", Schema = "Identity")]
-public class RoleIdentity : IdentityRole<long>
+public class RoleIdentity : IdentityRole<long>, IEntity<long>
 {
     public string Title { get; private set; }
+    public EntityId EntityId { get; private set; } = Guid.NewGuid();
     public RoleIdentity() : base()
     {
     }

@@ -1,5 +1,11 @@
-﻿namespace BaseSource.Core.Infrastrcuture.SQL.Common.Conversions;
+﻿using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-internal class EntityIdConversions
+namespace BaseSource.Core.Infrastrcuture.SQL.Common.Conversions;
+
+public class EntityIdConversion : ValueConverter<EntityId, Guid>
 {
+    public EntityIdConversion() : base(c => c.Value, c => EntityId.FromGuid(c))
+    {
+
+    }
 }
