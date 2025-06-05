@@ -16,7 +16,7 @@ public abstract class AuditableEntity<TId> : IAuditableEntity<TId>
     where TId : struct, IComparable, IComparable<TId>, IConvertible, IEquatable<TId>, IFormattable
 {
     [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public TId Id { get; private set; } = default;
+    public TId Id { get; protected set; } = default;
 
     public EntityId EntityId { get; protected set; } = EntityId.New();
 
