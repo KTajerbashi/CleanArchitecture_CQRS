@@ -15,28 +15,37 @@ public abstract class QueryRepository<TEntity, TId, TContext> : IQueryRepository
           IFormattable
     where TContext : BaseQueryDataContext
 {
-    public Task<TEntity> GetAsync(TId id)
+    protected readonly TContext Context;
+    protected readonly DbSet<TEntity> Entity;
+    protected QueryRepository(TContext context)
     {
-        throw new NotImplementedException();
+        Context = context;
+        Entity = Context.Set<TEntity>();
     }
 
-    public Task<TEntity> GetAsync(EntityId entityId)
+    public virtual async Task<TEntity> GetAsync(TId id)
     {
-        throw new NotImplementedException();
+        return await Entity.SingleAsync(item => item.Id.Equals(id));
     }
 
-    public Task<TEntity> GetAsync(TEntity entity)
+    public virtual async Task<TEntity> GetAsync(EntityId entityId)
     {
-        throw new NotImplementedException();
+        return await Entity.SingleAsync(item => item.EntityId.Equals(entityId));
     }
 
-    public Task<IEnumerable<TEntity>> GetAsync()
+    public virtual async Task<TEntity> GetAsync(TEntity entity)
     {
-        throw new NotImplementedException();
+        await Task.CompletedTask;
+        return Entity.Entry(entity).Entity;
     }
 
-    public Task<IQueryable<TEntity>> QueryableAsync()
+    public virtual async Task<IEnumerable<TEntity>> GetAsync()
     {
-        throw new NotImplementedException();
+        return await Entity.Where(item => item.IsActive && !item.IsDeleted).ToListAsync();
+    }
+
+    public virtual IQueryable<TEntity> Queryable()
+    {
+        return Entity.Where(item => item.IsActive && !item.IsDeleted).AsQueryable();
     }
 }
