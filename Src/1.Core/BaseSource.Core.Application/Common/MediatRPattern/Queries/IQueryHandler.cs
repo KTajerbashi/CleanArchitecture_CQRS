@@ -11,10 +11,10 @@ public interface IQueryHandler<TQuery, TResponse> : IRequestHandler<TQuery, TRes
 public abstract class QueryHandler<TQuery, TResponse> : IQueryHandler<TQuery, TResponse>
     where TQuery : Query<TResponse>
 {
-    protected readonly ProviderFactory ProviderFactory;
-    protected QueryHandler(ProviderFactory providerFactory)
+    protected readonly ProviderFactory Factory;
+    protected QueryHandler(ProviderFactory factory)
     {
-        ProviderFactory = providerFactory;
+        Factory = factory;
     }
     public abstract Task<TResponse> Handle(TQuery request, CancellationToken cancellationToken);
 }

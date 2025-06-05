@@ -1,6 +1,8 @@
-﻿namespace BaseSource.Core.Application.Common.RepositoryPatttern;
+﻿
 
-public interface ICommandRepository<TEntity, TId>
+namespace BaseSource.Core.Application.Common.RepositoryPatttern;
+
+public interface ICommandRepository<TEntity, TId> : IUnitOfWork
     where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
@@ -17,7 +19,7 @@ public interface ICommandRepository<TEntity, TId>
 
 
     Task<IEnumerable<TEntity>> GetAsync();
-    Task<IQueryable<TEntity>> QueryableAsync();
+    IQueryable<TEntity> Queryable();
 
     Task DeleteAsync(TId id);
     Task DeleteAsync(EntityId entityId);

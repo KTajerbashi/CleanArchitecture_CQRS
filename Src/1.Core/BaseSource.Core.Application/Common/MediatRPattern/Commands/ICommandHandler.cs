@@ -25,10 +25,10 @@ public interface ICommandHandler<TCommand, TResponse> : IRequestHandler<TCommand
 public abstract class CommandHandler<TCommand, TResponse> : ICommandHandler<TCommand, TResponse>
     where TCommand : Command<TResponse>
 {
-    protected readonly ProviderFactory ProviderFactory;
-    protected CommandHandler(ProviderFactory providerFactory)
+    protected readonly ProviderFactory Factory;
+    protected CommandHandler(ProviderFactory factory)
     {
-        ProviderFactory = providerFactory;
+        Factory = factory;
     }
     public abstract Task<TResponse> Handle(TCommand command, CancellationToken cancellationToken);
 }

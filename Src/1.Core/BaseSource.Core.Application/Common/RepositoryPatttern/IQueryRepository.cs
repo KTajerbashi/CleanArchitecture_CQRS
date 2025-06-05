@@ -18,5 +18,5 @@ public interface IQueryRepository<TEntity, TId>
 
 
     Task<IEnumerable<TEntity>> GetAsync();
-    Task<IQueryable<TEntity>> QueryableAsync();
+    IQueryable<TEntity> Queryable();
 }
