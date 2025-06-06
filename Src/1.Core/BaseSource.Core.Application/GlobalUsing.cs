@@ -4,6 +4,7 @@ global using BaseSource.Core.Application.Common.MediatRPattern.Behavior;
 global using BaseSource.Core.Application.Common.MediatRPattern.Commands;
 global using BaseSource.Core.Application.Common.MediatRPattern.Events;
 global using BaseSource.Core.Application.Common.MediatRPattern.Queries;
+global using BaseSource.Core.Application.Common.RepositoryPatttern;
 global using BaseSource.Core.Application.Common.UnitOfWorkPatter;
 global using BaseSource.Core.Application.Providers;
 global using BaseSource.Core.Application.UseCases.Identity.User.Repositories;
@@ -23,3 +24,4 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.DependencyModel;
 global using Microsoft.Extensions.Logging;
 global using System.Reflection;
+
