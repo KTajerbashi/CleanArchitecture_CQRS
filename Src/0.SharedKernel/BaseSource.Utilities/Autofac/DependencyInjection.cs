@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace BaseSource.Utilities.Autofac;
 
@@ -11,23 +12,21 @@ public interface IAutofacTransientLifetime { }
 
 public static class DependencyInjection
 {
-    public static ContainerBuilder AddAutofacLifetimeServices(this ContainerBuilder builder)
+    public static ContainerBuilder AddAutofacLifetimeServices(this ContainerBuilder builder, Assembly[] assemblies)
     {
         // Get the assembly where your services are located
-        var assembly = typeof(DependencyInjection).Assembly;
-
         // Register services based on their lifetime interfaces
-        builder.RegisterAssemblyTypes(assembly)
+        builder.RegisterAssemblyTypes(assemblies)
             .Where(t => t.IsAssignableTo<IAutofacSingletonLifetime>())
             .AsImplementedInterfaces()
             .SingleInstance();
 
-        builder.RegisterAssemblyTypes(assembly)
+        builder.RegisterAssemblyTypes(assemblies)
             .Where(t => t.IsAssignableTo<IAutofacScopedLifetime>())
             .AsImplementedInterfaces()
             .InstancePerLifetimeScope();
 
-        builder.RegisterAssemblyTypes(assembly)
+        builder.RegisterAssemblyTypes(assemblies)
             .Where(t => t.IsAssignableTo<IAutofacTransientLifetime>())
             .AsImplementedInterfaces()
             .InstancePerDependency();
@@ -35,7 +34,7 @@ public static class DependencyInjection
         return builder;
     }
 
-    public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services)
+    public static IServiceProvider BuildAutofacServiceProvider(this IServiceCollection services, Assembly[] assemblies)
     {
         var builder = new ContainerBuilder();
 
@@ -43,7 +42,7 @@ public static class DependencyInjection
         builder.Populate(services);
 
         // Add our lifetime-based registrations
-        builder.AddAutofacLifetimeServices();
+        builder.AddAutofacLifetimeServices(assemblies);
 
         var container = builder.Build();
         return new AutofacServiceProvider(container);

@@ -12,7 +12,7 @@ public static class DependencyInjections
         
         services.AddQueryExecute(configuration);
         
-        services.AddScrutorProvider();
+        services.AddScrutorProvider(assemblies);
 
         services.AddAutoMapperProfiles(configuration, assemblies);
 
