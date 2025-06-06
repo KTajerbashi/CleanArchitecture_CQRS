@@ -56,7 +56,7 @@ public abstract class Entity : Entity<long>
 public abstract class AggregateRoot<TId> : Entity<TId>
     where TId : struct, IComparable, IComparable<TId>, IConvertible, IEquatable<TId>, IFormattable
 {
-    private readonly List<IDomainEvent> _events;
+    private readonly List<IDomainEvent> _events = new();
     public void AddEvent(IDomainEvent @event) => _events.Add(@event);
     public void CleanEvents() => _events.Clear();
     public IEnumerable<IDomainEvent> GetEvents() => _events.AsEnumerable();

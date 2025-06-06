@@ -20,4 +20,8 @@
     <ProjectReference Include="..\BaseSource.Core.Domain\BaseSource.Core.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="UseCases\Store\" />
+  </ItemGroup>
+
 </Project>

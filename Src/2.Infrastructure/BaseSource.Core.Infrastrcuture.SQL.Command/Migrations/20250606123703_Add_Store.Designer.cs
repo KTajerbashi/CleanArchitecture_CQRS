@@ -4,6 +4,7 @@ using BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BaseSource.Core.Infrastrcuture.SQL.Command.Migrations
 {
     [DbContext(typeof(CommandDataContext))]
-    partial class CommandDataContextModelSnapshot : ModelSnapshot
+    [Migration("20250606123703_Add_Store")]
+    partial class Add_Store
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
