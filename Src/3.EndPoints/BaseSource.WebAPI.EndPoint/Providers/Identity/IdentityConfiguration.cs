@@ -4,7 +4,6 @@ using BaseSource.Core.Infrastrcuture.SQL.Identity;
 using Microsoft.AspNetCore.Identity;
 
 namespace BaseSource.WebAPI.EndPoint.Providers.Identity;
-
 public static class IdentityConfiguration
 {
     public static IServiceCollection AddIdentityProviders(this IServiceCollection services)

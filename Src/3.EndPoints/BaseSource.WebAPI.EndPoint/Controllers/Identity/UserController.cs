@@ -1,5 +1,5 @@
-﻿using BaseSource.Core.Application.UseCases.Identity.User.Handler.Commands.Create;
-using BaseSource.Core.Application.UseCases.Identity.User.Handler.Queries.GetById;
+﻿using BaseSource.Core.Application.UseCases.Identity.User.Handlers.Commands.Create;
+using BaseSource.Core.Application.UseCases.Identity.User.Handlers.Queries.GetById;
 
 namespace BaseSource.WebAPI.EndPoint.Controllers.Identity;
 

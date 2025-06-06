@@ -26,7 +26,7 @@ public static class DependencyInjections
         builder.Host.UseServiceProviderFactory(new AutofacServiceProviderFactory())
             .ConfigureContainer<ContainerBuilder>(containerBuilder =>
             {
-                containerBuilder.AddAutofacLifetimeServices();
+                containerBuilder.AddAutofacLifetimeServices(assemblies);
             });
 
         // Add Http Context Accessor.
