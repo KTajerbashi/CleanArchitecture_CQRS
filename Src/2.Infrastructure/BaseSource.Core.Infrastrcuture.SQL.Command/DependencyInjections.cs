@@ -1,4 +1,8 @@
-﻿using BaseSource.Core.Application.Common.RepositoryPatttern;
+﻿using Autofac.Core;
+using BaseSource.Core.Application.Common.RepositoryPatttern;
+using BaseSource.Core.Infrastrcuture.SQL.Command.Common.DataContext.Interceptors.ShadowProperties;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Command;
 
@@ -6,15 +10,31 @@ public static class DependencyInjections
 {
     public static IServiceCollection AddInfrastructureCommandServices(this IServiceCollection services, IConfiguration configuration, Assembly[] assemblies)
     {
+        services.AddScoped<ISaveChangesInterceptor, AddAuditDataInterceptor>();
+
         services.AddDbContext<CommandDataContext>(option =>
         {
-            option.UseSqlServer(configuration.GetConnectionString("CommandConnection"),
+            option
+            .UseSqlServer(configuration.GetConnectionString("CommandConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(typeof(CommandDataContext).Assembly.FullName);
                     sqlOptions.EnableRetryOnFailure();
-                });
+                })
+            .AddInterceptors(new AddAuditDataInterceptor())
+            ;
         });
+
+        //services.AddDbContext<CommandDataContext>((sp, options) =>
+        //{
+        //    options.UseSqlServer(configuration.GetConnectionString("CommandConnection"),
+        //        sqlServerOptionsAction: sqlOptions =>
+        //        {
+        //            sqlOptions.MigrationsAssembly(typeof(CommandDataContext).Assembly.FullName);
+        //            sqlOptions.EnableRetryOnFailure();
+        //        });
+        //    options.AddInterceptors(sp.GetRequiredService<AddAuditDataInterceptor>());
+        //});
 
         services.AddScoped<InitialCommandDataContext>();
 

@@ -3,10 +3,12 @@
 namespace BaseSource.Core.Infrastrcuture.SQL.Identity;
 
 [Table("Roles", Schema = "Identity")]
-public class RoleIdentity : IdentityRole<long>, IEntity<long>
+public class RoleIdentity : IdentityRole<long>, IAuditableEntity<long>
 {
     public string Title { get; private set; }
     public EntityId EntityId { get; private set; } = Guid.NewGuid();
+    public bool IsDeleted { get; private set; }
+    public bool IsActive { get; private set; }
     public RoleIdentity() : base()
     {
     }
