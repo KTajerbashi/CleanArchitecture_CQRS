@@ -32,7 +32,7 @@ public class ProductCreateHandler : CommandHandler<ProductCreateCommand, Product
         {
             ProductEntity entity = ProductEntity.Create(command.Title,command.Details);
             var result = await _repository.InsertAsync(entity);
-            await _repository.SaveChangeAsync(cancellationToken);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new ProductCreateResponse(entity.Id);
         }
         catch (Exception ex)

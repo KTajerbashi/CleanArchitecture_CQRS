@@ -32,7 +32,7 @@ public class AddProductDetailsHandler : CommandHandler<AddProductDetailsCommand,
         {
             var productEntity = await _repository.GetAsync(command.ProductId);
             productEntity.AddDetail(command.Title, command.Value);
-            await _repository.SaveChangeAsync(cancellationToken);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new(command.ProductId);
         }
         catch (Exception)

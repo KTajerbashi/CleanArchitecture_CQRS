@@ -33,7 +33,7 @@ public class CardCreateHandler : CommandHandler<CardCreateCommand, CardCreateRes
         {
             CardEntity entity = CardEntity.Create(command.CardCode);
             var id = await _repository.InsertAsync(entity);
-            await _repository.SaveChangeAsync(cancellationToken);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new(id);
         }
         catch (Exception)

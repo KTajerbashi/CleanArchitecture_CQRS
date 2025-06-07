@@ -2,7 +2,9 @@
 
 namespace BaseSource.Core.Application.UseCases.Store.Card.Handlers.Queries.GetById;
 
-public record CardGetByIdResponse();
+public record CardGetByIdResponse(
+    string CardCode
+    );
 public class CardGetByIdQuery : Query<CardGetByIdResponse>
 {
     public Guid EntityId { get; set; }
@@ -24,14 +26,26 @@ public class CardGetByIdValidator : AbstractValidator<CardGetByIdQuery>
 public class CardGetByIdHandler : QueryHandler<CardGetByIdQuery, CardGetByIdResponse>
 {
     private readonly ICardQueryRepository _repository;
-    public CardGetByIdHandler(ProviderFactory factory, ICardQueryRepository repository) : base(factory)
+    private readonly ICardCommandRepository _cardCommandRepository;
+    public CardGetByIdHandler(ProviderFactory factory, ICardQueryRepository repository, ICardCommandRepository cardCommandRepository) : base(factory)
     {
         _repository = repository;
+        _cardCommandRepository = cardCommandRepository;
     }
 
-    public override Task<CardGetByIdResponse> Handle(CardGetByIdQuery Query, CancellationToken cancellationToken)
+    public override async Task<CardGetByIdResponse> Handle(CardGetByIdQuery Query, CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        try
+        {
+            var entity = await _repository.GetGraphAsync(Query.EntityId);
+            var aggregate = await _cardCommandRepository.GetGraphAsync(Query.EntityId);
+            return new CardGetByIdResponse(entity.CardCode);
+        }
+        catch (Exception)
+        {
+
+            throw;
+        }
     }
 }
 

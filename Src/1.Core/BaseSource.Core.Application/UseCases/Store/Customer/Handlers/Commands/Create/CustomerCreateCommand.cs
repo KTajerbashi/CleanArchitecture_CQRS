@@ -34,7 +34,7 @@ public class CustomerCreateHandler : CommandHandler<CustomerCreateCommand, Custo
         {
             CustomerEntity entity = CustomerEntity.Create(command.FirstName,command.LastName,command.Email,command.PhoneNumber);
             var id = await _repository.InsertAsync(entity);
-            await _repository.SaveChangeAsync(cancellationToken);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new(id);
         }
         catch (Exception)

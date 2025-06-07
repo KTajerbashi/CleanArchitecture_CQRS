@@ -2,6 +2,6 @@
 
 namespace BaseSource.Core.Application.UseCases.Store.Customer.Repositories.CustomerAddress;
 
-public interface ICustomerAddressCommandRepository : ICommandRepository<CustomerAddressEntity, long>
-{
-}
+//public interface ICustomerAddressCommandRepository : ICommandRepository<CustomerAddressEntity, long>
+//{
+//}

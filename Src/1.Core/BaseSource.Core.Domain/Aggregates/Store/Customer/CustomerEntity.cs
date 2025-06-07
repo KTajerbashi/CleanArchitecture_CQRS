@@ -6,7 +6,7 @@ namespace BaseSource.Core.Domain.Aggregates.Store.Customer;
 [Table("Customers", Schema = "Store")]
 public class CustomerEntity : AggregateRoot
 {
-    private readonly List<CustomerAddressEntity> _addresses = new();
+    private List<CustomerAddressEntity> _addresses = new();
 
     private CustomerEntity() { }
 

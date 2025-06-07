@@ -3,7 +3,7 @@ using BaseSource.Core.Domain.Aggregates.Store.Card;
 
 namespace BaseSource.Core.Application.UseCases.Store.Card.Repositories.CardProduct;
 
-public interface ICardProductQueryRepository : IQueryRepository<CardProductEntity, long>
-{
-}
+//public interface ICardProductQueryRepository : IQueryRepository<CardProductEntity, long>
+//{
+//}
 

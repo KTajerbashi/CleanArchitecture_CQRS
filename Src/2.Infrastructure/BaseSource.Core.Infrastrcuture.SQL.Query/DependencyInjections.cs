@@ -10,14 +10,21 @@ public static class DependencyInjections
 
     public static IServiceCollection AddInfrastructureQueryServices(this IServiceCollection services, IConfiguration configuration, Assembly[] assemblies)
     {
-        services.AddDbContext<QueryDataContext>(option =>
+        services.AddDbContext<QueryDataContext>(options =>
         {
-            option.UseSqlServer(configuration.GetConnectionString("QueryConnection"),
+            options.UseSqlServer(
+                configuration.GetConnectionString("QueryConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(typeof(QueryDataContext).Assembly.FullName);
-                    sqlOptions.EnableRetryOnFailure();
-                });
+                    // You might want different retry settings for queries
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 3,
+                        maxRetryDelay: TimeSpan.FromSeconds(10),
+                        errorNumbersToAdd: null);
+                })
+            // No need for audit interceptor on read side typically
+            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         });
 
         services.AddRepositories(assemblies);

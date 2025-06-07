@@ -35,7 +35,7 @@ public class CustomerAddressCreateHandler : CommandHandler<CustomerAddressCreate
         {
             CustomerEntity entity = await _repository.GetAsync(command.CustomerId);
             entity.AddAddress(command.Street, command.City, command.State, command.ZipCode);
-            await _repository.SaveChangeAsync(cancellationToken);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new(entity.Id);
         }
         catch (Exception)

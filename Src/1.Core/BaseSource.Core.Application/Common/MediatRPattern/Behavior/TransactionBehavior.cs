@@ -1,26 +1,43 @@
 ﻿namespace BaseSource.Core.Application.Common.MediatRPattern.Behavior;
 
 //public class TransactionBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-//     where TRequest : IRequest<TResponse>
+//    where TRequest : IRequest<TResponse>
 //{
-//    private readonly DbContext _dbContext;
+//    private readonly IUnitOfWork _unitOfWork;
 
-//    public TransactionBehavior(DbContext dbContext)
+//    public TransactionBehavior(IUnitOfWork unitOfWork)
 //    {
-//        _dbContext = dbContext;
+//        _unitOfWork = unitOfWork;
 //    }
 
 //    public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next, CancellationToken cancellationToken)
 //    {
-//        var strategy = _dbContext.Database.CreateExecutionStrategy();
-
-//        return await strategy.ExecuteAsync(async () =>
+//        if (IsNotCommand())
 //        {
-//            await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
-//            var response = await next();
-//            await _dbContext.SaveChangesAsync(cancellationToken);
-//            await transaction.CommitAsync(cancellationToken);
-//            return response;
+//            return await next();
+//        }
+
+//        var executionStrategy = _unitOfWork.GetExecutionStrategy();
+
+//        return await executionStrategy.ExecuteAsync(async () =>
+//        {
+//            await _unitOfWork.BeginTransactionAsync(cancellationToken);
+//            try
+//            {
+//                var response = await next();
+//                await _unitOfWork.CommitTransactionAsync(cancellationToken);
+//                return response;
+//            }
+//            catch
+//            {
+//                await _unitOfWork.RollbackTransactionAsync(cancellationToken);
+//                throw;
+//            }
 //        });
+//    }
+
+//    private static bool IsNotCommand()
+//    {
+//        return !typeof(TRequest).Name.EndsWith("Command");
 //    }
 //}

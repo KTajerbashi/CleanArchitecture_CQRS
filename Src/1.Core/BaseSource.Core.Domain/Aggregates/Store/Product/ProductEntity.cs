@@ -6,7 +6,7 @@ namespace BaseSource.Core.Domain.Aggregates.Store.Product;
 [Table("Products", Schema = "Store")]
 public class ProductEntity : AggregateRoot
 {
-    private readonly List<ProductDetailEntity> _productDetails = new();
+    private List<ProductDetailEntity> _productDetails = new();
 
     private ProductEntity() { }
 

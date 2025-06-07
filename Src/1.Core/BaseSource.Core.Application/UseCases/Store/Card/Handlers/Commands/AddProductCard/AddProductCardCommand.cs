@@ -34,7 +34,7 @@ public class AddProductCardHandler : CommandHandler<AddProductCardCommand, AddPr
         {
             CardEntity entity = await _repository.GetAsync(command.CardId);
             entity.AddProduct(command.ProductId);
-            await _repository.SaveChangeAsync(cancellationToken);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new(entity.Id);
         }
         catch (Exception)

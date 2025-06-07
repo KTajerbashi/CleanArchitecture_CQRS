@@ -1,4 +1,7 @@
-﻿using BaseSource.WebAPI.EndPoint.Middleware.ValidationHandler;
+﻿using BaseSource.Core.Application.Common.Exceptions;
+using BaseSource.Core.Domain.Exceptions;
+using BaseSource.Core.Infrastrcuture.SQL.Command.Common.Exceptions;
+using BaseSource.WebAPI.EndPoint.Middleware.ValidationHandler;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using System.Net;
@@ -32,9 +35,21 @@ public static class ApiExceptionMiddlewareExtensions
 
                     var statusCode = exception switch
                     {
-                        FluentValidation.ValidationException => HttpStatusCode.BadRequest,
-                        UnauthorizedAccessException => HttpStatusCode.Unauthorized,
-                        KeyNotFoundException => HttpStatusCode.NotFound,
+                        DomainLogicException or
+                        DomainValueObjectException or
+                        FluentValidation.ValidationException or
+                        AppException 
+                        => HttpStatusCode.BadRequest,
+                        
+                        CommandDbException or
+                        CommandTransactionException 
+                        => HttpStatusCode.InternalServerError,
+                        
+                        UnauthorizedAccessException 
+                        => HttpStatusCode.Unauthorized,
+                        
+                        KeyNotFoundException 
+                        => HttpStatusCode.NotFound,
                         _ => HttpStatusCode.InternalServerError
                     };
 
