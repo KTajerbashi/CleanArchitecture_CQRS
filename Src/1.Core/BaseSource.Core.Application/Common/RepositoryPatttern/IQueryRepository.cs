@@ -1,10 +1,7 @@
-﻿using BaseSource.Core.Domain.Common.Aggregate;
-using BaseSource.Core.Domain.ValueObjects;
-
-namespace BaseSource.Core.Application.Common.RepositoryPatttern;
+﻿namespace BaseSource.Core.Application.Common.RepositoryPatttern;
 
 public interface IQueryRepository<TEntity, TId>
-    where TEntity : Entity<TId>
+    where TEntity : AggregateRoot<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,
@@ -15,6 +12,9 @@ public interface IQueryRepository<TEntity, TId>
     Task<TEntity> GetAsync(TId id);
     Task<TEntity> GetAsync(EntityId entityId);
     Task<TEntity> GetAsync(TEntity entity);
+
+
+    Task<TEntity> GetGraphAsync(EntityId entityId);
 
 
     Task<IEnumerable<TEntity>> GetAsync();

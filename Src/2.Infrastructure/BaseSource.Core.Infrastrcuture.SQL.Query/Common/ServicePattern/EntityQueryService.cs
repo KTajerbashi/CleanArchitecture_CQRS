@@ -5,7 +5,7 @@ using BaseSource.Core.Domain.Common.Aggregate;
 namespace BaseSource.Core.Infrastrcuture.SQL.Query.Common.ServicePattern;
 
 public abstract class EntityQueryService<TEntity, TId> : IEntityQueryService<TEntity, TId>
-    where TEntity : Entity<TId>
+    where TEntity : AggregateRoot<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,

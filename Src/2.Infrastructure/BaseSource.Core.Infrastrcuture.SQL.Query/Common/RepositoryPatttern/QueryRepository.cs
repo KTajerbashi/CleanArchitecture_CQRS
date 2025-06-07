@@ -6,7 +6,7 @@ using BaseSource.Core.Infrastrcuture.SQL.Query.Common.DataContext;
 namespace BaseSource.Core.Infrastrcuture.SQL.Query.Common.RepositoryPatttern;
 
 public abstract class QueryRepository<TEntity, TId, TContext> : IQueryRepository<TEntity, TId>
-    where TEntity : Entity<TId>
+    where TEntity : AggregateRoot<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,
@@ -42,6 +42,17 @@ public abstract class QueryRepository<TEntity, TId, TContext> : IQueryRepository
     public virtual async Task<IEnumerable<TEntity>> GetAsync()
     {
         return await Entity.Where(item => item.IsActive && !item.IsDeleted).ToListAsync();
+    }
+
+    public async Task<TEntity> GetGraphAsync(EntityId entityId)
+    {
+        var graphPath = Context.GetIncludePaths(typeof(TEntity));
+        IQueryable<TEntity> query = Context.Set<TEntity>().AsQueryable();
+        foreach (var item in graphPath)
+        {
+            query = query.Include(item);
+        }
+        return await query.FirstOrDefaultAsync(item => item.EntityId == entityId);
     }
 
     public virtual IQueryable<TEntity> Queryable()

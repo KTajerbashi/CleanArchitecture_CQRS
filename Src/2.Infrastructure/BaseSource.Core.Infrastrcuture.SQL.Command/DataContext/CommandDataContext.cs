@@ -15,6 +15,7 @@ public class CommandDataContext : BaseCommandDataContext
     }
 
 
+
     public virtual DbSet<ProductEntity> ProductEntities => Set<ProductEntity>();
     public virtual DbSet<ProductDetailEntity> ProductDetailEntities => Set<ProductDetailEntity>();
 
