@@ -4,6 +4,7 @@ global using BaseSource.Core.Domain.Aggregates.Identity.UserAggregate;
 global using BaseSource.Core.Domain.Common.Aggregate;
 global using BaseSource.Core.Domain.ValueObjects;
 global using BaseSource.Core.Infrastrcuture.SQL.Command.Common.DataContext;
+global using BaseSource.Core.Infrastrcuture.SQL.Command.Common.Exceptions;
 global using BaseSource.Core.Infrastrcuture.SQL.Command.Common.RepositoryPatttern;
 global using BaseSource.Core.Infrastrcuture.SQL.Command.DataContext;
 global using BaseSource.Core.Infrastrcuture.SQL.Identity;

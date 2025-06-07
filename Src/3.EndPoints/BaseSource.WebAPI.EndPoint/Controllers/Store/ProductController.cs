@@ -1,5 +1,6 @@
 ﻿using BaseSource.Core.Application.UseCases.Store.Product.Handlers.Commands.AddProductDetails;
 using BaseSource.Core.Application.UseCases.Store.Product.Handlers.Commands.Create;
+using BaseSource.Core.Application.UseCases.Store.Product.Handlers.Commands.CreateProductWithDetails;
 using BaseSource.Core.Application.UseCases.Store.Product.Handlers.Commands.Delete;
 using BaseSource.Core.Application.UseCases.Store.Product.Handlers.Commands.RemoveProductDetails;
 using BaseSource.Core.Application.UseCases.Store.Product.Handlers.Commands.Update;
@@ -13,6 +14,10 @@ public class ProductController : AuthorizeController
     [HttpPost]
     public async Task<IActionResult> Create(ProductCreateCommand command)
         => await CreateAsync<ProductCreateCommand, ProductCreateResponse>(command);
+    
+    [HttpPost("CreateProductWithDetails")]
+    public async Task<IActionResult> CreateProductWithDetails(CreateProductWithDetailsCommand command)
+        => await CreateAsync<CreateProductWithDetailsCommand, CreateProductWithDetailsResponse>(command);
 
     [HttpPost("ProductDetails")]
     public async Task<IActionResult> AddProductDetails(AddProductDetailsCommand command)

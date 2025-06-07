@@ -1,8 +1,5 @@
-﻿using Autofac.Core;
-using BaseSource.Core.Application.Common.RepositoryPatttern;
-using BaseSource.Core.Infrastrcuture.SQL.Command.Common.DataContext.Interceptors.ShadowProperties;
+﻿using BaseSource.Core.Infrastrcuture.SQL.Command.Common.DataContext.Interceptors.ShadowProperties;
 using Microsoft.EntityFrameworkCore.Diagnostics;
-using System;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Command;
 
@@ -12,29 +9,22 @@ public static class DependencyInjections
     {
         services.AddScoped<ISaveChangesInterceptor, AddAuditDataInterceptor>();
 
-        services.AddDbContext<CommandDataContext>(option =>
+        services.AddDbContext<CommandDataContext>(options =>
         {
-            option
-            .UseSqlServer(configuration.GetConnectionString("CommandConnection"),
+            options.UseSqlServer(
+                configuration.GetConnectionString("CommandConnection"),
                 sqlServerOptionsAction: sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(typeof(CommandDataContext).Assembly.FullName);
-                    sqlOptions.EnableRetryOnFailure();
-                })
-            .AddInterceptors(new AddAuditDataInterceptor())
-            ;
+                    // Configure retry options with sensible defaults
+                    sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd: null);
+                }
+                )
+            .AddInterceptors(new AddAuditDataInterceptor());
         });
-
-        //services.AddDbContext<CommandDataContext>((sp, options) =>
-        //{
-        //    options.UseSqlServer(configuration.GetConnectionString("CommandConnection"),
-        //        sqlServerOptionsAction: sqlOptions =>
-        //        {
-        //            sqlOptions.MigrationsAssembly(typeof(CommandDataContext).Assembly.FullName);
-        //            sqlOptions.EnableRetryOnFailure();
-        //        });
-        //    options.AddInterceptors(sp.GetRequiredService<AddAuditDataInterceptor>());
-        //});
 
         services.AddScoped<InitialCommandDataContext>();
 
