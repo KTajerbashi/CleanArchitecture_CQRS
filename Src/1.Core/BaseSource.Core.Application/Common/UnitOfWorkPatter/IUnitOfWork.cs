@@ -40,4 +40,8 @@ public interface IUnitOfWork : IDisposable, IAsyncDisposable, IScopedLifetime
 
     void SaveChanges();
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
+
+
+    Task TransactionAsync(Func<Task> func, CancellationToken cancellationToken = default);
+    Task<TResult> TransactionAsync<TResult>(Func<Task<TResult>> func, CancellationToken cancellationToken = default);
 }

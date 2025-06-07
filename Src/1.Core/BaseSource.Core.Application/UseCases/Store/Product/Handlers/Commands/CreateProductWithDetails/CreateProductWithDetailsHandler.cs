@@ -22,25 +22,26 @@ public class CreateProductWithDetailsHandler : CommandHandler<CreateProductWithD
         //await _repository.BeginTransactionAsync(cancellationToken);
         try
         {
-
-            CreateProductWithDetailsResponse response = new CreateProductWithDetailsResponse();
-
-            var cardEntity = CardEntity.Create(command.CardCode);
-            await _cardCommandRepository.InsertAsync(cardEntity);
-
-
-            var productEntity = ProductEntity.Create(command.Title,command.Details);
-            //await _repository.SaveChangesAsync(cancellationToken);
-            cardEntity.AddProduct(productEntity.Id);
-
-            await _repository.InsertAsync(productEntity);
-            foreach (var card in command.ProductDetails)
+            var result = await _repository.TransactionAsync(async () =>
             {
-                productEntity.AddDetail(card.Title, card.Value);
-            }
+                CreateProductWithDetailsResponse response = new CreateProductWithDetailsResponse();
+                var cardEntity = CardEntity.Create(command.CardCode);
+                await _cardCommandRepository.InsertAsync(cardEntity);
 
-            await _repository.SaveChangesAsync(cancellationToken);
-            return response;
+
+                var productEntity = ProductEntity.Create(command.Title,command.Details);
+                //await _repository.SaveChangesAsync(cancellationToken);
+                cardEntity.AddProduct(productEntity.Id);
+
+                await _repository.InsertAsync(productEntity);
+                foreach (var card in command.ProductDetails)
+                {
+                    productEntity.AddDetail(card.Title, card.Value);
+                }
+                return response;
+            },cancellationToken);
+
+            return result;
         }
         catch (Exception ex)
         {
