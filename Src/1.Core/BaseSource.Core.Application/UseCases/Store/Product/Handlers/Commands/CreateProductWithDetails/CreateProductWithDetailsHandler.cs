@@ -19,32 +19,32 @@ public class CreateProductWithDetailsHandler : CommandHandler<CreateProductWithD
 
     public override async Task<CreateProductWithDetailsResponse> Handle(CreateProductWithDetailsCommand command, CancellationToken cancellationToken)
     {
+        //await _repository.BeginTransactionAsync(cancellationToken);
         try
         {
+
             CreateProductWithDetailsResponse response = new CreateProductWithDetailsResponse();
-            
-            await _repository.ExecuteTransactionAsync(async () =>
+
+            var cardEntity = CardEntity.Create(command.CardCode);
+            await _cardCommandRepository.InsertAsync(cardEntity);
+
+
+            var productEntity = ProductEntity.Create(command.Title,command.Details);
+            //await _repository.SaveChangesAsync(cancellationToken);
+            cardEntity.AddProduct(productEntity.Id);
+
+            await _repository.InsertAsync(productEntity);
+            foreach (var card in command.ProductDetails)
             {
-                var cardEntity = CardEntity.Create(command.CardCode);
-                await _cardCommandRepository.InsertAsync(cardEntity);
+                productEntity.AddDetail(card.Title, card.Value);
+            }
 
-
-                var productEntity = ProductEntity.Create(command.Title,command.Details);
-                await _repository.SaveChangesAsync(cancellationToken);
-                cardEntity.AddProduct(productEntity.Id);
-
-                await _repository.InsertAsync(productEntity);
-                foreach (var card in command.ProductDetails)
-                {
-                    productEntity.AddDetail(card.Title, card.Value);
-                }
-
-            }, cancellationToken);
-
+            await _repository.SaveChangesAsync(cancellationToken);
             return response;
         }
         catch (Exception ex)
         {
+            //await _repository.RollbackTransactionAsync(cancellationToken);
             throw ex;
         }
     }

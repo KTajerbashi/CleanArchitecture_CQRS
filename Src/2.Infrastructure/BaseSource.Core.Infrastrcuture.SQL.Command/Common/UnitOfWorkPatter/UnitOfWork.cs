@@ -1,66 +1,36 @@
 ﻿using BaseSource.Core.Application.Common.UnitOfWorkPatter;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.UnitOfWorkPatter;
 
-public abstract class UnitOfWork<TContext> : IUnitOfWork, IAsyncDisposable
+public abstract class UnitOfWork<TContext> : IUnitOfWork
     where TContext : BaseCommandDataContext
 {
-    private readonly TContext _context;
-    private IDbContextTransaction _currentTransaction;
-    private bool _disposed;
+    protected readonly TContext _context;
+    private IDbContextTransaction? _transaction;
 
     protected UnitOfWork(TContext context)
     {
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public bool HasActiveTransaction => _currentTransaction != null;
-
     public void BeginTransaction()
     {
-        if (HasActiveTransaction)
-        {
-            throw new CommandTransactionException("A transaction is already in progress.");
-        }
-
-        _currentTransaction = _context.Database.BeginTransaction();
+        _transaction = _context.Database.BeginTransaction();
     }
 
     public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
     {
-        if (HasActiveTransaction)
-        {
-            throw new CommandTransactionException("A transaction is already in progress.");
-        }
-
-        _currentTransaction = await _context.Database.BeginTransactionAsync(cancellationToken);
-    }
-
-    public async Task BeginTransactionWithoutRetryAsync(CancellationToken cancellationToken = default)
-    {
-        if (HasActiveTransaction)
-        {
-            throw new CommandTransactionException("A transaction is already in progress.");
-        }
-
-        var strategy = _context.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async () =>
-        {
-            _currentTransaction = await _context.Database.BeginTransactionAsync(cancellationToken);
-        });
+        _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
     }
 
     public void CommitTransaction()
     {
-        if (!HasActiveTransaction)
-        {
-            throw new CommandTransactionException("No active transaction to commit.");
-        }
-
         try
         {
-            _currentTransaction.Commit();
+            _context.SaveChanges();
+            _transaction?.Commit();
         }
         catch
         {
@@ -69,221 +39,90 @@ public abstract class UnitOfWork<TContext> : IUnitOfWork, IAsyncDisposable
         }
         finally
         {
-            _currentTransaction?.Dispose();
-            _currentTransaction = null;
+            DisposeTransaction();
         }
     }
 
     public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
     {
-        if (!HasActiveTransaction)
-        {
-            throw new CommandTransactionException("No active transaction to commit.");
-        }
-
-        try
-        {
-            await _currentTransaction.CommitAsync(cancellationToken);
-        }
-        catch
-        {
-            await RollbackTransactionAsync(cancellationToken);
-            throw;
-        }
-        finally
-        {
-            if (_currentTransaction != null)
-            {
-                await _currentTransaction.DisposeAsync();
-                _currentTransaction = null;
-            }
-        }
-    }
-
-    public async Task CommitTransactionWithoutRetryAsync(CancellationToken cancellationToken = default)
-    {
-        if (!HasActiveTransaction)
-        {
-            throw new CommandTransactionException("No active transaction to commit.");
-        }
-
         var strategy = _context.Database.CreateExecutionStrategy();
+
         await strategy.ExecuteAsync(async () =>
         {
+            // start the transaction INSIDE the strategy
+            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
             try
             {
-                await _currentTransaction.CommitAsync(cancellationToken);
+                await _context.SaveChangesAsync(cancellationToken);
+                await transaction.CommitAsync(cancellationToken);
             }
             catch
             {
-                await RollbackTransactionAsync(cancellationToken);
+                await transaction.RollbackAsync(cancellationToken);
                 throw;
-            }
-            finally
-            {
-                if (_currentTransaction != null)
-                {
-                    await _currentTransaction.DisposeAsync();
-                    _currentTransaction = null;
-                }
             }
         });
     }
 
     public void RollbackTransaction()
     {
-        if (!HasActiveTransaction)
-        {
-            throw new CommandTransactionException("No active transaction to rollback.");
-        }
-
         try
         {
-            _currentTransaction.Rollback();
+            _transaction?.Rollback();
         }
         finally
         {
-            _currentTransaction?.Dispose();
-            _currentTransaction = null;
+            DisposeTransaction();
         }
     }
 
     public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
     {
-        if (!HasActiveTransaction)
-        {
-            throw new CommandTransactionException("No active transaction to rollback.");
-        }
-
         try
         {
-            await _currentTransaction.RollbackAsync(cancellationToken);
+            if (_transaction != null)
+                await _transaction.RollbackAsync(cancellationToken);
         }
         finally
         {
-            if (_currentTransaction != null)
-            {
-                await _currentTransaction.DisposeAsync();
-                _currentTransaction = null;
-            }
+            await DisposeTransactionAsync();
         }
     }
 
-    public async Task RollbackTransactionWithoutRetryAsync(CancellationToken cancellationToken = default)
+    public void SaveChanges()
     {
-        if (!HasActiveTransaction)
-        {
-            throw new CommandTransactionException("No active transaction to rollback.");
-        }
-
-        var strategy = _context.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async () =>
-        {
-            try
-            {
-                await _currentTransaction.RollbackAsync(cancellationToken);
-            }
-            finally
-            {
-                if (_currentTransaction != null)
-                {
-                    await _currentTransaction.DisposeAsync();
-                    _currentTransaction = null;
-                }
-            }
-        });
+        _context.SaveChanges();
     }
 
-    public int SaveChanges()
+    public Task SaveChangesAsync(CancellationToken cancellationToken = default)
     {
-        return _context.SaveChanges();
-    }
-
-    public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
-    {
-        return await _context.SaveChangesAsync(cancellationToken);
+        return _context.SaveChangesAsync(cancellationToken);
     }
 
     public void Dispose()
     {
-        Dispose(true);
-        GC.SuppressFinalize(this);
+        DisposeTransaction();
+        _context.Dispose();
     }
 
     public async ValueTask DisposeAsync()
     {
-        await DisposeAsyncCore().ConfigureAwait(false);
-        Dispose(false);
-        GC.SuppressFinalize(this);
+        await DisposeTransactionAsync();
+        await _context.DisposeAsync();
     }
 
-    protected virtual void Dispose(bool disposing)
+    private void DisposeTransaction()
     {
-        if (!_disposed)
+        _transaction?.Dispose();
+        _transaction = null;
+    }
+
+    private async Task DisposeTransactionAsync()
+    {
+        if (_transaction != null)
         {
-            if (disposing)
-            {
-                _currentTransaction?.Dispose();
-                _context?.Dispose();
-            }
-            _disposed = true;
+            await _transaction.DisposeAsync();
+            _transaction = null;
         }
-    }
-
-    protected virtual async ValueTask DisposeAsyncCore()
-    {
-        if (!_disposed)
-        {
-            if (_currentTransaction != null)
-            {
-                await _currentTransaction.DisposeAsync().ConfigureAwait(false);
-            }
-            if (_context != null)
-            {
-                await _context.DisposeAsync().ConfigureAwait(false);
-            }
-        }
-    }
-
-    public async Task ExecuteTransactionAsync(Func<Task> func, CancellationToken cancellationToken)
-    {
-        var strategy = _context.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async () =>
-        {
-            await using var transaction = await _context.Database.BeginTransactionAsync();
-            try
-            {
-                await func();
-                // Your operations here
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
-        });
-    }
-
-    public async Task<TResult> ExecuteTransactionAsync<TResult>(Func<Task> func, CancellationToken cancellationToken)
-    {
-        var strategy = _context.Database.CreateExecutionStrategy();
-        await strategy.ExecuteAsync(async () =>
-        {
-            await using var transaction = await _context.Database.BeginTransactionAsync();
-            try
-            {
-                await func();
-                await _context.SaveChangesAsync();
-                await transaction.CommitAsync();
-            }
-            catch
-            {
-                await transaction.RollbackAsync();
-                throw;
-            }
-        });
-        return default;
     }
 }

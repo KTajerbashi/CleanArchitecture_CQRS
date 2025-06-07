@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Core.Application.Common.UnitOfWorkPatter;
+﻿using System.Transactions;
+
+namespace BaseSource.Core.Application.Common.UnitOfWorkPatter;
 
 //Key Points:
 //Execution Strategy Integration:
@@ -27,24 +29,15 @@
 //This implementation provides a robust solution that works with EF Core's execution strategy while giving you flexibility in how you manage transactions.
 public interface IUnitOfWork : IDisposable, IAsyncDisposable, IScopedLifetime
 {
-    bool HasActiveTransaction { get; }
     void BeginTransaction();
     Task BeginTransactionAsync(CancellationToken cancellationToken = default);
-    Task BeginTransactionWithoutRetryAsync(CancellationToken cancellationToken = default);
 
     void CommitTransaction();
     Task CommitTransactionAsync(CancellationToken cancellationToken = default);
-    Task CommitTransactionWithoutRetryAsync(CancellationToken cancellationToken = default);
 
     void RollbackTransaction();
     Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
-    Task RollbackTransactionWithoutRetryAsync(CancellationToken cancellationToken = default);
 
-    int SaveChanges();
-    Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
-
-
-    Task ExecuteTransactionAsync(Func<Task> func, CancellationToken cancellationToken);
-    Task<TResult> ExecuteTransactionAsync<TResult>(Func<Task> func, CancellationToken cancellationToken);
-
+    void SaveChanges();
+    Task SaveChangesAsync(CancellationToken cancellationToken = default);
 }
