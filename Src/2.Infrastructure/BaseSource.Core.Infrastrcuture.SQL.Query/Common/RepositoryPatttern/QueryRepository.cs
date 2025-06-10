@@ -52,7 +52,7 @@ public abstract class QueryRepository<TEntity, TId, TContext> : IQueryRepository
         {
             query = query.Include(item);
         }
-        return await query.FirstOrDefaultAsync(item => item.EntityId == entityId);
+        return await query.SingleAsync(item => item.EntityId == entityId);
     }
 
     public virtual IQueryable<TEntity> Queryable()

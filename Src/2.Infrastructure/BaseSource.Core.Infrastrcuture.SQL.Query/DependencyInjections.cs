@@ -14,17 +14,16 @@ public static class DependencyInjections
         {
             options.UseSqlServer(
                 configuration.GetConnectionString("QueryConnection"),
-                sqlServerOptionsAction: sqlOptions =>
+                sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(typeof(QueryDataContext).Assembly.FullName);
-                    // You might want different retry settings for queries
                     sqlOptions.EnableRetryOnFailure(
                         maxRetryCount: 3,
                         maxRetryDelay: TimeSpan.FromSeconds(10),
                         errorNumbersToAdd: null);
-                })
-            // No need for audit interceptor on read side typically
-            .UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                });
+
+            options.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
         });
 
         services.AddRepositories(assemblies);

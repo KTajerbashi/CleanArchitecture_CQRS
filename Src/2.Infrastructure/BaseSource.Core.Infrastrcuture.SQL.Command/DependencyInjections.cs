@@ -13,17 +13,17 @@ public static class DependencyInjections
         {
             options.UseSqlServer(
                 configuration.GetConnectionString("CommandConnection"),
-                sqlServerOptionsAction: sqlOptions =>
+                sqlOptions =>
                 {
                     sqlOptions.MigrationsAssembly(typeof(CommandDataContext).Assembly.FullName);
-                    // Configure retry options with sensible defaults
                     sqlOptions.EnableRetryOnFailure(
                         maxRetryCount: 5,
                         maxRetryDelay: TimeSpan.FromSeconds(30),
                         errorNumbersToAdd: null);
-                }
-                )
-            .AddInterceptors(new AddAuditDataInterceptor());
+                });
+
+            options.AddInterceptors(new AddAuditDataInterceptor());
+            //options.UseQueryTrackingBehavior(QueryTrackingBehavior.TrackAll); // default, can omit if preferred
         });
 
         services.AddScoped<InitialCommandDataContext>();
