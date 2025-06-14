@@ -4,13 +4,39 @@ namespace BaseSource.WebAPI.EndPoint.Providers.Swagger;
 
 public static class SwaggerConfiguration
 {
-    public static IServiceCollection AddSwaggerProvider(this IServiceCollection services)
+    public static IServiceCollection AddSwaggerProvider(this IServiceCollection services, IConfiguration configuration)
     {
-        // Register the Swagger generator, defining 1 or more Swagger documents
-        services.AddSwaggerGen(c =>
+        SwaggerOptions options = new SwaggerOptions();
+        configuration.Bind("Swagger", options);
+        // Configure Swagger
+        services.AddSwaggerGen(option =>
         {
-            c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
+            option.SwaggerDoc(options.Version, new OpenApiInfo { Title = options.Title, Version = options.Version });
+            option.AddSecurityDefinition(options.SecurityTitle, new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = options.Description,
+                Name = options.Name,
+                Type = SecuritySchemeType.ApiKey,
+                BearerFormat = options.BearerFormat,
+                Scheme = options.Scheme
+            });
+            option.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = options.Scheme
+                        }
+                    },
+                    new string[]{}
+                }
+            });
         });
+
         return services;
     }
 

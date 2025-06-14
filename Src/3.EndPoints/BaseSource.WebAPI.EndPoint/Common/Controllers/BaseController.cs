@@ -3,6 +3,7 @@ using BaseSource.Core.Application.Common.MediatRPattern.Queries;
 using BaseSource.Core.Application.Providers;
 using BaseSource.WebAPI.EndPoint.Common.Models.ApiResponses;
 using BaseSource.WebAPI.EndPoint.Extensions;
+using System.Text;
 namespace BaseSource.WebAPI.EndPoint.Common.Controllers;
 
 [ApiController]
@@ -68,9 +69,24 @@ public abstract class BaseController : Controller
 
 
 
+    protected ObjectResult ReturnResponse(object? data, string message = "Success", IEnumerable<string> errors = default)
+    {
+        StringBuilder @string = new StringBuilder();
+        foreach (var item in errors)
+        {
+            @string.AppendLine(item);
+        }
+        return ReturnResponse(data, @string.ToString());
+    }
+
+    protected ObjectResult ReturnResponse(object? data, string message = "Success")
+   => Ok(ApiResponseFactory.Success(data, message));
+
     protected ObjectResult ReturnResponse(object? data)
-        => Ok(ApiResponseFactory.Success(data, "Success"));
-    protected ObjectResult ReturnResponse()
-        => Ok(ApiResponseFactory.Success("Success"));
+        => ReturnResponse(data,"Success");
+
+    protected ObjectResult ReturnResponse(string message = "Success")
+        => Ok(ApiResponseFactory.Success(message));
+
 
 }

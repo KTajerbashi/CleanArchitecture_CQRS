@@ -1,8 +1,7 @@
 ﻿using BaseSource.Core.Application.Providers.Interfaces;
-using BaseSource.Utilities.Scrutor;
 using System.Security.Claims;
 
-namespace BaseSource.WebAPI.EndPoint.Providers.Identity;
+namespace BaseSource.WebAPI.EndPoint.Providers.Identity.Services;
 
 public class CurrentUserService : IUser
 {
@@ -29,7 +28,7 @@ public class CurrentUserService : IUser
 
     //public string Family => GetStringClaim(ClaimTypes.Surname);
     public string Family => GetStringClaim("Family");
-    
+
     public string DisplayName => $"{Name} {Family}".Trim();
 
     public long UserId => GetLongClaim("UserId");

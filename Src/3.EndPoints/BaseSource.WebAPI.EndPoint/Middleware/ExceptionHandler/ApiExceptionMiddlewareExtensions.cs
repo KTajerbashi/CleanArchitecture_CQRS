@@ -1,20 +1,12 @@
 ﻿using BaseSource.Core.Application.Common.Exceptions;
 using BaseSource.Core.Domain.Exceptions;
 using BaseSource.Core.Infrastrcuture.SQL.Command.Common.Exceptions;
-using BaseSource.WebAPI.EndPoint.Middleware.ValidationHandler;
 using Microsoft.AspNetCore.Diagnostics;
-using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.Tokens;
 using System.Net;
 using System.Text.Json;
 
 namespace BaseSource.WebAPI.EndPoint.Middleware.ExceptionHandler;
-
-public class ApiErrorResponse
-{
-    public int StatusCode { get; set; }
-    public string Message { get; set; }
-    public IEnumerable<string> Errors { get; set; }
-}
 public static class ApiExceptionMiddlewareExtensions
 {
     public static void UseApiExceptionHandler(this IApplicationBuilder app)
@@ -38,17 +30,17 @@ public static class ApiExceptionMiddlewareExtensions
                         DomainLogicException or
                         DomainValueObjectException or
                         FluentValidation.ValidationException or
-                        AppException 
+                        AppException
                         => HttpStatusCode.BadRequest,
-                        
+
                         CommandDbException or
-                        CommandTransactionException 
+                        CommandTransactionException
                         => HttpStatusCode.InternalServerError,
-                        
-                        UnauthorizedAccessException 
+
+                        UnauthorizedAccessException
                         => HttpStatusCode.Unauthorized,
-                        
-                        KeyNotFoundException 
+
+                        KeyNotFoundException
                         => HttpStatusCode.NotFound,
                         _ => HttpStatusCode.InternalServerError
                     };
@@ -58,10 +50,8 @@ public static class ApiExceptionMiddlewareExtensions
                     var errorResponse = new ApiErrorResponse
                     {
                         StatusCode = context.Response.StatusCode,
-                        Message = exception.Message,
-                        Errors = exception is FluentValidation.ValidationException validationException
-                            ? validationException.Errors.Select(e => $"{e.PropertyName}: {e.ErrorMessage}")
-                            : null!
+                        Message = exception.getMessage(),
+                        Errors = exception.getErrors(),
                     };
 
                     logger.LogError(exception, "Unhandled exception occurred");
@@ -71,5 +61,32 @@ public static class ApiExceptionMiddlewareExtensions
                 }
             });
         });
+    }
+
+    private static IEnumerable<string> getErrors(this Exception exception)
+    {
+        var result =  exception is FluentValidation.ValidationException validationException
+                            ? validationException.Errors.Select(e => $"{e.PropertyName}: {e.ErrorMessage}")
+                            : null!;
+        return result;
+    }
+    private static string getMessage(this Exception exception)
+    {
+        string message = exception switch
+        {
+            SecurityTokenExpiredException => "Token has expired",
+            SecurityTokenInvalidSignatureException => "Invalid token signature",
+            SecurityTokenNotYetValidException => "Token is not yet valid",
+            DomainLogicException or
+            DomainValueObjectException or
+            FluentValidation.ValidationException or
+            AppException or
+            CommandDbException or
+            CommandTransactionException or
+            UnauthorizedAccessException or
+            KeyNotFoundException => exception.Message,
+            _ => "Invalid token"
+        };
+        return message;
     }
 }

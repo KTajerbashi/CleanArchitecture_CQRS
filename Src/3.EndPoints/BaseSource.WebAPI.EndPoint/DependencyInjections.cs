@@ -39,16 +39,17 @@ public static class DependencyInjections
         builder.Services.AddOpenApi();
 
         //  Swagger
-        builder.Services.AddSwaggerProvider();
+        builder.Services.AddSwaggerProvider(configuration);
 
         //  BaseSource Utilities
         builder.Services.AddBaseSourceUtilities(configuration, assemblies);
 
-        builder.Services.AddIdentityProviders();
+        builder.Services.AddIdentity(configuration, "Identity");
 
         builder.Services.AddApplicationService(assemblies);
 
         builder.Services.AddInfrastructureCommandServices(configuration,assemblies);
+        
         builder.Services.AddInfrastructureQueryServices(configuration, assemblies);
 
         return builder;
@@ -70,11 +71,16 @@ public static class DependencyInjections
             //  Swagger
             app.UseSwaggerProvider();
         }
+        
         app.UseMiddleware<RequestLoggingMiddleware>();
-
+        
         app.UseValidationExceptionHandler();
+        
         app.UseApiExceptionHandler();
+        
         app.UseHttpsRedirection();
+
+        app.UseAuthentication();
 
         app.UseAuthorization();
 
