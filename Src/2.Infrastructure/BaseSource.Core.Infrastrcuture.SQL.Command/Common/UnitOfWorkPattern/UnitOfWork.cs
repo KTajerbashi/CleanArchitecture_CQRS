@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
-namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.UnitOfWorkPatter;
+namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.UnitOfWorkPattern;
 
 public abstract class UnitOfWork<TContext> : IUnitOfWork
     where TContext : BaseCommandDataContext
@@ -15,79 +15,79 @@ public abstract class UnitOfWork<TContext> : IUnitOfWork
         _context = context ?? throw new ArgumentNullException(nameof(context));
     }
 
-    public void BeginTransaction()
-    {
-        _transaction = _context.Database.BeginTransaction();
-    }
+    //public void BeginTransaction()
+    //{
+    //    _transaction = _context.Database.BeginTransaction();
+    //}
 
-    public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
-    }
+    //public async Task BeginTransactionAsync(CancellationToken cancellationToken = default)
+    //{
+    //    _transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+    //}
 
-    public void CommitTransaction()
-    {
-        try
-        {
-            _context.SaveChanges();
-            _transaction?.Commit();
-        }
-        catch
-        {
-            RollbackTransaction();
-            throw;
-        }
-        finally
-        {
-            DisposeTransaction();
-        }
-    }
+    //public void CommitTransaction()
+    //{
+    //    try
+    //    {
+    //        _context.SaveChanges();
+    //        _transaction?.Commit();
+    //    }
+    //    catch
+    //    {
+    //        RollbackTransaction();
+    //        throw;
+    //    }
+    //    finally
+    //    {
+    //        DisposeTransaction();
+    //    }
+    //}
 
-    public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        var strategy = _context.Database.CreateExecutionStrategy();
+    //public async Task CommitTransactionAsync(CancellationToken cancellationToken = default)
+    //{
+    //    var strategy = _context.Database.CreateExecutionStrategy();
 
-        await strategy.ExecuteAsync(async () =>
-        {
-            // start the transaction INSIDE the strategy
-            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
-            try
-            {
-                await _context.SaveChangesAsync(cancellationToken);
-                await transaction.CommitAsync(cancellationToken);
-            }
-            catch
-            {
-                await transaction.RollbackAsync(cancellationToken);
-                throw;
-            }
-        });
-    }
+    //    await strategy.ExecuteAsync(async () =>
+    //    {
+    //        // start the transaction INSIDE the strategy
+    //        await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+    //        try
+    //        {
+    //            await _context.SaveChangesAsync(cancellationToken);
+    //            await transaction.CommitAsync(cancellationToken);
+    //        }
+    //        catch
+    //        {
+    //            await transaction.RollbackAsync(cancellationToken);
+    //            throw;
+    //        }
+    //    });
+    //}
 
-    public void RollbackTransaction()
-    {
-        try
-        {
-            _transaction?.Rollback();
-        }
-        finally
-        {
-            DisposeTransaction();
-        }
-    }
+    //public void RollbackTransaction()
+    //{
+    //    try
+    //    {
+    //        _transaction?.Rollback();
+    //    }
+    //    finally
+    //    {
+    //        DisposeTransaction();
+    //    }
+    //}
 
-    public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-    {
-        try
-        {
-            if (_transaction != null)
-                await _transaction.RollbackAsync(cancellationToken);
-        }
-        finally
-        {
-            await DisposeTransactionAsync();
-        }
-    }
+    //public async Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
+    //{
+    //    try
+    //    {
+    //        if (_transaction != null)
+    //            await _transaction.RollbackAsync(cancellationToken);
+    //    }
+    //    finally
+    //    {
+    //        await DisposeTransactionAsync();
+    //    }
+    //}
 
     public void SaveChanges()
     {

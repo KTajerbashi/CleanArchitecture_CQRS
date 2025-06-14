@@ -24,4 +24,5 @@ public interface ICommandRepository<TEntity, TId> : IUnitOfWork
     Task DeleteAsync(EntityId entityId, CancellationToken cancellationToken = default);
     Task DeleteAsync(TEntity entity, CancellationToken cancellationToken = default);
 
+    string ContextId { get; }
 }

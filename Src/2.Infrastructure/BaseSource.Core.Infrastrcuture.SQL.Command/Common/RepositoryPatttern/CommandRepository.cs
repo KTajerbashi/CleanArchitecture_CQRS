@@ -1,6 +1,4 @@
-﻿using BaseSource.Core.Infrastrcuture.SQL.Command.Common.UnitOfWorkPatter;
-
-namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.RepositoryPatttern;
+﻿namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.RepositoryPatttern;
 
 public abstract class CommandRepository<TEntity, TId, TContext> : UnitOfWork<TContext>, ICommandRepository<TEntity, TId>
     where TEntity : AggregateRoot<TId>
@@ -15,6 +13,8 @@ public abstract class CommandRepository<TEntity, TId, TContext> : UnitOfWork<TCo
 
     protected TContext Context;
     protected DbSet<TEntity> Entity;
+
+    public string ContextId => Context.ContextId.InstanceId.ToString();
 
     protected CommandRepository(TContext context) : base(context)
     {

@@ -29,14 +29,14 @@ namespace BaseSource.Core.Application.Common.UnitOfWorkPatter;
 //This implementation provides a robust solution that works with EF Core's execution strategy while giving you flexibility in how you manage transactions.
 public interface IUnitOfWork : IDisposable, IAsyncDisposable, IScopedLifetime
 {
-    void BeginTransaction();
-    Task BeginTransactionAsync(CancellationToken cancellationToken = default);
+    //void BeginTransaction();
+    //Task BeginTransactionAsync(CancellationToken cancellationToken = default);
 
-    void CommitTransaction();
-    Task CommitTransactionAsync(CancellationToken cancellationToken = default);
+    //void CommitTransaction();
+    //Task CommitTransactionAsync(CancellationToken cancellationToken = default);
 
-    void RollbackTransaction();
-    Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
+    //void RollbackTransaction();
+    //Task RollbackTransactionAsync(CancellationToken cancellationToken = default);
 
     void SaveChanges();
     Task SaveChangesAsync(CancellationToken cancellationToken = default);
