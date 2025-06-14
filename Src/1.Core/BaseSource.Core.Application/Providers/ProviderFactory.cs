@@ -1,4 +1,6 @@
-﻿namespace BaseSource.Core.Application.Providers;
+﻿using BaseSource.Core.Application.Providers.Interfaces;
+
+namespace BaseSource.Core.Application.Providers;
 
 public class ProviderFactory
 {
@@ -10,6 +12,7 @@ public class ProviderFactory
     public readonly ICacheAdapter Cache;
     public readonly IJsonSerializer Json;
     public readonly IMapperAdapter Mapper;
+    public readonly IUser User;
 
     public ProviderFactory(
         IMediator mediator,
@@ -19,7 +22,8 @@ public class ProviderFactory
         IQueryExecute query,
         ICacheAdapter cache,
         IJsonSerializer json,
-        IMapperAdapter mapper)
+        IMapperAdapter mapper,
+        IUser user)
     {
         Mediator = mediator;
         Publisher = publisher;
@@ -29,5 +33,6 @@ public class ProviderFactory
         Cache = cache;
         Json = json;
         Mapper = mapper;
+        User = user;
     }
 }
