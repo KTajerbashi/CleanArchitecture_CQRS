@@ -32,6 +32,4 @@ public abstract class BaseDataContext : IdentityDbContext<UserIdentity, RoleIden
         return value != null ? condition : default!;
     }
     public object GetShadowPropertyValue(object entity, string propertyName) => Entry(entity).Property(propertyName).CurrentValue!;
-
-    
 }

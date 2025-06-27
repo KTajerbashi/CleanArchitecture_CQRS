@@ -17,9 +17,10 @@ public abstract class BaseCommandDataContext : BaseDataContext
 
     protected override void OnModelCreating(ModelBuilder builder)
     {
-        builder.AddAuditableShadowProperties<long>();
-        builder.AddAuditableShadowProperties<int>();
+        //builder.AddAuditableShadowProperties<long>();
+        //builder.AddAuditableShadowProperties<int>();
         base.OnModelCreating(builder);
+        builder.AddShadowProperty();
 
     }
 

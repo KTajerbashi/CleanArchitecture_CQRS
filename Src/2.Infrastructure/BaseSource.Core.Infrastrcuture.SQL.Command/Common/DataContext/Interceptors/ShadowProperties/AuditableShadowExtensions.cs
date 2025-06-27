@@ -13,7 +13,7 @@ public static class AuditableShadowExtensions
 
             // Add shadow properties
             builder.Property<bool>("IsActive").HasDefaultValue(true);
-            builder.Property<string>("IsDeleted").HasDefaultValue("No");
+            builder.Property<bool>("IsDeleted").HasDefaultValue(false);
 
             builder.Property<long>("CreatedByUserRoleId");
             builder.Property<long?>("UpdatedByUserRoleId");
@@ -28,16 +28,10 @@ public static class AuditableShadowExtensions
             if (typeof(IAuditableEntity<long>).IsAssignableFrom(entityType.ClrType))
             {
                 var parameter = Expression.Parameter(entityType.ClrType, "e");
-                var prop = Expression.Call(
-            typeof(EF),
-            nameof(EF.Property),
-            new[] { typeof(bool) },
-            parameter,
-            Expression.Constant(AuditableShadowProperties.IsDeleted));
 
-                var filter = Expression.Lambda(
-            Expression.Equal(prop, Expression.Constant(false)),
-            parameter);
+                var prop = Expression.Call(typeof(EF),nameof(EF.Property),new[] { typeof(bool) },parameter,Expression.Constant(AuditableShadowProperties.IsDeleted));
+
+                var filter = Expression.Lambda(Expression.Equal(prop, Expression.Constant(false)),parameter);
 
                 modelBuilder.Entity(entityType.ClrType).HasQueryFilter(filter);
             }

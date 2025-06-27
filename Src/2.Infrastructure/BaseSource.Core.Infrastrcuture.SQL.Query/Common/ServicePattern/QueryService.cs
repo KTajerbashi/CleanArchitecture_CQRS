@@ -1,10 +1,8 @@
-﻿using BaseSource.Core.Application.Common.RepositoryPatttern;
-using BaseSource.Core.Application.Common.ServicePattern;
-using BaseSource.Core.Domain.Common.Aggregate;
+﻿
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Query.Common.ServicePattern;
 
-public abstract class EntityQueryService<TEntity, TId> : IEntityQueryService<TEntity, TId>
+public abstract class QueryService<TEntity, TId> : IQueryService<TEntity, TId>
     where TEntity : AggregateRoot<TId>
     where TId : struct,
           IComparable,
@@ -14,7 +12,7 @@ public abstract class EntityQueryService<TEntity, TId> : IEntityQueryService<TEn
           IFormattable
 {
     protected readonly IQueryRepository<TEntity, TId> Repository;
-    protected EntityQueryService(IQueryRepository<TEntity, TId> repository)
+    protected QueryService(IQueryRepository<TEntity, TId> repository)
     {
         Repository = repository;
     }

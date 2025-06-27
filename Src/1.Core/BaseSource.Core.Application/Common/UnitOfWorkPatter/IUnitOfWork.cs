@@ -1,6 +1,4 @@
-﻿using System.Transactions;
-
-namespace BaseSource.Core.Application.Common.UnitOfWorkPatter;
+﻿namespace BaseSource.Core.Application.Common.UnitOfWorkPatter;
 
 //Key Points:
 //Execution Strategy Integration:

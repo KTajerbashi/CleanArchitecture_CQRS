@@ -1,7 +1,7 @@
 ﻿
 namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.ServicePattern;
 
-public abstract class EntityCommandService<TEntity, TId> : IEntityCommandService<TEntity, TId>
+public abstract class CommandService<TEntity, TId> : ICommandService<TEntity, TId>
     where TEntity : AggregateRoot<TId>
     where TId : struct,
           IComparable,
@@ -11,7 +11,7 @@ public abstract class EntityCommandService<TEntity, TId> : IEntityCommandService
           IFormattable
 {
     protected readonly ICommandRepository<TEntity, TId> Repository;
-    protected EntityCommandService(ICommandRepository<TEntity, TId> repository)
+    protected CommandService(ICommandRepository<TEntity, TId> repository)
     {
         Repository = repository;
     }
