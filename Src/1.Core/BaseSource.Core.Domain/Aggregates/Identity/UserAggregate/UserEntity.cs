@@ -4,7 +4,7 @@ using static BaseSource.Core.Domain.Aggregates.Identity.UserAggregate.Parameters
 namespace BaseSource.Core.Domain.Aggregates.Identity.UserAggregate;
 
 [Table("Users", Schema = "Identity")]
-public class UserEntity : AggregateRoot
+public class UserEntity : Entity
 {
     public string FirstName { get; private set; }
     public string LastName { get; private set; }

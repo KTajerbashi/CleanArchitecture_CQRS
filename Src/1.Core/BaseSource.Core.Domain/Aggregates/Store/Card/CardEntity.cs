@@ -4,7 +4,7 @@ using BaseSource.Core.Domain.Common.Aggregate;
 namespace BaseSource.Core.Domain.Aggregates.Store.Card;
 
 [Table("Cards", Schema = "Store")]
-public class CardEntity : AggregateRoot
+public class CardEntity : Entity
 {
 
     private CardEntity() { }
@@ -20,7 +20,6 @@ public class CardEntity : AggregateRoot
         {
             CardCode = cardCode
         };
-        entity.AddEvent(new CardCreatedEvent(entity));
         return entity;
     }
 
@@ -28,7 +27,6 @@ public class CardEntity : AggregateRoot
     {
         var cardProduct = new CardProductEntity(productId);
         _cardProducts.Add(cardProduct);
-        AddEvent(new CardProductAddedEvent(Id, cardProduct.ProductId));
     }
 }
 

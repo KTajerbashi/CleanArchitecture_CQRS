@@ -1,7 +1,7 @@
 ﻿namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.RepositoryPatttern;
 
 public abstract class CommandRepository<TEntity, TId, TContext> : UnitOfWork<TContext>, ICommandRepository<TEntity, TId>
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,

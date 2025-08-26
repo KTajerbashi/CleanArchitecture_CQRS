@@ -1,7 +1,7 @@
 ﻿namespace BaseSource.Core.Application.Common.RepositoryPatttern;
 
 public interface ICommandRepository<TEntity, TId> : IUnitOfWork
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,

@@ -6,7 +6,7 @@ using BaseSource.Core.Infrastrcuture.SQL.Query.Common.DataContext;
 namespace BaseSource.Core.Infrastrcuture.SQL.Query.Common.RepositoryPatttern;
 
 public abstract class QueryRepository<TEntity, TId, TContext> : IQueryRepository<TEntity, TId>
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,

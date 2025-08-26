@@ -4,7 +4,7 @@ using BaseSource.Core.Domain.Common.Aggregate;
 namespace BaseSource.Core.Domain.Aggregates.Store.Product;
 
 [Table("Products", Schema = "Store")]
-public class ProductEntity : AggregateRoot
+public class ProductEntity : Entity
 {
     private List<ProductDetailEntity> _productDetails = new();
 
@@ -22,7 +22,6 @@ public class ProductEntity : AggregateRoot
             Title = title,
             Details = details
         };
-        product.AddEvent(new ProductCreatedEvent(product));
         return product;
     }
 
@@ -30,7 +29,6 @@ public class ProductEntity : AggregateRoot
     {
         var detail = new ProductDetailEntity(title, value);
         _productDetails.Add(detail);
-        AddEvent(new ProductDetailAddedEvent(EntityId, detail));
     }
 }
 

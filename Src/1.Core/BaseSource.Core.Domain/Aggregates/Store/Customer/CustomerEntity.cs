@@ -4,7 +4,7 @@ using BaseSource.Core.Domain.Common.Aggregate;
 namespace BaseSource.Core.Domain.Aggregates.Store.Customer;
 
 [Table("Customers", Schema = "Store")]
-public class CustomerEntity : AggregateRoot
+public class CustomerEntity : Entity
 {
     private List<CustomerAddressEntity> _addresses = new();
 
@@ -26,7 +26,6 @@ public class CustomerEntity : AggregateRoot
             Email = email,
             PhoneNumber = phoneNumber
         };
-        entity.AddEvent(new CustomerCreatedEvent(entity));
         return entity;
     }
 
@@ -34,7 +33,6 @@ public class CustomerEntity : AggregateRoot
     {
         var address = new CustomerAddressEntity(street, city, state, zipCode);
         _addresses.Add(address);
-        AddEvent(new CustomerAddressAddedEvent(Id, address));
     }
 }
 

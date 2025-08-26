@@ -1,5 +1,4 @@
 ﻿using BaseSource.Core.Application.Common.UnitOfWorkPatter;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 
 namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.UnitOfWorkPattern;

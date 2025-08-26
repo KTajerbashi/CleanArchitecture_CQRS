@@ -3,7 +3,7 @@
 namespace BaseSource.Core.Infrastrcuture.SQL.Query.Common.ServicePattern;
 
 public abstract class QueryService<TEntity, TId> : IQueryService<TEntity, TId>
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,

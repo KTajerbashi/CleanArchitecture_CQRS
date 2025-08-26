@@ -2,7 +2,7 @@
 namespace BaseSource.Core.Infrastrcuture.SQL.Command.Common.ServicePattern;
 
 public abstract class CommandService<TEntity, TId> : ICommandService<TEntity, TId>
-    where TEntity : AggregateRoot<TId>
+    where TEntity : Entity<TId>
     where TId : struct,
           IComparable,
           IComparable<TId>,

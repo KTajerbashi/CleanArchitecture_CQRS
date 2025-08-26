@@ -53,39 +53,3 @@ public abstract class Entity : Entity<long>
 {
 
 }
-public abstract class AggregateRoot<TId> : Entity<TId>
-    where TId : struct, IComparable, IComparable<TId>, IConvertible, IEquatable<TId>, IFormattable
-{
-    private readonly List<IDomainEvent> _events = new();
-    public void AddEvent(IDomainEvent @event) => _events.Add(@event);
-    public void CleanEvents() => _events.Clear();
-    public IEnumerable<IDomainEvent> GetEvents() => _events.AsEnumerable();
-    public IReadOnlyCollection<IDomainEvent> Events => _events;
-
-    protected AggregateRoot() => _events = new();
-
-
-    private void Mutate(IDomainEvent @event)
-    {
-        var onMethod = this.GetType().GetMethod("On", BindingFlags.Instance | BindingFlags.NonPublic, [@event.GetType()]);
-        onMethod.Invoke(this, new[] { @event });
-    }
-    protected void Apply(IDomainEvent @event)
-    {
-        Mutate(@event);
-        AddEvent(@event);
-    }
-    public AggregateRoot(IEnumerable<IDomainEvent> events)
-    {
-        if (events == null || !events.Any()) return;
-        foreach (var @event in events)
-        {
-            Mutate(@event);
-        }
-    }
-}
-
-public abstract class AggregateRoot : AggregateRoot<long>
-{
-
-}
