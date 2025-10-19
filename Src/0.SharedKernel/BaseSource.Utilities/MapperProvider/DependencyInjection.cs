@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
 
 namespace BaseSource.Utilities.MapperProvider;
 
@@ -9,7 +10,9 @@ public static class DependencyInjection
         IConfiguration configuration,
         Assembly[] assemblies)
     {
-        services.AddAutoMapper(assemblies);
+        services.AddAutoMapper(config =>
+        {
+        }, assemblies);
 
         services.AddSingleton<IMapperAdapter, MapperAdapter>();
 
